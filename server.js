@@ -10,16 +10,16 @@ const express = require("express");
 const http = require('http');
 const path = require('path');
 const app = express();
-const database = require("./database");
-database.createTables();
+//const database = require("./database");
+//database.createTables();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use("/", express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
-
+//app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
+/*
 app.post("/insert", async (req, res) => {
     const annuncio = req.body;
     try {
@@ -38,13 +38,15 @@ app.post("/insert", async (req, res) => {
     await database.delete(req.params.id);
     res.json({result: "ok"});
   })
+    */
   const server = http.createServer(app);
-  const port = 5600;
+  const port = 80;
   server.listen(port, () => {
     console.log("- server running on port: " + port);
   });
-  
+  /*
   app.get('/types', async (req, res) => {
     const list = await database.selectTypes();
     res.json(list);
   });
+  */
