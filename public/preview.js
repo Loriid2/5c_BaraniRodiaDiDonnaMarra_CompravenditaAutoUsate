@@ -5,6 +5,8 @@ export const prewiew = (parentElement) => {
 
     return {
       build:(diz)=>{
+        console.log("prew i " + diz);
+        console.log(diz);
         info={
             images:diz.immages,
             marce:diz.marce,
@@ -60,14 +62,12 @@ export const prewiew = (parentElement) => {
    
   </div>
 </div>`;
+console.info(html);
 
             
     parentElement.innerHTML=html;
 
-//const button=document.getElementById("det");
-//button.onclick=()=>{
-    
-//}
+
     }
     }
 }

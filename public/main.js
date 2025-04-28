@@ -1,7 +1,11 @@
 import { createNavigator } from "./navigator.js";
 import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
+import{homepage}from"./homepage.js";
+const home=homepage(document.getElementById("homePage"));
 const navigator = createNavigator(document.querySelector("#container"));
+
+
 const COI=createCOI();
 const prewiewer=prewiew(document.getElementById("prewiews"));
 let  diz={
@@ -23,5 +27,10 @@ let  diz={
 
 COI.build(document.getElementById("detailsCar"),document.getElementById("imagesCar"),document.getElementById("description"),document.getElementById("titleCar"),document.getElementById("price"),diz);
 COI.render();
-prewiewer.build(diz);
-prewiewer.render();
+
+
+//prewiewer.build(diz);
+//prewiewer.render();
+
+home.build(diz);
+home.render();
