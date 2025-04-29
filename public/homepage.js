@@ -222,7 +222,7 @@ export const homepage = (parentElement) => {
                    
                    <table id="carList" class="table table-borderless">`;
 
-   //console.log(dati.length)                
+                  
         for( let i=0;i<dati.length;i+=3){
     
 html+=`  <tr>
@@ -243,15 +243,17 @@ html+=`  <tr>
         </div>
         </div>`;
 
-    console.info(html);
+   // console.info(html);
     parentElement.innerHTML=html;
     const value = document.querySelector("#value");
-const input = document.querySelector("#prezzo");
-value.textContent = input.value;
+    const input = document.querySelector("#prezzo");
+    value.textContent = input.value;
+
+//-------------------------------------------
 input.addEventListener("input", (event) => {
   value.textContent = event.target.value+"€";
 });
-
+//-----------------------------------------------
     const renderCars = (cars) => {
       const carList = document.getElementById("carList");
       let carHtml = `<table class="table table-borderless">`;
@@ -269,7 +271,7 @@ input.addEventListener("input", (event) => {
 
       for (let i = 0; i < cars.length; i++) {
           const prewiewer = prewiew(document.getElementById("n" + i));
-          prewiewer.build(cars[i]);
+          prewiewer.build(cars[i],i);
           prewiewer.render();
       }
   };
