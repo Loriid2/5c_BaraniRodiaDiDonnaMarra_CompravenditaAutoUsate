@@ -1,13 +1,18 @@
+import { createCOI } from "./COI.js";
 export const prewiew = (parentElement) => {
     
 
     let info;
-
+    let dizionario;
+    let COI;
+    let i;
     return {
-      build:(diz)=>{
+      build:(diz,cont)=>{
         console.log("prew i " + diz);
         console.log(diz);
-
+        COI=createCOI();
+        i=cont;
+        dizionario=diz
         info={
             images:diz.immages,
             marce:diz.marce,
@@ -53,7 +58,7 @@ export const prewiew = (parentElement) => {
     <hr>
     <div class="row">
               <div class="col">
-               <a href="#pagina2" class="btn btn-primary" id="dett">Dettagli</a>
+               <a href="#pagina2" class="btn btn-primary" id="dett`+i+`">Dettagli</a>
               </div>
               <div class="col">
                  <b>`+info.prezzo+`</b>
@@ -63,10 +68,18 @@ export const prewiew = (parentElement) => {
    
   </div>
 </div>`;
-//console.info(html);
 
+parentElement.innerHTML=html;
+
+
+const bott= document.getElementById("dett"+i);
+bott.onclick=()=>{
+  COI.build(document.getElementById("detailsCar"),document.getElementById("imagesCar"),document.getElementById("description"),document.getElementById("titleCar"),document.getElementById("price"),dizionario);
+COI.render();
+
+}
             
-    parentElement.innerHTML=html;
+   
 
 
     }

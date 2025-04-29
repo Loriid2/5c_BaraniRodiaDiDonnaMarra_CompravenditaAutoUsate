@@ -1,7 +1,7 @@
 export async function login(parentElement, pubsub) {
 
-    fetch("./conf.json").then(r => r.json()).then(config => {
-  
+    fetch("./config.json").then(r => r.json()).then(config => {
+        // da inserire il token per ws molinari
       const inputName = document.querySelector("#username");
       const inputPassword = document.querySelector("#password");
       const loginButton = document.querySelector("#loginButton");
@@ -30,9 +30,9 @@ export async function login(parentElement, pubsub) {
       loginButton.onclick = () => {
         login(inputName.value, inputPassword.value).then((result) => {
           if (result !== true) {
-            window.location.href = "#login";
+            window.location.href = "#paginaRegister";
           } else {
-            window.location.href = "#admin";
+            window.location.href = "#pagina1";
           }
   
         })
