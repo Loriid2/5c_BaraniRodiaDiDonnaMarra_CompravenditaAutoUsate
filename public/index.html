@@ -13,6 +13,8 @@
 
 <body>
    <div id="container" class="container">
+
+
       <div id="pagina1" class="page">
          <div id="homePage"></div>
          <!--
@@ -22,6 +24,27 @@
          </div>     
          -->             
       </div>
+
+      <!------PAGINA LOGIN --------->
+      <div id="paginaLogin" class="page hidden">
+         <input type="text" id="username" placeholder="Username" required>
+         <input type="password" id="password" placeholder="Password" required>
+         <button id="loginButton"><a href="#pagina1">Login</a></button>
+         <button id="registerButton"><a href="#paginaRegister">Register</a></button>
+      </div>
+
+
+
+      <!------PAGINA REGISTRAZIONE --------->
+      <div id="paginaRegister" class="page hidden">
+         <input type="text" id="usernameReg" placeholder="Username" required>
+         <input type="password" id="passwordReg" placeholder="Password" required>
+         <input type="email" id="emailReg" placeholder="Email" required>
+         <button id="invio"><a href="#pagina1">invio</a></button>
+      </div>
+
+
+      <!------PAGINA DETTAGLI AUTO-------->
 
       <div id="pagina2" class="page">
         <div class="container text-center">
@@ -36,7 +59,7 @@
               <div class="col">
                 
               </div>
-            </div>
+         </div>
          <hr>
          <!--------------------------------------------------->
          <!-----------immagine e dettagli----------------->
@@ -48,7 +71,7 @@
               <div id="detailsCar">qui i dettagli elencati </div>
             </div>
             
-          </div>
+         </div>
        <hr>
        <!--------------------------------------------------->
         <!-----------descrizione macchina----------------->
@@ -68,16 +91,21 @@
             </div>
             <div class="col">
                 <div id="price">bottone per chattare con venditore  </div>
-               </div>
+            </div>
             
             
-          </div>
-        
-       <!--------------------------------------------------->
+         </div>
       </div>
+
+
+
+      
+         
       
    </div>
    <script type="module" src="./main.js"></script>
+   <script type="module" src="./login.js"></script>
+
 
 </body>
 
