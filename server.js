@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use("/", express.static(path.join(__dirname, "public")));
 //app.use(express.static(path.join(__dirname, "node_modules/bootstrap/dist/")));
+
 /*
 app.post("/insert", async (req, res) => {
     const annuncio = req.body;
