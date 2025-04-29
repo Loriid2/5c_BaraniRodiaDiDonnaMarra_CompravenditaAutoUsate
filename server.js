@@ -5,11 +5,14 @@ sito
 https://public.opendatasoft.com/explore/dataset/all-vehicles-model/api/?sort=modifiedon
 */
 
+
 const bodyParser = require('body-parser');
 const express = require("express");
 const http = require('http');
 const path = require('path');
 const app = express();
+const serverDB = require("./serverDB.js");
+
 //const database = require("./database");
 //database.createTables();
 
@@ -50,3 +53,4 @@ app.post("/insert", async (req, res) => {
     res.json(list);
   });
   */
+ serverDB.createTable();
