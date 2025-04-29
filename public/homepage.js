@@ -103,6 +103,7 @@ export const homepage = (parentElement) => {
     <option value="TVR">TVR</option>
     <option value="VAUXHALL">VAUXHALL</option>
 </select><br>
+<p>Prezzo</p>
 <input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
         <p>Value: <output id="value"></output></p>
                   <br> <select>
@@ -216,7 +217,7 @@ export const homepage = (parentElement) => {
     <option value="Vicenza">Vicenza</option>
     <option value="Viterbo">Viterbo</option>
 </select>
-<br> <button>vai</button> 
+<br> <button id="filtraButton">vai</button> 
         </div>
         <div class="col">
                    
