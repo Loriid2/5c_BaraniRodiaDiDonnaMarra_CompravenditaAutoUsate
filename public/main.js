@@ -1,12 +1,13 @@
 import { createNavigator } from "./navigator.js";
-//import { createCOI } from "./COI.js";
+import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 const home=homepage(document.getElementById("homePage"));
 const navigator = createNavigator(document.querySelector("#container"));
 
 
-//const COI=createCOI();
+const COI=createCOI();
+/*
 const prewiewer=prewiew(document.getElementById("prewiews"));
 let  automobili = [
     {
@@ -92,11 +93,43 @@ let  automobili = [
     }
 ];
 let diz={};
-/*
+
 COI.build(document.getElementById("detailsCar"),document.getElementById("imagesCar"),document.getElementById("description"),document.getElementById("titleCar"),document.getElementById("price"),automobili[0]);
 COI.render();
 */
+let automobili;
+
+//CarOfInterest(1);
+//home.setCallBack(CarOfInterest());
+
+function CarOfInterest(index){
+     fetch("/car/getone", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ index: index })
+    }).then(response => response.json())
+    .then(json => {
+        let dizionario=json.result;
+        console.log(dizionario);
+        COI.build(document.getElementById("detailsCar"),document.getElementById("imagesCar"),document.getElementById("description"),document.getElementById("titleCar"),document.getElementById("price"),dizionario);
+        COI.render();}
+        
+    )
+}
 
 
-home.build(automobili);
-home.render();
+fetch("/car/getall")
+            .then(response => response.json())
+            .then(json => {
+               console.log(json.dati);
+               automobili=json.dati;
+               home.build(automobili);
+               home.setCallBack(CarOfInterest);
+               home.render();
+
+            });
+          
+
+

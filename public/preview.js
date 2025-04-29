@@ -6,10 +6,11 @@ export const prewiew = (parentElement) => {
     let dizionario;
     let COI;
     let i;
+    let callback;
     return {
       build:(diz,cont)=>{
-        console.log("prew i " + diz);
-        console.log(diz);
+        //console.log("prew i " + diz);
+        //console.log(diz);
         COI=createCOI();
         i=cont;
         dizionario=diz
@@ -28,6 +29,9 @@ export const prewiew = (parentElement) => {
             prezzo:diz.prezzo
         }
         
+      },
+      setCallBack:(cb)=>{
+        callback=cb;
       },
       render:()=>{
         
@@ -74,9 +78,7 @@ parentElement.innerHTML=html;
 
 const bott= document.getElementById("dett"+i);
 bott.onclick=()=>{
-  COI.build(document.getElementById("detailsCar"),document.getElementById("imagesCar"),document.getElementById("description"),document.getElementById("titleCar"),document.getElementById("price"),dizionario);
-COI.render();
-
+callback(i);
 }
             
    

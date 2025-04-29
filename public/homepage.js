@@ -1,7 +1,7 @@
 import { prewiew } from "./preview.js";
 
 export const homepage = (parentElement) => {
-    
+    let callback;
     let dati=[];
     const filterCars = (searchTerm) => {
       return dati.filter(car => car.titolo.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -11,6 +11,9 @@ export const homepage = (parentElement) => {
       build:(diz)=>{
        
         dati=diz;
+      },
+      setCallBack:(cb)=>{
+        callback=cb;
       },
       render:()=>{
         let html=`
@@ -272,6 +275,7 @@ input.addEventListener("input", (event) => {
 
       for (let i = 0; i < cars.length; i++) {
           const prewiewer = prewiew(document.getElementById("n" + i));
+          console.log(cars[i]);
           prewiewer.build(cars[i],i);
           prewiewer.render();
       }
