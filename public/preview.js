@@ -7,6 +7,7 @@ export const prewiew = (parentElement) => {
       build:(diz)=>{
         console.log("prew i " + diz);
         console.log(diz);
+
         info={
             images:diz.immages,
             marce:diz.marce,
@@ -62,7 +63,7 @@ export const prewiew = (parentElement) => {
    
   </div>
 </div>`;
-console.info(html);
+//console.info(html);
 
             
     parentElement.innerHTML=html;

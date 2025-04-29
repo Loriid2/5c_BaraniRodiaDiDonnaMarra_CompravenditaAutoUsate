@@ -7,7 +7,7 @@ export const homepage = (parentElement) => {
     return {
       build:(diz)=>{
        
-        dati=[diz];
+        dati=diz;
       },
       render:()=>{
         let html=`
@@ -40,11 +40,18 @@ export const homepage = (parentElement) => {
                    
                    <table class="table table-borderless">`;
 
-        for( let i=0;i<dati.length;i++){
+   //console.log(dati.length)                
+        for( let i=0;i<dati.length;i+=3){
     
 html+=`  <tr>
   <td >
   <div id="n`+ i+ `"></div>
+ </td>
+ <td >
+  <div id="n`+ (i+1)+ `"></div>
+ </td>
+ <td >
+  <div id="n`+ (i+2) +`"></div>
  </td>
   </tr>`;
         }
@@ -54,11 +61,14 @@ html+=`  <tr>
         </div>
         </div>`;
 
-    
+    console.info(html);
     parentElement.innerHTML=html;
     
     for( let i=0;i<dati.length;i++){
+        console.info(document.getElementById("n"+i));
     const prewiewer=prewiew(document.getElementById("n"+i));
+    console.log("test");
+    console.log(dati[i]);
      prewiewer.build(dati[i]);
      prewiewer.render();
     }
