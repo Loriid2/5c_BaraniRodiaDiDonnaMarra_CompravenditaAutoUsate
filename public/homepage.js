@@ -1,16 +1,17 @@
 import { prewiew } from "./preview.js";
 
 export const homepage = (parentElement) => {
-    
-    let dati=[];
+  const bottoneInvioRegister = document.querySelector("#invio");
 
-    return {
-      build:(diz)=>{
-       
-        dati=[diz];
-      },
-      render:()=>{
-        let html=`
+  let dati = [];
+
+  return {
+    build: (diz) => {
+
+      dati = [diz];
+    },
+    render: () => {
+      let html = `
         <div class="row">
         <div class="col">
                 <a href="doc/indexDocum.html"><button>DOCUMENTATION</button></a>
@@ -23,13 +24,13 @@ export const homepage = (parentElement) => {
 
         </div>
          <div class="col">
-                  <button><a href="#pagina3">CARRELLO</a></button>
+                  <button id="carrello"><a href="#pagina3">CARRELLO</a></button>
         </div>
          <div class="col">
-                <button>sign</button>
+                <button id="registrati"><a href="#paginaRegister">Sign</a></button>
         </div>
         <div class="col">
-                    <button>Log-In</button>
+                    <button id="login"><a href="#paginaLogin">Log-In</a></button>
         </div>
         </div>
         <div class="row">
@@ -40,29 +41,33 @@ export const homepage = (parentElement) => {
                    
                    <table class="table table-borderless">`;
 
-        for( let i=0;i<dati.length;i++){
-    
-html+=`  <tr>
-  <td >
-  <div id="n`+ i+ `"></div>
- </td>
-  </tr>`;
-        }
-    
-           html+= `</table>
+      for (let i = 0; i < dati.length; i++) {
+        html += `  <tr>
+        <td>
+        <div id="n`+ i + `"></div>
+      </td>
+        </tr>`;
+      }
+
+      html += `</table>
 
         </div>
         </div>`;
 
-    
-    parentElement.innerHTML=html;
-    
-    for( let i=0;i<dati.length;i++){
-    const prewiewer=prewiew(document.getElementById("n"+i));
-     prewiewer.build(dati[i]);
-     prewiewer.render();
-    }
+
+      parentElement.innerHTML = html;
+
+      for (let i = 0; i < dati.length; i++) {
+        const prewiewer = prewiew(document.getElementById("n" + i));
+        prewiewer.build(dati[i]);
+        prewiewer.render();
+      }
+      
+
+      
+      
+      
 
     }
-    }
+  }
 }
