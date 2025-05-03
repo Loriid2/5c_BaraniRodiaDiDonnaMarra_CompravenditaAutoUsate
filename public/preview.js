@@ -62,7 +62,7 @@ export const prewiew = (parentElement) => {
     <hr>
     <div class="row">
               <div class="col">
-               <a href="#pagina2" class="btn btn-primary" id="dett`+i+`">Dettagli</a>
+               <a href="#car=${i}" class="btn btn-primary" id="dett${i}">Dettagli</a>
               </div>
               <div class="col">
                  <b>`+info.prezzo+`</b>
@@ -78,7 +78,7 @@ parentElement.innerHTML=html;
 
 const bott= document.getElementById("dett"+i);
 bott.onclick=()=>{
-callback(i);
+callback(i,"car="+i);
 }
             
    

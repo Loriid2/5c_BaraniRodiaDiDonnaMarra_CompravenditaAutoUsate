@@ -277,6 +277,7 @@ input.addEventListener("input", (event) => {
           const prewiewer = prewiew(document.getElementById("n" + i));
           console.log(cars[i]);
           prewiewer.build(cars[i],i);
+          prewiewer.setCallBack(callback);
           prewiewer.render();
       }
   };
