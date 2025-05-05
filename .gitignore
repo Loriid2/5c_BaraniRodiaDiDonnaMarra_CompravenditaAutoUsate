@@ -1,4 +1,5 @@
 conf.json
+package-lock.json
 # Node.js
 node_modules/
 npm-debug.log*
