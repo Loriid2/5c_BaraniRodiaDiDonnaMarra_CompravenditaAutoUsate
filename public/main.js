@@ -7,10 +7,38 @@ const navigator = createNavigator(document.querySelector("#container"));
 
 
 const home=homepage(document.getElementById("homePage"));
+const loginButton = document.querySelector("#loginButton");
 
 const COI=createCOI();
 
 let automobili;
+
+
+
+
+loginButton.onclick=()=>{
+  const username = document.querySelector("#username").value;
+    const password = document.querySelector("#password").value;
+    fetch("/car/login", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log("palle chiare");
+        if (json.result) {
+          alert("madonna troia che boss");
+          navigator.update(document.querySelector("#container"));
+          home.render();
+        } else {
+          alert("Login failed. Please check your credentials.");
+        }
+      });
+}
+
 
 
 function CarOfInterest(index, pagina) {

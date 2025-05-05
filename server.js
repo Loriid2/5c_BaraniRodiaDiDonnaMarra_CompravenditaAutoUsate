@@ -117,5 +117,28 @@ app.post("/car/getone", (req, res) => {
  console.info(req.body);
     res.json({result: automobili[indice]});
  
- });
- serverDB.createTable();
+});
+
+
+
+ app.post("/car/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log("Username:", username, "   Password:", password);
+  serverDB.login(username, password)
+      .then(results => {
+          console.log("Risultati della query:", results);
+          res.json({
+              result: results.length > 0
+          });
+          console.log("Login effettuato con successo:", results);
+      })
+      .catch(error => {
+          console.error("Errore durante il login:", error);
+          res.status(500).json({
+              result: false,
+              error: "Errore durante il login"
+          });
+      });
+});
+serverDB.createTable();
