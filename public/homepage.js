@@ -1,10 +1,19 @@
 import { prewiew } from "./preview.js";
+function removeDots(str) {
+  return str.replace(/\./g, '');
+}
 
 export const homepage = (parentElement) => {
     let callback;
     let dati=[];
-    const filterCars = (searchTerm) => {
-      return dati.filter(car => car.titolo.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filterCars = (prezzoMax, marca, provincia) => {
+      return dati.filter(car => {
+          const carPrezzo = parseFloat(removeDots(car.prezzo)); // Converte il prezzo in numero
+          const matchesPrezzo = carPrezzo <= prezzoMax;
+          const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
+          const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
+          return matchesPrezzo && matchesMarca && matchesProvincia;
+      });
   };
 
     return {
@@ -39,7 +48,7 @@ export const homepage = (parentElement) => {
         </div>
         <div class="row">
           <div class="col">
-                  <select>
+                  <select id="marcaFilter">
     <option selected>Scegli la marca</option>
     <option value="FIAT">FIAT</option>
     <option value="VOLKSWAGEN">VOLKSWAGEN</option>
@@ -109,7 +118,7 @@ export const homepage = (parentElement) => {
 <p>Prezzo</p>
 <input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
         <p>Value: <output id="value"></output></p>
-                  <br> <select>
+                  <br> <select id="provinciaFilter">
     <option selected>Seleziona una provincia</option>
     <option value="Agrigento">Agrigento</option>
     <option value="Alessandria">Alessandria</option>
@@ -288,6 +297,13 @@ input.addEventListener("input", (event) => {
       const searchTerm = document.getElementById("searchInput").value;
       const filteredCars = filterCars(searchTerm);
       renderCars(filteredCars);
+});
+document.getElementById("filtraButton").addEventListener("click", () => {
+  const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
+  const marca = document.getElementById("marcaFilter").value;
+  const provincia = document.getElementById("provinciaFilter").value;
+  const filteredCars = filterCars(prezzoMax, marca, provincia);
+  renderCars(filteredCars);
 });
 }
 }

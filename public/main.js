@@ -28,9 +28,9 @@ loginButton.onclick=()=>{
     })
       .then(response => response.json())
       .then(json => {
-        console.log("palle chiare");
+        
         if (json.result) {
-          alert("madonna troia che boss");
+         
           navigator.update(document.querySelector("#container"));
           home.render();
         } else {
