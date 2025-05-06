@@ -8,17 +8,25 @@ export const createCOI=()=>{
     let title;
     let dizionario;
     let prezzo;
+    let nomef;
+    let i;
 
     return{
-        build:(inf,im,de,ti,pr,diz)=>{
-            info=infos(inf);
-            img=immages(im);
-            description=de;
-            title=ti;
-            prezzo=pr;
+        build:(diz,val)=>{
+            
             dizionario=diz
+            i=val;
         },
         render:()=>{
+
+
+         console.info(dizionario);
+            info=infos(document.getElementById("detailsCar"+i));
+            console.log(document.getElementById("imagesCar"+i));
+            img=immages(document.getElementById("imagesCar"+i));
+            description=document.getElementById("description"+i);
+            title=document.getElementById("titleCar"+i);
+            prezzo=document.getElementById("price"+i);
             img.build(dizionario);
             img.render();
             

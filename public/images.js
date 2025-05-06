@@ -2,8 +2,9 @@ export const immages = (parentElement) => {
     let arrImag=[];
     return {
       build:(diz)=>{
-        
+        console.log(diz);
         arrImag=diz.immages;
+
       },
       render:()=>{
         
@@ -31,8 +32,7 @@ export const immages = (parentElement) => {
             <span class="visually-hidden">Next</span>
             </button>
         </div>`;
-        //console.log(html);
-        //console.log(parentElement);
+        console.log(document.querySelector("#container"));
     parentElement.innerHTML=html;
 
     }

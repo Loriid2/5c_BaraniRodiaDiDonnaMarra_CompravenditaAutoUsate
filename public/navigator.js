@@ -9,18 +9,27 @@ const hide = (elements) => {
     element.classList.add("visible");
     element.classList.remove("hidden");   
  }
- 
- export const createNavigator = (parentElement) => {
-    const pages = Array.from(parentElement.querySelectorAll(".page"));
-    
-    const render = () => {
+ export const createNavigator = (initialParentElement) => {
+   let parentElement = initialParentElement;
+   let pages = Array.from(parentElement.querySelectorAll(".page"));
+
+   const render = () => {
        const url = new URL(document.location.href);
        const pageName = url.hash.replace("#", "");
-       const selected = pages.filter((page) => page.id === pageName)[0] || pages[0];
- 
+       const selected = pages.find((page) => page.id === pageName) || pages[0];
+
        hide(pages);
        show(selected);
-    }
-    window.addEventListener('popstate', render); 
-    render();   
- }
+   };
+
+   const update = (newParentElement) => {
+       parentElement = newParentElement;
+       pages = Array.from(parentElement.querySelectorAll(".page"));
+       render(); // opzionale: aggiorna subito la vista
+   };
+
+   window.addEventListener('popstate', render);
+   render();
+
+   return { update };
+};
