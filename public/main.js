@@ -37,8 +37,9 @@ loginButton.onclick=()=>{
     })
       .then(response => response.json())
       .then(json => {
+        
         if (json.result) {
-          alert("login effettuato con successo");
+         
           navigator.update(document.querySelector("#container"));
           home.render();
         } else {
