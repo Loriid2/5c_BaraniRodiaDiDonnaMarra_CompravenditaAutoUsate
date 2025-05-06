@@ -119,7 +119,28 @@ app.post("/car/getone", (req, res) => {
  
 });
 
-
+app.post("/car/register", (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(req.body);
+  console.log("Username:", username, "   Email:", email, "   Password:", password);
+  serverDB.register(username, email, password)
+      .then(results => {
+          console.log("Risultati della query:", results);
+          res.json({
+              result: results.affectedRows > 0
+          });
+          console.log("Registrazione effettuata con successo:", results);
+      })
+      .catch(error => {
+          console.error("Errore durante la registrazione:", error);
+          res.status(500).json({
+              result: false,
+              error: "Errore durante la registrazione"
+          });
+      });
+});
 
  app.post("/car/login", (req, res) => {
   const username = req.body.username;

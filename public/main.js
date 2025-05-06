@@ -3,20 +3,29 @@ import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
+
 const navigator = createNavigator(document.querySelector("#container"));
 
 
 const home=homepage(document.getElementById("homePage"));
 const loginButton = document.querySelector("#loginButton");
+const invioRegisterButton = document.querySelector("#invioRegister");
 
 const COI=createCOI();
 
 let automobili;
 
+invioRegisterButton.onclick=()=>{
+  const username = document.querySelector("#username");
+  const email = document.querySelector("#email");
+  const password = document.querySelector("#password");
+  console.log("Username:", username, "   Email:", email, "   Password:", password);
+}
 
 
 
-loginButton.onclick=()=>{
+
+loginButton.onclick=()=>{ 
   const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
     fetch("/car/login", {
@@ -28,13 +37,12 @@ loginButton.onclick=()=>{
     })
       .then(response => response.json())
       .then(json => {
-        console.log("palle chiare");
         if (json.result) {
-          alert("madonna troia che boss");
+          alert("login effettuato con successo");
           navigator.update(document.querySelector("#container"));
           home.render();
         } else {
-          alert("Login failed. Please check your credentials.");
+          alert("Login errato. controllare le credenziali.");
         }
       });
 }
