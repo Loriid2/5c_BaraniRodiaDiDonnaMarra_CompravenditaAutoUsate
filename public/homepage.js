@@ -8,10 +8,17 @@ export const homepage = (parentElement) => {
     let dati=[];
     const filterCars = (prezzoMax, marca, provincia) => {
       return dati.filter(car => {
+          const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+          if(searchTerm!==null) {
+            return car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm);
+          }
           const carPrezzo = parseFloat(removeDots(car.prezzo)); // Converte il prezzo in numero
           const matchesPrezzo = carPrezzo <= prezzoMax;
           const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
           const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
+          if(searchTerm!==null) {
+            return car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm);
+          }
           return matchesPrezzo && matchesMarca && matchesProvincia;
       });
   };
