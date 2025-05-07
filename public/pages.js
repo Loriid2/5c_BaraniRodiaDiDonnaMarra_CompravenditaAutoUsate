@@ -54,8 +54,12 @@ export const createPages=(parentElement)=>{
             <div class="col">
              <div id="price`+i+`">prezzo</div>
             </div>
-            <div class="col">
-                <div id="price`+i+`">bottone per chattare con venditore  </div>
+            <div class="col" id="mail">
+            <botton id="mail" class="btn btn-primary">Contattaci</botton>
+              <form id="emailForm" class="form-inline">
+                
+                </form>
+                <div id="result"></div>
             </div>
             
                </div>
