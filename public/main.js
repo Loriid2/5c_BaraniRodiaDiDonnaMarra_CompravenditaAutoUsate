@@ -30,8 +30,94 @@ const COI=createCOI();
 let automobili;
 
 openFormButton.onclick=()=>{
-  
+  let html=`
+          <form>
+          <div class="mb-3">
+            <label for="nomeModello" class="form-label">Nome Macchina</label>
+            <input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">
+          </div>
+          <div class="mb-3">
+            <label for="nomeMarca" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="nomeMarca" placeholder="Inserire Marca">
+          </div>
+          <div class="mb-3">
+            <label for="numerokm" class="form-label">Numero Km</label>
+            <input type="text" class="form-control" id="numerokm" placeholder="Inserire numero km">
+          </div>
+          <div class="mb-3">
+            <label for="rapportoTP" class="form-label">Rapporto Tara Peso</label>
+            <input type="text" class="form-control" id="rapportoTP" placeholder="Inserire Rapporto Tara Peso">
+          </div>
+          <div class="mb-3">
+            <label for="potenza" class="form-label">Potenza</label>
+            <input type="text" class="form-control" id="potenza" placeholder="Inserire Potenza">
+          </div>
+          <div class="mb-3">
+            <label for="luogoVendita" class="form-label">Luogo Vendita</label>
+            <input type="text" class="form-control" id="luogoVendita" placeholder="Inserire Luogo di Vendita">
+          </div>
+          <div class="mb-3">
+            <label for="marce" class="form-label">Marce</label>
+            <input type="text" class="form-control" id="marce" placeholder="Inserire Marce">
+          </div>
+          <div class="mb-3">
+            <label for="prezzo" class="form-label">Prezzo</label>
+            <input type="text" class="form-control" id="prezzo" placeholder="Inserire Prezzo">
+          </div>
+          <div class="mb-3">
+            <label for="carburante" class="form-label">Carburante</label>
+            <input type="text" class="form-control" id="carburante" placeholder="Inserire Tipo di Carburante">
+          </div>
+          <div class="mb-3">
+            <label for="descrizione" class="form-label">Descrizione</label>
+            <input type="text" class="form-control" id="descrizione" placeholder="Inserire Descrizione">
+
+          </div>
+          <button type="submit" id="invioForm" class="btn btn-primary">Invio</button>
+        </form>`;
+    const formContainer = document.querySelector("#formInserimento");
+    formContainer.innerHTML = html;
+
+    /*const invioFormButton = document.querySelector("#invioForm");
+    invioFormButton.onclick=()=>{
+      const nomeModello = document.querySelector("#nomeModello").value;
+      const nomeMarca = document.querySelector("#nomeMarca").value;
+      const numerokm = document.querySelector("#numerokm").value;
+      const rapportoTP = document.querySelector("#rapportoTP").value;
+      const potenza = document.querySelector("#potenza").value;
+      const luogoVendita = document.querySelector("#luogoVendita").value;
+      const marce = document.querySelector("#marce").value;
+      const prezzo = document.querySelector("#prezzo").value;
+      const carburante = document.querySelector("#carburante").value;
+      const descrizione = document.querySelector("#descrizione").value;
+      if(nomeModello!==null && nomeMarca!==null && numerokm!==null && rapportoTP!==null && potenza!==null && luogoVendita!==null && marce!==null && prezzo!==null && carburante!==null && descrizione!==null){ {
+        fetch("/car/insert", {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ titolo: nomeModello, marca: nomeMarca, km: numerokm, Rapporto_Tara_Potenza: rapportoTP, potenza: potenza, luogoVendita: luogoVendita, marce: marce, prezzo: prezzo, carburante: carburante, descrizione: descrizione })
+        })
+          .then(response => response.json())
+          .then(json => {
+            if (json.result) {
+              console.log("Auto inserita con successo:", json);
+              alert("Auto inserita con successo!");
+              navigator.update(document.querySelector("#container"));
+              home.render(); 
+            } else {
+              alert("Errore durante l'inserimento dell'auto.");
+            }
+          });
+      }
+    
+    }*/
 }
+
+
+
+
+
 
 invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#username");
@@ -62,7 +148,6 @@ loginButton.onclick=()=>{
           navigator.update(document.querySelector("#container"));
           home.render(); 
         } else {
-
           alert("Login errato. controllare le credenziali.");
         }
       });
