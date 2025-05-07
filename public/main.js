@@ -4,16 +4,34 @@ import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
 
+//import { login } from "../serverDB.js";
+
+
+
+
+
 const navigator = createNavigator(document.querySelector("#container"));
 
 
 const home=homepage(document.getElementById("homePage"));
+
+
 const loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister");
+//da metterci il cambio di visibilità
+const loginNavbar= document.querySelector("#login");
+const registerNavbar= document.querySelector("#registrati");
+
+//bottone per l'aggiunta dell'auto tramite form
+const openFormButton = document.querySelector("#aggiungiMacchina");
 
 const COI=createCOI();
 
 let automobili;
+
+openFormButton.onclick=()=>{
+  
+}
 
 invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#username");
@@ -25,7 +43,7 @@ invioRegisterButton.onclick=()=>{
 
 
 
-loginButton.onclick=()=>{ 
+loginButton.onclick=()=>{
   const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
     fetch("/car/login", {
@@ -37,12 +55,14 @@ loginButton.onclick=()=>{
     })
       .then(response => response.json())
       .then(json => {
-        
         if (json.result) {
-         
+          console.log(loginNavbar,registerNavbar);
+          loginNavbar.classList.add("hidden");
+          registerNavbar.classList.add("hidden");
           navigator.update(document.querySelector("#container"));
-          home.render();
+          home.render(); 
         } else {
+
           alert("Login errato. controllare le credenziali.");
         }
       });

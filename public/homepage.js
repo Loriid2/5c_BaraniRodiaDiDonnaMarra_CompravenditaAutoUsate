@@ -25,7 +25,11 @@ export const homepage = (parentElement) => {
         callback=cb;
       },
       render:()=>{
-        let html=`
+        let html=`<button id="carrello"><a href="#pagina3">CARRELLO</a></button>
+        <button id="registrati" class="parteLog"><a href="#paginaRegister">Sign</a></button>
+        <button id="login" class="parteLog"><a href="#paginaLogin">Log-In</a></button>
+        <button id="areaPers"><a href="#areaPersonale">Area Personale</a></button>`
+        html+=`
         <div class="row">
         <div class="col">
                 <a href="doc/indexDocum.html"><button>DOCUMENTATION</button></a>
@@ -36,15 +40,6 @@ export const homepage = (parentElement) => {
                         <input type="text" id="searchInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-         <div class="col">
-                  <button id="carrello"><a href="#pagina3">CARRELLO</a></button>
-        </div>
-         <div class="col">
-                <button id="registrati"><a href="#paginaRegister">Sign</a></button>
-        </div>
-        <div class="col">
-                    <button id="login"><a href="#paginaLogin">Log-In</a></button>
-        </div>
         </div>
         <div class="row">
           <div class="col">
@@ -114,9 +109,9 @@ export const homepage = (parentElement) => {
     <option value="TESLA">TESLA</option>
     <option value="TVR">TVR</option>
     <option value="VAUXHALL">VAUXHALL</option>
-</select><br>
-<p>Prezzo</p>
-<input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
+    </select><br>
+    <p>Prezzo</p>
+    <input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
         <p>Value: <output id="value"></output></p>
                   <br> <select id="provinciaFilter">
     <option selected>Seleziona una provincia</option>
@@ -228,36 +223,37 @@ export const homepage = (parentElement) => {
     <option value="Vibo Valentia">Vibo Valentia</option>
     <option value="Vicenza">Vicenza</option>
     <option value="Viterbo">Viterbo</option>
-</select>
-<br> <button id="filtraButton">vai</button> 
+    </select>
+    <br> <button id="filtraButton">vai</button> 
         </div>
         <div class="col">
                    
-                   <table id="carList" class="table table-borderless">`;
+        <table id="carList" class="table table-borderless">`;
 
                   
         for( let i=0;i<dati.length;i+=3){
-    
-html+=`  <tr>
-  <td >
-  <div id="n`+ i+ `"></div>
- </td>
- <td >
-  <div id="n`+ (i+1)+ `"></div>
- </td>
- <td >
-  <div id="n`+ (i+2) +`"></div>
- </td>
-  </tr>`;
+          html+=`  <tr>
+            <td >
+            <div id="n`+ i+ `"></div>
+          </td>
+          <td >
+            <div id="n`+ (i+1)+ `"></div>
+          </td>
+          <td >
+            <div id="n`+ (i+2) +`"></div>
+          </td>
+            </tr>`;
         }
     
-           html+= `</table>
+        html+= `</table>
 
         </div>
         </div>`;
 
    // console.info(html);
     parentElement.innerHTML=html;
+
+    
     const value = document.querySelector("#value");
     const input = document.querySelector("#prezzo");
     value.textContent = input.value;
