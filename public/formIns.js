@@ -102,7 +102,7 @@ export const createform=(parentElement)=>{
                           console.log(json);
                           alert("Auto inserita con successo!"); // funzionante
                           /* da aggiungere qui la parte dove viene aggiunta alla home la macchina appena inserita su db (creando metodo)*/
-                          callbackPromise()
+                          callback();
                           
                         } else {
                           alert("Errore durante l'inserimento dell'auto.");

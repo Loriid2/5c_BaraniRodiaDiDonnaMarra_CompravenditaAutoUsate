@@ -48,8 +48,8 @@ const serverDB = {
         return executeQuery(`INSERT INTO credenziali (nome, email, password) VALUES ('${username}', '${email}', '${password}')`);
     },
     
-    insert: function (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello, contatto, abstract,abstract,img) {
-        return executeQuery(`INSERT INTO AutoDettagli (immagini,titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto,abstract,abstract) VALUES ('${img}','${titolo}', '${descrizione}', ${prezzo}, ${marce}, '${potenza}', ${km}, '${luogoVendita}', '${carburante}', '${Rapporto_Tara_Potenza}', '${marca}', '${modello}','${contatto}','${abstract}','${abstract}')`);
+    insert: function (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello, contatto, abstract,img) {
+        return executeQuery(`INSERT INTO AutoDettagli (immagini,titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto,abstract) VALUES ('${img}','${titolo}', '${descrizione}', ${prezzo}, ${marce}, '${potenza}', ${km}, '${luogoVendita}', '${carburante}', '${Rapporto_Tara_Potenza}', '${marca}', '${modello}','${contatto}','${abstract}')`);
     },
     getall:function(){
         return executeQuery("SELECT * from AutoDettagli");
