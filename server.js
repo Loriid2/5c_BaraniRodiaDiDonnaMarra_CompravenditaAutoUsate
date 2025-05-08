@@ -108,11 +108,22 @@ app.use("/", express.static(path.join(__dirname, "public")));
   server.listen(port, () => {
     console.log("- server running on port: " + port);
   });
+
+
   app.get("/car/getall",(req,res) => {
 
     let auto=serverDB.getall().then(results => {
       console.log("Risultati della query:", results);
-//res.json({dati:auto})
+      for(let i=0;i<results.length;i++){
+        let auto=results[i]
+      
+        results[i].immagini=auto.immagini.split(",");
+
+      };
+     // let img=(results["immagini"]).split(",")
+      //results.immagini=img;
+      let auto=results;
+      res.json({dati:auto})
       //console.log(" effettuato con successo:", results);
   })
   .catch(error => {
@@ -123,7 +134,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
       });
   });
    // console.log(auto);
-         res.json({dati:automobili})
+    //     res.json({dati:automobili})
  });
  
 app.post("/car/getone", (req, res) => {
