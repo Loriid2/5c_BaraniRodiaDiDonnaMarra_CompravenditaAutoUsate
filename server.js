@@ -107,7 +107,21 @@ app.use("/", express.static(path.join(__dirname, "public")));
     console.log("- server running on port: " + port);
   });
   app.get("/car/getall",(req,res) => {
-     res.json({dati:automobili})
+
+    let auto=serverDB.getall().then(results => {
+      console.log("Risultati della query:", results);
+//res.json({dati:auto})
+      //console.log(" effettuato con successo:", results);
+  })
+  .catch(error => {
+      console.error("Errore durante il login:", error);
+      res.status(500).json({
+          result: false,
+          error: "Errore durante il login"
+      });
+  });
+   // console.log(auto);
+         res.json({dati:automobili})
  });
  
 app.post("/car/getone", (req, res) => {
@@ -174,9 +188,11 @@ app.post("/car/insert", (req, res) => {
     const carburante = req.body.carburante;
     const Rapporto_Tara_Potenza = req.body.Rapporto_Tara_Potenza;
     const marca = req.body.marca;
-    const modello = req.body.modello;
+    const modello = req.body.titolo;
+    const contatto= req.body.contatto;
     console.log("Dati dell'auto:", req.body);
-    serverDB.insert(titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello)
+   // prezzo=prezzo.replaceAll(" ","");
+    serverDB.insert(titolo, descrizione, prezzo.trim(), marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto)
         .then(results => {
             console.log("Risultati della query:", results);
             res.json({

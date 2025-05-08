@@ -48,9 +48,13 @@ const serverDB = {
         return executeQuery(`INSERT INTO credenziali (nome, email, password) VALUES ('${username}', '${email}', '${password}')`);
     },
     
-    insert: function (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello) {
-        return executeQuery(`INSERT INTO AutoDettagli (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello) VALUES ('${titolo}', '${descrizione}', ${prezzo}, ${marce}, '${potenza}', ${km}, '${luogoVendita}', '${carburante}', '${Rapporto_Tara_Potenza}', '${marca}', '${modello}')`);
+    insert: function (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto) {
+        return executeQuery(`INSERT INTO AutoDettagli (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto) VALUES ('${titolo}', '${descrizione}', ${prezzo}, ${marce}, '${potenza}', ${km}, '${luogoVendita}', '${carburante}', '${Rapporto_Tara_Potenza}', '${marca}', '${modello}','${contatto}')`);
     },
+    getall:function(){
+        return executeQuery("SELECT * from AutoDettagli");
+
+    }
     
 };
 
