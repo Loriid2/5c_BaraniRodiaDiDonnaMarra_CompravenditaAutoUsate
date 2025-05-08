@@ -103,23 +103,25 @@ app.post("/car/login", (req, res) => {
 });
 
 app.post("/car/insert", (req, res) => {
-    const titolo = req.body.titolo;
-    const descrizione = req.body.descrizione;
-    const prezzo = req.body.prezzo;
-    const marce = req.body.marce;
-    const potenza = req.body.potenza;
-    const km = req.body.km;
-    const luogoVendita = req.body.luogoVendita;
-    const carburante = req.body.carburante;
-    const Rapporto_Tara_Potenza = req.body.Rapporto_Tara_Potenza;
-    const marca = req.body.marca;
-    const modello = req.body.titolo;
-    const contatto= req.body.contatto;
-    const abstract=req.body.abstract;
+    
+    const titolo = String(req.body.titolo).trim();
+    const descrizione = String(req.body.descrizione).trim();
+    const prezzo = String(req.body.prezzo).trim();
+    const marce = String(req.body.marce).trim();
+    const potenza = String(req.body.potenza).trim();
+    const km = String(req.body.km).trim();
+    const luogoVendita = String(req.body.luogoVendita).trim();
+    const carburante = String(req.body.carburante).trim();
+    const Rapporto_Tara_Potenza = String(req.body.Rapporto_Tara_Potenza).trim();
+    const marca = String(req.body.marca).trim();
+    const modello = String(req.body.titolo).trim();
+    const contatto= String(req.body.contatto).trim();
+    const abstract = String(req.body.abstract).trim();
+    
     const immagini=req.body.immagini;
     console.log("Dati dell'auto:", req.body);
    // prezzo=prezzo.replaceAll(" ","");
-    serverDB.insert(titolo, descrizione, prezzo.trim(), marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto,abstract,immagini)
+    serverDB.insert(titolo, descrizione, prezzo.trim(), marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto)
         .then(results => {
             console.log("Risultati della query:", results);
             res.json({

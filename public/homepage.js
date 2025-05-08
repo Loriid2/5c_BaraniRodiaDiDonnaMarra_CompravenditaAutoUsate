@@ -13,14 +13,16 @@ export const homepage = (parentElement) => {
       }
     })};
 
-  const filterCars = (prezzoMax, marca, provincia) => {
-    return dati.filter(car => {
-      const carPrezzo = parseFloat(removeDots(car.prezzo)); // Converte il prezzo in numero
-      const matchesPrezzo = carPrezzo <= prezzoMax;
-      const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
-      const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
-      return matchesPrezzo && matchesMarca && matchesProvincia;
-    });
+    const filterCars = (prezzoMax, marca, provincia, kmMax) => {
+      return dati.filter(car => {
+          const carPrezzo = parseFloat(removeDots(car.prezzo)); // Converte il prezzo in numero
+          const carKm = parseFloat(removeDots(car.km)); // Converte il chilometraggio in numero
+          const matchesPrezzo = carPrezzo <= prezzoMax;
+          const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
+          const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
+          const matchesKm = carKm <= kmMax;
+          return matchesPrezzo && matchesMarca && matchesProvincia && matchesKm;
+      });
   };
 
   return {
@@ -116,9 +118,13 @@ export const homepage = (parentElement) => {
     <option value="TVR">TVR</option>
     <option value="VAUXHALL">VAUXHALL</option>
     </select><br>
-    <p>Prezzo</p>
-    <input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
-        <p>Value: <output id="value"></output></p>
+   <p>Prezzo massimo</p>
+<input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" onchange="document.getElementById('value').textContent = this.value + ' €'">
+<p>Value: <span id="value">50000 €</span></p>
+        <p>Chilometraggio massimo</p>
+<input type="range" id="chilometraggio" min="0" max="500000" value="100000" step="1000" onchange="document.getElementById('kmValue').textContent = this.value + ' km'">
+<p>Value: <span id="kmValue">100000 km</span></p>
+
                   <br> <select id="provinciaFilter">
     <option selected>Seleziona una provincia</option>
     <option value="Agrigento">Agrigento</option>
@@ -259,14 +265,7 @@ export const homepage = (parentElement) => {
 
       // console.info(html);
       parentElement.innerHTML = html;
-      const value = document.querySelector("#value");
-      const input = document.querySelector("#prezzo");
-      value.textContent = input.value;
-
-      //-------------------------------------------
-      input.onchange=() => {
-        value.textContent = input.value + "€";
-      };
+     
 //-----------------------------------------------
 const renderCars = (cars) => {
   const carList = document.getElementById("carList");
@@ -303,7 +302,8 @@ document.getElementById("filtraButton").onclick = () => {
   const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
   const marca = document.getElementById("marcaFilter").value;
   const provincia = document.getElementById("provinciaFilter").value;
-  const filteredCars = filterCars(prezzoMax, marca, provincia);
+  const kmMax = parseInt(document.getElementById("chilometraggio").value, 10);
+  const filteredCars = filterCars(prezzoMax, marca, provincia, kmMax);
   renderCars(filteredCars);
 };
       }
