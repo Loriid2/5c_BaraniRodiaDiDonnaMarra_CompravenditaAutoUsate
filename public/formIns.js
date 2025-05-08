@@ -13,9 +13,9 @@ export const createform=(parentElement)=>{
          },
          render:()=>{
  
-         let html;
+         let html="";
          html+=`
-          <form>
+          
           <div class="mb-3">
             <label for="nomeMarca" class="form-label">Marca</label>
             <input type="text" class="form-control" id="nomeMarca" placeholder="Inserire Marca">
@@ -64,8 +64,14 @@ export const createform=(parentElement)=>{
             <label for="descrizione" class="form-label">Descrizione</label>
             <input type="text" class="form-control" id="descrizione" placeholder="Inserire Descrizione">
           </div>
-          <button type="submit" id="invioForm" class="btn btn-primary">Invio</button>
-        </form>`;
+            <div class="mb-3">
+            <label for="descrizione" class="form-label">Foto</label>
+            <input id="file1" name="file" class="form-control " type="file" ></input>
+            <input id="file2" name="file" class="form-control " type="file" ></input>
+            <input id="file3" name="file" class="form-control " type="file" ></input>
+          </div>
+          <a href="#pagina1"><button type="button" id="invioForm" class="btn btn-primary">Invio</button><a>
+        `;
                 parentElement.innerHTML=html;
                 
 
@@ -87,29 +93,68 @@ export const createform=(parentElement)=>{
                   const descrizione = document.querySelector("#descrizione").value;
                   const contatto= document.querySelector("#contatto").value;
                   const abstract=document.querySelector("#abstract").value;
-                  const img="1.jpg";
-                  console.log(nomeModello,nomeMarca,numerokm,rapportoTP,potenza,luogoVendita,marce,prezzo,carburante,descrizione,contatto);
+                  const inputFile1=document.getElementById("file1");
+                  const inputFile2=document.getElementById("file2");
+                  const inputFile3=document.getElementById("file3");
+                  const file1 = inputFile1.files[0];
+                  const file2 = inputFile2.files[0];
+                  const file3 = inputFile3.files[0];
+
+                    if (!file1 || !file2 || !file3) {
+                    console.error("Tutti e 3 i file devono essere selezionati!");
+                    } else {
+                    const formData = new FormData();
+                    formData.append("file", file1);
+                    formData.append("file", file2);
+                    formData.append("file", file3);
+                
+                    fetch("/car/upload", {
+                        method: "POST",
+                        body: formData
+                      })
+                      .then(response => response.json())
+                      .then(json => {
+                        const img = json.files.join(","); 
+                
+                    
                     fetch("/car/insert", {
                       method: 'POST',
                       headers: {
                         "Content-Type": "application/json"
                       },
-                      body: JSON.stringify({ titolo: nomeModello, marca: nomeMarca, km: numerokm, Rapporto_Tara_Potenza: rapportoTP, potenza: potenza, luogoVendita: luogoVendita, marce: marce, prezzo: prezzo, carburante: carburante, descrizione: descrizione,contatto: contatto,abstract: abstract,immagini:img})
+                      body: JSON.stringify({
+                        titolo: nomeModello,
+                        marca: nomeMarca,
+                        km: numerokm,
+                        Rapporto_Tara_Potenza: rapportoTP,
+                        potenza: potenza,
+                        luogoVendita: luogoVendita,
+                        marce: marce,
+                        prezzo: prezzo,
+                        carburante: carburante,
+                        descrizione: descrizione,
+                        contatto: contatto,
+                        abstract: abstract,
+                        immagini: img   
+                      })
                     })
-                      .then(response => response.json())
-                      .then(json => {
-                        if (json.result) {
-                          console.log(json);
-                          alert("Auto inserita con successo!"); // funzionante
-                          /* da aggiungere qui la parte dove viene aggiunta alla home la macchina appena inserita su db (creando metodo)*/
-                          callback();
-                          
-                        } else {
-                          alert("Errore durante l'inserimento dell'auto.");
-                        }
-                      }); 
+                    .then(response => response.json())
+                    .then(json => {
+                      if (json.result) {
+                        alert("Auto inserita con successo!");
+                        callback();
+                      } else {
+                        alert("Errore durante l'inserimento dell'auto.");
+                      }
+                    });
+                
+                  })
+                  .catch(err => {
+                    console.error("Errore durante l'upload:", err);
+                  });
                 }
- 
+                
+            }
          }
      }
  }
