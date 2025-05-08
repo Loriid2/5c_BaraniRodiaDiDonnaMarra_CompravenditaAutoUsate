@@ -3,7 +3,7 @@ export const immages = (parentElement) => {
     return {
       build:(diz)=>{
         console.log(diz);
-        arrImag=diz.immages;
+        arrImag=diz.immagini;
 
       },
       render:()=>{

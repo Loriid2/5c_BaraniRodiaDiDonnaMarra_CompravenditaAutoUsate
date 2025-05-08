@@ -9,7 +9,7 @@ const fs= require("fs");
 const multer = require("multer");
 const serverDB = require("./serverDB.js");
 
-
+let automobili;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -26,6 +26,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
     let auto=serverDB.getall().then(results => {
       console.log("Risultati della query:", results);
+      
       for(let i=0;i<results.length;i++){
         let auto=results[i]
       
@@ -35,6 +36,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
      // let img=(results["immagini"]).split(",")
       //results.immagini=img;
       let auto=results;
+      automobili=results;
       res.json({dati:auto})
       //console.log(" effettuato con successo:", results);
   })
