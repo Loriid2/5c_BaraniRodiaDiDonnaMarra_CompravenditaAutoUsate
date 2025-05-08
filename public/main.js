@@ -33,12 +33,12 @@ openFormButton.onclick=()=>{
   let html=`
           <form>
           <div class="mb-3">
-            <label for="nomeModello" class="form-label">Nome Macchina</label>
-            <input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">
-          </div>
-          <div class="mb-3">
             <label for="nomeMarca" class="form-label">Marca</label>
             <input type="text" class="form-control" id="nomeMarca" placeholder="Inserire Marca">
+          </div>
+          <div class="mb-3">
+            <label for="nomeModello" class="form-label">Nome Macchina</label>
+            <input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">
           </div>
           <div class="mb-3">
             <label for="numerokm" class="form-label">Numero Km</label>
@@ -73,9 +73,12 @@ openFormButton.onclick=()=>{
             <input type="text" class="form-control" id="contatto" placeholder="Inserire contatto">
           </div>
           <div class="mb-3">
+            <label for="abstract" class="form-label">Abstract</label>
+            <input type="text" class="form-control" id="abstract" placeholder="Inserire Riassunto">
+          </div>
+          <div class="mb-3">
             <label for="descrizione" class="form-label">Descrizione</label>
             <input type="text" class="form-control" id="descrizione" placeholder="Inserire Descrizione">
-
           </div>
           <button type="submit" id="invioForm" class="btn btn-primary">Invio</button>
         </form>`;
