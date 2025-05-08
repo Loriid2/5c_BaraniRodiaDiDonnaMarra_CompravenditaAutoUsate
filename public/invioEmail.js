@@ -1,5 +1,27 @@
 export const invioEmail = () => {
-  const express = require('express');
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'youremail@gmail.com',
+      pass: 'yourpassword'
+    }
+  }); 
+  
+  let mailOptions = {
+    from: 'youremail@gmail.com',
+    to: 'myfriend@yahoo.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+  /*const express = require('express');
   const path = require('path');
   const mailer = require('./mailer');
   
@@ -32,7 +54,7 @@ export const invioEmail = () => {
 
 
   const form = document.getElementById('emailForm');
-  const resultBox = document.getElementById('result');
+  const resultBox = document.getElementBdyId('result');
      /*function toggleForm() {
       const formContainer = document.getElementById('emailForm');
       const contactBtn = document.getElementById('contactBtn');
@@ -40,7 +62,7 @@ export const invioEmail = () => {
       formContainer.classList.toggle('visible');
 
       contactBtn.style.display = 'none';
-    }*/
+    }
 
 
     form.addEventListener('submit', async (e) => {
@@ -70,5 +92,5 @@ export const invioEmail = () => {
       } catch (err) {
         resultBox.innerHTML = `<div class="alert alert-danger">Errore di rete: ${err.message}</div>`;
       }
-    });
+    });*/
 }

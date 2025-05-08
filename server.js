@@ -119,11 +119,10 @@ app.post("/car/insert", (req, res) => {
     const modello = String(req.body.titolo).trim();
     const contatto= String(req.body.contatto).trim();
     const abstract = String(req.body.abstract).trim();
-    
-    const immagini=req.body.immagini;
+    const immagini=String(req.body.immagini).trim();
     console.log("Dati dell'auto:", req.body);
    // prezzo=prezzo.replaceAll(" ","");
-    serverDB.insert(titolo, descrizione, prezzo.trim(), marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto)
+    serverDB.insert(titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto,abstract,immagini)
         .then(results => {
             console.log("Risultati della query:", results);
             res.json({

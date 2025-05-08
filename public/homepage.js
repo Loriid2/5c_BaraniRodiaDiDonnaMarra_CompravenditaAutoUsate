@@ -269,6 +269,11 @@ export const homepage = (parentElement) => {
 //-----------------------------------------------
 const renderCars = (cars) => {
   const carList = document.getElementById("carList");
+  if(!carList) {
+    alert("Car list element not found!");
+    return;
+  }
+
   let carHtml = `<table class="table table-borderless">`;
 
   for (let i = 0; i < cars.length; i += 3) {
@@ -280,6 +285,7 @@ const renderCars = (cars) => {
   }
 
   carHtml += `</table>`;
+  console.log(carHtml);
   carList.innerHTML = carHtml;
 
   for (let i = 0; i < cars.length; i++) {

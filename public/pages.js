@@ -56,7 +56,7 @@ export const createPages=(parentElement)=>{
             </div>
             <div class="col" id="divMail" >
             <form id="formBottonMail" class="visible">
-            <botton id="bottonMail" class="btn btn-primary">Contattaci</botton>
+            <button id="bottonMail" class="btn btn-primary">Contattaci</botton>
             </form>
               <form id="emailForm" class="hidden">
                  <h2 class="mt-4">Invia un messaggio</h2>
