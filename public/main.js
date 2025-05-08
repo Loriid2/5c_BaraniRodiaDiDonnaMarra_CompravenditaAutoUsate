@@ -104,13 +104,14 @@ openFormButton.onclick=()=>{
       const carburante = document.querySelector("#carburante").value;
       const descrizione = document.querySelector("#descrizione").value;
       const contatto= document.querySelector("#contatto").value;
-      console.log(nomeModello,nomeMarca,numerokm,rapportoTP,potenza,luogoVendita,marce,prezzo,carburante,descrizione,contatto);
+      const abstract= document.querySelector("#abstract").value;
+      console.log(nomeModello,nomeMarca,numerokm,rapportoTP,potenza,luogoVendita,marce,prezzo,carburante,descrizione,contatto,abstract);
         fetch("/car/insert", {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ titolo: nomeModello, marca: nomeMarca, km: numerokm, Rapporto_Tara_Potenza: rapportoTP, potenza: potenza, luogoVendita: luogoVendita, marce: marce, prezzo: prezzo, carburante: carburante, descrizione: descrizione,contatto: contatto})
+          body: JSON.stringify({ titolo: nomeModello, marca: nomeMarca, km: numerokm, Rapporto_Tara_Potenza: rapportoTP, potenza: potenza, luogoVendita: luogoVendita, marce: marce, prezzo: prezzo, carburante: carburante, descrizione: descrizione,contatto: contatto, abstract: abstract })
         })
           .then(response => response.json())
           .then(json => {
