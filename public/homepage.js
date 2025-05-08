@@ -1,25 +1,44 @@
 import { prewiew } from "./preview.js";
+function removeDots(str) {
+  return str.replace(/\./g, '');
+}
 
 export const homepage = (parentElement) => {
-    let callback;
-    let dati=[];
-    const filterCars = (searchTerm) => {
-      return dati.filter(car => car.titolo.toLowerCase().includes(searchTerm.toLowerCase()));
+  let callback;
+  let dati = [];
+  const filterSerach = (searchTerm) => {
+    return dati.filter(car => {
+      if (searchTerm !== null) {
+        return car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm);
+      }
+    })};
+
+  const filterCars = (prezzoMax, marca, provincia) => {
+    return dati.filter(car => {
+      const carPrezzo = parseFloat(removeDots(car.prezzo)); // Converte il prezzo in numero
+      const matchesPrezzo = carPrezzo <= prezzoMax;
+      const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
+      const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
+      return matchesPrezzo && matchesMarca && matchesProvincia;
+    });
   };
 
-    return {
-      build:(diz)=>{
-       
-        dati=diz;
-      },
-      setCallBack:(cb)=>{
-        callback=cb;
-      },
-      render:()=>{
-        let html=`
+  return {
+    build: (diz) => {
+
+      dati = diz;
+    },
+    setCallBack: (cb) => {
+      callback = cb;
+    },
+    render: () => {
+      let html = `
         <div class="row">
         <div class="col">
                 <a href="doc/indexDocum.html"><button>DOCUMENTATION</button></a>
+                <a href="#paginaRegister"><button>Register</button></a>
+                <a href="#paginaLogin"><button>Log-In</button></a>
+                <a href="#areaPersonale"><button>Area Personale</button></a>
         </div>
          <div class="col">
                     <div class="input-group mb-3">
@@ -27,19 +46,10 @@ export const homepage = (parentElement) => {
                         <input type="text" id="searchInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                     </div>
                 </div>
-         <div class="col">
-                  <button id="carrello"><a href="#pagina3">CARRELLO</a></button>
-        </div>
-         <div class="col">
-                <button id="registrati"><a href="#paginaRegister">Sign</a></button>
-        </div>
-        <div class="col">
-                    <button id="login"><a href="#paginaLogin">Log-In</a></button>
-        </div>
         </div>
         <div class="row">
           <div class="col">
-                  <select>
+                  <select id="marcaFilter">
     <option selected>Scegli la marca</option>
     <option value="FIAT">FIAT</option>
     <option value="VOLKSWAGEN">VOLKSWAGEN</option>
@@ -105,11 +115,11 @@ export const homepage = (parentElement) => {
     <option value="TESLA">TESLA</option>
     <option value="TVR">TVR</option>
     <option value="VAUXHALL">VAUXHALL</option>
-</select><br>
-<p>Prezzo</p>
-<input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
+    </select><br>
+    <p>Prezzo</p>
+    <input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" oninput="this.nextElementSibling.value = this.value">
         <p>Value: <output id="value"></output></p>
-                  <br> <select>
+                  <br> <select id="provinciaFilter">
     <option selected>Seleziona una provincia</option>
     <option value="Agrigento">Agrigento</option>
     <option value="Alessandria">Alessandria</option>
@@ -219,76 +229,84 @@ export const homepage = (parentElement) => {
     <option value="Vibo Valentia">Vibo Valentia</option>
     <option value="Vicenza">Vicenza</option>
     <option value="Viterbo">Viterbo</option>
-</select>
-<br> <button id="filtraButton">vai</button> 
+    </select>
+    <br> <button id="filtraButton">vai</button> 
         </div>
         <div class="col">
                    
-                   <table id="carList" class=" trasparente">`;
+        <table id="carList" class="table table-borderless">`;
 
-                  
-        for( let i=0;i<dati.length;i+=3){
-    
-html+=`  <tr>
+
+      for (let i = 0; i < dati.length; i += 3) {
+
+        html += `  <tr>
   <td >
-  <div id="n`+ i+ `"></div>
+  <div id="n`+ i + `"></div>
  </td>
  <td >
-  <div id="n`+ (i+1)+ `"></div>
+  <div id="n`+ (i + 1) + `"></div>
  </td>
  <td >
-  <div id="n`+ (i+2) +`"></div>
+  <div id="n`+ (i + 2) + `"></div>
  </td>
   </tr>`;
-        }
-    
-           html+= `</table>
+      }
+
+      html += `</table>
 
         </div>
         </div>`;
 
-   // console.info(html);
-    parentElement.innerHTML=html;
-    const value = document.querySelector("#value");
-    const input = document.querySelector("#prezzo");
-    value.textContent = input.value;
+      // console.info(html);
+      parentElement.innerHTML = html;
+      const value = document.querySelector("#value");
+      const input = document.querySelector("#prezzo");
+      value.textContent = input.value;
 
-//-------------------------------------------
-input.addEventListener("input", (event) => {
-  value.textContent = event.target.value+"€";
-});
+      //-------------------------------------------
+      input.onchange=() => {
+        value.textContent = input.value + "€";
+      };
 //-----------------------------------------------
-    const renderCars = (cars) => {
-      const carList = document.getElementById("carList");
-      let carHtml = `<table class="table table-borderless">`;
+const renderCars = (cars) => {
+  const carList = document.getElementById("carList");
+  let carHtml = `<table class="table table-borderless">`;
 
-      for (let i = 0; i < cars.length; i += 3) {
-          carHtml += `<tr>
+  for (let i = 0; i < cars.length; i += 3) {
+    carHtml += `<tr>
               <td><div id="n${i}"></div></td>
               <td><div id="n${i + 1}"></div></td>
               <td><div id="n${i + 2}"></div></td>
           </tr>`;
+  }
+
+  carHtml += `</table>`;
+  carList.innerHTML = carHtml;
+
+  for (let i = 0; i < cars.length; i++) {
+    const prewiewer = prewiew(document.getElementById("n" + i));
+    console.log(cars[i]);
+    prewiewer.build(cars[i], i);
+    prewiewer.setCallBack(callback);
+    prewiewer.render();
+  }
+};
+
+renderCars(dati);
+
+document.getElementById("ricercaButton").onclick = () => {
+  const searchTerm = document.getElementById("searchInput").value;
+  const filteredCars = filterSerach(searchTerm);
+  renderCars(filteredCars);
+};
+document.getElementById("filtraButton").onclick = () => {
+  const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
+  const marca = document.getElementById("marcaFilter").value;
+  const provincia = document.getElementById("provinciaFilter").value;
+  const filteredCars = filterCars(prezzoMax, marca, provincia);
+  renderCars(filteredCars);
+};
       }
+    }
+  }
 
-      carHtml += `</table>`;
-      carList.innerHTML =carHtml;
-
-      for (let i = 0; i < cars.length; i++) {
-          const prewiewer = prewiew(document.getElementById("n" + i));
-          console.log(cars[i]);
-          prewiewer.build(cars[i],i);
-          prewiewer.setCallBack(callback);
-          prewiewer.render();
-      }
-  };
-
-  renderCars(dati);
-
-  document.getElementById("ricercaButton").addEventListener("click", () => {
-      const searchTerm = document.getElementById("searchInput").value;
-      const filteredCars = filterCars(searchTerm);
-      renderCars(filteredCars);
-});
-}
-}
-}

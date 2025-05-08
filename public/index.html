@@ -20,6 +20,18 @@
                    
       </div>
 
+      <!------PAGINA AREA PERSONALE --------->
+      <div id="areaPersonale" class="page hidden">
+         <h1>Area Personale</h1>
+         <button type="button" class="btn btn-primary" id="aggiungiMacchina">Aggiungi Macchina</button>
+         <a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
+         <button type="button" class="btn btn-primary" id="logoutButton">Logout</button>
+         <div id="formInserimento">
+
+         </div>
+         
+      </div>
+
       <!------PAGINA LOGIN --------->
       <div id="paginaLogin" class="page hidden">
          <input type="text" id="username" placeholder="Username" required>
@@ -35,13 +47,13 @@
          <input type="text" id="usernameReg" placeholder="Username" required>
          <input type="password" id="passwordReg" placeholder="Password" required>
          <input type="email" id="emailReg" placeholder="Email" required>
-         <button id="invio"><a href="#pagina1">invio</a></button>
+         <button id="invioRegister"><a href="#pagina1">invio</a></button>
       </div>
 
 
       <!------PAGINA DETTAGLI AUTO-------->
 
-      <div id="pagina2" class="page">
+      <div id="pagina2" class="page hidden">
         <div class="container text-center">
             <!-----------header----------------->
             <div class="row">
@@ -85,23 +97,20 @@
              <div id="price">prezzo</div>
             </div>
             <div class="col">
-                <div id="price">bottone per chattare con venditore  </div>
+               <div id="mail">mail</div>
+                  
+               </div>
             </div>
             
             
          </div>
       </div>
-
-
-
-      
-         
       
    </div>
    </div>
 
    <script type="module" src="./main.js"></script>
-   <script type="module" src="./login.js"></script>
+   
 
 
 </body>

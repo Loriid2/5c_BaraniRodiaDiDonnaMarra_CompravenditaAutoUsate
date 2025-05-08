@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { register } = require('module');
 const mysql = require('mysql2');
 const conf = JSON.parse(fs.readFileSync("./conf.json")).dbInfo;
 conf.ssl = {
@@ -39,6 +40,16 @@ const serverDB = {
                 abstract TEXT
         );
         `);
+    },
+    login: function (username, password) {
+        return executeQuery(`SELECT * FROM credenziali WHERE nome = '${username}' AND password = '${password}'`);
+    },
+    register: function (username, email ,password) {
+        return executeQuery(`INSERT INTO credenziali (nome, email, password) VALUES ('${username}', '${email}', '${password}')`);
+    },
+    
+    insert: function (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello) {
+        return executeQuery(`INSERT INTO AutoDettagli (titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello) VALUES ('${titolo}', '${descrizione}', ${prezzo}, ${marce}, '${potenza}', ${km}, '${luogoVendita}', '${carburante}', '${Rapporto_Tara_Potenza}', '${marca}', '${modello}')`);
     },
     
 };

@@ -117,5 +117,79 @@ app.post("/car/getone", (req, res) => {
  console.info(req.body);
     res.json({result: automobili[indice]});
  
- });
- serverDB.createTable();
+});
+
+app.post("/car/register", (req, res) => {
+  const username = req.body.username;
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(req.body);
+  console.log("Username:", username, "   Email:", email, "   Password:", password);
+  serverDB.register(username, email, password)
+      .then(results => {
+          console.log("Risultati della query:", results);
+          res.json({
+              result: results.affectedRows > 0
+          });
+          console.log("Registrazione effettuata con successo:", results);
+      })
+      .catch(error => {
+          console.error("Errore durante la registrazione:", error);
+          res.status(500).json({
+              result: false,
+              error: "Errore durante la registrazione"
+          });
+      });
+});
+
+app.post("/car/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  console.log("Username:", username, "   Password:", password);
+  serverDB.login(username, password)
+      .then(results => {
+          console.log("Risultati della query:", results);
+          res.json({
+              result: results.length > 0
+          });
+          console.log("Login effettuato con successo:", results);
+      })
+      .catch(error => {
+          console.error("Errore durante il login:", error);
+          res.status(500).json({
+              result: false,
+              error: "Errore durante il login"
+          });
+      });
+});
+
+app.post("/car/insert", (req, res) => {
+    const titolo = req.body.titolo;
+    const descrizione = req.body.descrizione;
+    const prezzo = req.body.prezzo;
+    const marce = req.body.marce;
+    const potenza = req.body.potenza;
+    const km = req.body.km;
+    const luogoVendita = req.body.luogoVendita;
+    const carburante = req.body.carburante;
+    const Rapporto_Tara_Potenza = req.body.Rapporto_Tara_Potenza;
+    const marca = req.body.marca;
+    const modello = req.body.modello;
+    console.log("Dati dell'auto:", req.body);
+    serverDB.insert(titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello)
+        .then(results => {
+            console.log("Risultati della query:", results);
+            res.json({
+                result: results.affectedRows > 0
+            });
+            console.log("Auto inserita con successo:", results);
+        })
+        .catch(error => {
+            console.error("Errore durante l'inserimento dell'auto:", error);
+            res.status(500).json({
+                result: false,
+                error: "Errore durante l'inserimento dell'auto"
+            });
+        });
+});
+serverDB.createTable();
