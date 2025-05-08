@@ -3,6 +3,7 @@ import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
+//import{invioEmail}from"./invioEmail.js";
 
 //import { login } from "../serverDB.js";
 
@@ -12,9 +13,11 @@ import{createPages}from"./pages.js";
 
 const navigator = createNavigator(document.querySelector("#container"));
 
-
 const home=homepage(document.getElementById("homePage"));
-
+const divMail=document.getElementById("divMail");
+const mail=createPages(document.querySelector("#bottonMail"));
+const formContainer = createPages(document.getElementById('formMail'));
+const bottone=createPages(document.getElementById('formBottonMail'));
 
 const loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister");
@@ -33,12 +36,12 @@ openFormButton.onclick=()=>{
   let html=`
           <form>
           <div class="mb-3">
-            <label for="nomeModello" class="form-label">Nome Macchina</label>
-            <input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">
-          </div>
-          <div class="mb-3">
             <label for="nomeMarca" class="form-label">Marca</label>
             <input type="text" class="form-control" id="nomeMarca" placeholder="Inserire Marca">
+          </div>
+          <div class="mb-3">
+            <label for="nomeModello" class="form-label">Nome Macchina</label>
+            <input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">
           </div>
           <div class="mb-3">
             <label for="numerokm" class="form-label">Numero Km</label>
@@ -69,9 +72,16 @@ openFormButton.onclick=()=>{
             <input type="text" class="form-control" id="carburante" placeholder="Inserire Tipo di Carburante">
           </div>
           <div class="mb-3">
+            <label for="contatto" class="form-label">Contatto</label>
+            <input type="text" class="form-control" id="contatto" placeholder="Inserire contatto">
+          </div>
+          <div class="mb-3">
+            <label for="abstract" class="form-label">Abstract</label>
+            <input type="text" class="form-control" id="abstract" placeholder="Inserire Riassunto">
+          </div>
+          <div class="mb-3">
             <label for="descrizione" class="form-label">Descrizione</label>
             <input type="text" class="form-control" id="descrizione" placeholder="Inserire Descrizione">
-
           </div>
           <button type="submit" id="invioForm" class="btn btn-primary">Invio</button>
         </form>`;
@@ -93,18 +103,19 @@ openFormButton.onclick=()=>{
       const prezzo = document.querySelector("#prezzoMacchinaForm").value;
       const carburante = document.querySelector("#carburante").value;
       const descrizione = document.querySelector("#descrizione").value;
-      console.log(nomeModello,nomeMarca,numerokm,rapportoTP,potenza,luogoVendita,marce,prezzo,carburante,descrizione);
+      const contatto= document.querySelector("#contatto").value;
+      console.log(nomeModello,nomeMarca,numerokm,rapportoTP,potenza,luogoVendita,marce,prezzo,carburante,descrizione,contatto);
         fetch("/car/insert", {
           method: 'POST',
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ titolo: nomeModello, marca: nomeMarca, km: numerokm, Rapporto_Tara_Potenza: rapportoTP, potenza: potenza, luogoVendita: luogoVendita, marce: marce, prezzo: prezzo, carburante: carburante, descrizione: descrizione })
+          body: JSON.stringify({ titolo: nomeModello, marca: nomeMarca, km: numerokm, Rapporto_Tara_Potenza: rapportoTP, potenza: potenza, luogoVendita: luogoVendita, marce: marce, prezzo: prezzo, carburante: carburante, descrizione: descrizione,contatto: contatto})
         })
           .then(response => response.json())
           .then(json => {
             if (json.result) {
-              console.log(prezzo);
+              console.log(json);
               alert("Auto inserita con successo!"); // funzionante
               /* da aggiungere qui la parte dove viene aggiunta alla home la macchina appena inserita su db (creando metodo)*/
               navigator.update(document.querySelector("#container"));
@@ -189,7 +200,7 @@ function CarOfInterest(index, pagina) {
 fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
-               //console.log(json.dati);
+               console.log(json.dati);
                automobili=json.dati;
                home.build(automobili);
                home.setCallBack(CarOfInterest);
@@ -226,3 +237,7 @@ setInterval(() => {
   }
 }, 200); // controlla ogni 200ms
 
+mail.onclick = () => {
+  
+  formContainer.render();
+}

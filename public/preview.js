@@ -15,7 +15,7 @@ export const prewiew = (parentElement) => {
         i=cont;
         dizionario=diz
         info={
-            images:diz.immages,
+            images:diz.immagini,
             marce:diz.marce,
             potenza:diz.potenza,
             km:diz.km ,
