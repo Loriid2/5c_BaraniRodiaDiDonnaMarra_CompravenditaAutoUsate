@@ -194,7 +194,7 @@ function CarOfInterest(index, pagina) {
 fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
-               //console.log(json.dati);
+               console.log(json.dati);
                automobili=json.dati;
                home.build(automobili);
                home.setCallBack(CarOfInterest);
