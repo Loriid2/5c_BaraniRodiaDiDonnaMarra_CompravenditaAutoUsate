@@ -224,7 +224,7 @@ export const homepage = (parentElement) => {
         </div>
         <div class="col">
                    
-                   <table id="carList" class="table table-borderless">`;
+                   <table id="carList" class=" trasparente">`;
 
                   
         for( let i=0;i<dati.length;i+=3){

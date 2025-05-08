@@ -5,3 +5,18 @@
  .hidden {
     display: none;
  }
+ #bd{
+   background-color:#0b0bb0;
+ }
+ .trasparente {
+   background-color: transparent;
+   border-collapse: collapse;
+ }
+ 
+ .trasparente th,
+ .trasparente td {
+   background-color: transparent;
+   border: 1px solid #ccc; /* opzionale: solo se vuoi bordi */
+   color: black; /* cambia se serve */
+ }
+ 
