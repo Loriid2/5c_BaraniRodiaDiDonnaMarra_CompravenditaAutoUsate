@@ -5,6 +5,8 @@ const express = require("express");
 const http = require('http');
 const path = require('path');
 const app = express();
+const fs= require("fs");
+const multer = require("multer");
 const serverDB = require("./serverDB.js");
 
 let  automobili = [
