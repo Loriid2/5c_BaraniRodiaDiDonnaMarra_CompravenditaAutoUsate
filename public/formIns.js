@@ -13,7 +13,7 @@ export const createform=(parentElement)=>{
          },
          render:()=>{
  
-         let html;
+         let html="";
          html+=`
           <form>
           <div class="mb-3">
@@ -102,7 +102,7 @@ export const createform=(parentElement)=>{
                           console.log(json);
                           alert("Auto inserita con successo!"); // funzionante
                           /* da aggiungere qui la parte dove viene aggiunta alla home la macchina appena inserita su db (creando metodo)*/
-                          callback();
+                          callbackPromise()
                           
                         } else {
                           alert("Errore durante l'inserimento dell'auto.");
