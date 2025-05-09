@@ -89,7 +89,26 @@ app.post("/car/getone", (req, res) => {
     res.json({result: automobili[indice]});
  
 });
+app.post("/car/sel",(req, res) => {
+  //console.log(req);
+  let user=req.body.utente;
+  serverDB.getForUser(user).then(results=>{
 
+    for(let i=0;i<results.length;i++){
+      let auto=results[i]
+    
+      results[i].immagini=auto.immagini.split(",");
+  
+    };
+   
+    let auto=results;
+    automobili=results;
+  //console.log(auto);
+    res.json({dati:auto})
+
+  });
+
+})
 app.post("/car/register", (req, res) => {
   const username = req.body.username;
   const email = req.body.email;

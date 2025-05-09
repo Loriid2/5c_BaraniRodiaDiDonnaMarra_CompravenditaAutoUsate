@@ -1,7 +1,5 @@
 import { prewiew } from "./preview.js";
-function removeDots(str) {
-  return str.replace(/\./g, '');
-}
+
 
 export const homepage = (parentElement) => {
   let callback;
@@ -15,8 +13,8 @@ export const homepage = (parentElement) => {
 
     const filterCars = (prezzoMax, marca, provincia, kmMax) => {
       return dati.filter(car => {
-          const carPrezzo = parseFloat(removeDots(car.prezzo)); // Converte il prezzo in numero
-          const carKm = parseFloat(removeDots(car.km)); // Converte il chilometraggio in numero
+          const carPrezzo =car.prezzo; // Converte il prezzo in numero
+          const carKm = car.km; // Converte il chilometraggio in numero
           const matchesPrezzo = carPrezzo <= prezzoMax;
           const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
           const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
