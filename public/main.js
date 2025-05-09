@@ -39,11 +39,20 @@ openFormButton.onclick=()=>{
     form.build();
     form.setCallBack(aggiorna);
     form.render();
+
   }
 
 function aggiorna(){
-    navigator.update(document.querySelector("#container"));
-    home.render(); 
+   // navigator.update(document.querySelector("#container"));
+    
+    fetch("/car/getall")
+            .then(response => response.json())
+            .then(json => {
+               //console.log(json.dati);
+               automobili=json.dati;
+               home.render();
+            });
+
 }
 
 
@@ -115,7 +124,7 @@ function CarOfInterest(index, pagina) {
 fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
-               console.log(json.dati);
+               //console.log(json.dati);
                automobili=json.dati;
                home.build(automobili);
                home.setCallBack(CarOfInterest);
@@ -156,3 +165,5 @@ mail.onclick = () => {
   
   formContainer.render();
 }
+
+
