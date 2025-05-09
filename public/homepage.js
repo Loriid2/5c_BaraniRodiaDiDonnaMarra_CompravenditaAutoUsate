@@ -36,9 +36,6 @@ export const homepage = (parentElement) => {
         <div class="row">
         <div class="col">
                 <a href="doc/indexDocum.html"><button>DOCUMENTATION</button></a>
-                <a href="#paginaRegister"><button id="registerButtonHome">Register</button></a>
-                <a href="#paginaLogin"><button id="loginButtonHome">Log-In</button></a>
-                <a href="#areaPersonale"><button id="areaPersonaleButtonHome" class="hidden">Area Personale</button></a>
         </div>
          <div class="col">
                     <div class="input-group mb-3">
@@ -283,12 +280,12 @@ const renderCars = (cars) => {
   }
 
   carHtml += `</table>`;
-  console.log(carHtml);
+  //console.log(carHtml); - ok
   carList.innerHTML = carHtml;
 
   for (let i = 0; i < cars.length; i++) {
     const prewiewer = prewiew(document.getElementById("n" + i));
-    console.log(cars[i]);
+    //console.log(cars[i]); - ok
     prewiewer.build(cars[i], i);
     prewiewer.setCallBack(callback);
     prewiewer.render();

@@ -14,7 +14,7 @@ Comprate.setCallBack(CarOfInterest);
 import{generateMiddleware}from"./middleware.js";
 
 //import { login } from "../serverDB.js";
-import{createform}from "./formIns.js";
+
 
 const middleware=generateMiddleware();
 
@@ -26,12 +26,15 @@ const divMail=document.getElementById("divMail");
 const formContainer = createPages(document.getElementById('formMail'));
 const bottone=createPages(document.getElementById('formBottonMail'));
 const submitButton = document.getElementById('submit');
+
+
 const loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister");
 
 //da metterci il cambio di visibilità
-const loginNavbar= document.querySelector("#login");
-const registerNavbar= document.querySelector("#registrati");
+const loginNavbar= document.querySelector("#loginButtonHome");
+const registerNavbar= document.querySelector("#registerButtonHome");
+const areaPersonaleNavbar = document.querySelector("#areaPersonaleButtonHome");
 
 //bottone per l'aggiunta dell'auto tramite form
 const openFormButton = document.querySelector("#aggiungiMacchina");
@@ -87,12 +90,20 @@ loginButton.onclick=()=>{
       .then(response => response.json())
       .then(json => {
         if (json.result) {
-          console.log(loginNavbar,registerNavbar);
+          console.log("i bottoni sono questi: "+loginNavbar,registerNavbar,areaPersonaleNavbar);
+          //cambio di visibilità navbar
+          loginNavbar.classList.add("hidden");
+          registerNavbar.classList.add("hidden");
+          areaPersonaleNavbar.classList.remove("hidden");
+          areaPersonaleNavbar.classList.add("visible");
+          
+
           navigator.update(document.querySelector("#container"));
           home.render();
         } else {
           alert("Login errato. controllare le credenziali.");
         }
+      
       });
 }
 

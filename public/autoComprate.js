@@ -21,7 +21,7 @@ export const autocomprate = (parentElement) => {
           })
           .then(response => response.json())
           .then(dati => {
-        console.log(dati.dati);
+        //console.log(dati.dati);
         dati=dati.dati;
         let  html=`<a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
                     <table id="carList" class="table table-borderless">`;
@@ -45,7 +45,7 @@ export const autocomprate = (parentElement) => {
       html += `</table>
 `;
     parentElement.innerHTML=html;
-    console.log(html);
+   // console.log(html);
 const renderCars = (cars) => {
   const carList = document.getElementById("carList");
   if(!carList) {
@@ -69,7 +69,7 @@ const renderCars = (cars) => {
 
   for (let i = 0; i < cars.length; i++) {
     const prewiewer = prewiew(document.getElementById("r" + i));
-    console.log(cars[i]);
+    //console.log(cars[i]); - ok
     prewiewer.build(cars[i], i);
     prewiewer.setCallBack(callback);
     prewiewer.render();
