@@ -197,7 +197,7 @@ app.post('/send-email', async (req, res) => {
     }
 
     try {
-      const info = await mail.invioEmail.sendEmail(to, subject, message);
+      const info = await mail.sendEmail(to, subject, message);
       res.send({ success: true, messageId: info.messageId });
     } catch (error) {
       res.status(500).send({ error: 'Errore durante l\'invio', details: error.message });

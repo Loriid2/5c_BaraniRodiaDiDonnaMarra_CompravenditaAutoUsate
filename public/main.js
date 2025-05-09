@@ -3,26 +3,18 @@ import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
-import { autocomprate } from "./autoComprate.js";
+import {autocomprate} from "./autoComprate.js";
 import{createform}from "./formIns.js";
-
-
-
 import{generateMiddleware}from"./middleware.js";
 
-//import { login } from "../serverDB.js";
-
-
 const middleware=generateMiddleware();
+
 const Comprate=autocomprate(document.querySelector("#autocomprate"));
 const form=createform(document.querySelector("#formInserimento"));
 const navigator = createNavigator(document.querySelector("#container"));
 const home=homepage(document.getElementById("homePage"));
-const divMail=document.getElementById("divMail");
-//const submit=createPages(document.querySelector("#submit"));
-const formContainer = createPages(document.getElementById('formMail'));
-const bottone=createPages(document.getElementById('formBottonMail'));
-const submitButton = document.getElementById('submit');
+
+const submitButton = document.querySelector("#submit");
 
 
 const loginButton = document.querySelector("#loginButton");
@@ -37,6 +29,7 @@ const areaPersonaleNavbar = document.querySelector("#areaPersonaleButtonHome");
 const openFormButton = document.querySelector("#aggiungiMacchina");
 
 const COI=createCOI();
+//const pippo  = createPages(document.querySelector("#container"), middleware);
 
 let automobili;
 
@@ -59,10 +52,6 @@ function aggiorna(){
             });
 
 }
-
-
-
-
 
 invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#usernameReg");
@@ -88,9 +77,6 @@ invioRegisterButton.onclick=()=>{
       }
     });
 }
-
-
-
 
 loginButton.onclick=()=>{
   const username = document.querySelector("#username").value;
@@ -129,8 +115,6 @@ Comprate.setCallBack(CarOfInterest);
       });
 }
 
-
-
 function CarOfInterest(index, pagina) {
     if (pagina === "" || pagina === null) {
       return;
@@ -146,7 +130,7 @@ function CarOfInterest(index, pagina) {
       .then(response => response.json())
       .then(json => {
         let dizionario = json.result;
-        const coi = createPages(document.querySelector("#container"));
+        const coi = createPages(document.querySelector("#container"), middleware);
         coi.build(index);
         coi.render();
         navigator.update(document.querySelector("#container"));
@@ -158,7 +142,6 @@ function CarOfInterest(index, pagina) {
       });
   }
   
-
 fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
@@ -170,7 +153,6 @@ fetch("/car/getall")
 
             });
 
-
 const hash = window.location.hash;
 if (hash.startsWith("#car=")) {
     const index = parseInt(hash.replace("#car=", ""));
@@ -179,7 +161,6 @@ if (hash.startsWith("#car=")) {
     }
 }
           
-
 let lastHash = window.location.hash;
 
 setInterval(() => {
@@ -198,6 +179,23 @@ setInterval(() => {
     }
   }
 }, 200); // controlla ogni 200ms
+
+//const submitButton = document.getElementById('submit');
+/*if (submitButton) {
+  submitButton.onclick = () => {
+    console.log("submitButton clicked");
+    const to = document.getElementById("to").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    if (!to || !subject || !message) {
+        alert("Tutti i campi sono obbligatori!");
+        return;
+    }
+
+    middleware.sendEmail(to, subject, message);
+  };
+}*/
 
 /*submitButton.onclick = () => {
   console.log("csdoèa")
