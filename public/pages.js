@@ -1,7 +1,5 @@
-
-
-export const createPages=(parentElement)=>{
-   let i;
+export const createPages=(parentElement, middleware)=>{
+  let i;
 
     return{
         build:(val)=>{
@@ -57,24 +55,21 @@ export const createPages=(parentElement)=>{
             <div class="col" id="divMail" >
               <form id="emailForm">
                  <h2 class="mt-4">Invia un messaggio</h2>
-                  <form id="emailForm1">
+                  
                     <div class="mb-3">
-                      <label for="to" class="form-label">Destinatario</label>
+                      <label class="form-label">Destinatario</label>
                       <input type="email" class="form-control" id="to" >
                     </div>
                     <div class="mb-3">
-                      <label for="subject" class="form-label">Oggetto</label>
-                      <input type="text" class="form-control" id="subject" name="subject" >
+                      <label class="form-label">Oggetto</label>
+                      <input type="text" class="form-control" id="subject" >
                     </div>
                     <div class="mb-3">
-                      <label for="message" class="form-label">Messaggio</label>
-                      <textarea class="form-control" id="message" name="message" rows="5" ></textarea>
+                      <label class="form-label">Messaggio</label>
+                      <input type="text" class="form-control" id="message">
                     </div>
                     <button type="button" id="submit" class="btn btn-success">Invia Email</button>
-                  </form>
-          <div id="result" class="mt-3"></div>
                 </form>
-                <div id="result"></div>
             </div>
             
                </div>
@@ -82,14 +77,24 @@ export const createPages=(parentElement)=>{
                parentElement.innerHTML=html;
                console.log(html);
 
-               const submitButton = document.getElementById('submit');
-            if (submitButton) {
-                submitButton.onclick = () => {
-                    console.log("csdoèa");
-                    //formContainer.render();
-                };
+               const submitButton = document.getElementById("submit");
+               if (submitButton) {
+                 submitButton.onclick = () => {
+                  console.log("submitButton clicked");
+                   const to = document.getElementById("to").value;
+                   const subject = document.getElementById("subject").value;
+                   const message = document.getElementById("message").value;
+         
+                   if (!to || !subject || !message) {
+                     alert("Tutti i campi sono obbligatori!");
+                     return;
+                   }
+         
+                  middleware.sendEmail(to, subject, message);
+                 };
+               }
+
             }
 
         }
     }
-}
