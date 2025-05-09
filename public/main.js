@@ -3,6 +3,7 @@ import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
+<<<<<<< HEAD
 import { autocomprate } from "./autoComprate.js";
 import{createform}from "./formIns.js";
 
@@ -11,14 +12,26 @@ const Comprate=autocomprate(document.querySelector("#autocomprate"));
 Comprate.build({contatto:"rodiathomas@itis-molinari.eu"});
 Comprate.render();
 Comprate.setCallBack(CarOfInterest);
+=======
+import{generateMiddleware}from"./middleware.js";
+
+//import { login } from "../serverDB.js";
+import{createform}from "./formIns.js";
+
+const middleware=generateMiddleware();
+>>>>>>> 27cfbfe18fc3c642be88a94c44baa921f52341d8
 
 const form=createform(document.querySelector("#formInserimento"));
 const navigator = createNavigator(document.querySelector("#container"));
 const home=homepage(document.getElementById("homePage"));
 const divMail=document.getElementById("divMail");
-const mail=createPages(document.querySelector("#bottonMail"));
+//const submit=createPages(document.querySelector("#submit"));
 const formContainer = createPages(document.getElementById('formMail'));
+<<<<<<< HEAD
 const bottone=createPages(document.getElementById('formBottonMail'));
+=======
+const submitButton = document.getElementById('submit');
+>>>>>>> 27cfbfe18fc3c642be88a94c44baa921f52341d8
 const loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister");
 
@@ -161,9 +174,7 @@ setInterval(() => {
   }
 }, 200); // controlla ogni 200ms
 
-mail.onclick = () => {
-  
-  formContainer.render();
-}
-
-
+/*submitButton.onclick = () => {
+  console.log("csdoèa")
+  //formContainer.render();
+}*/

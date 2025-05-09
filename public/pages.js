@@ -55,25 +55,22 @@ export const createPages=(parentElement)=>{
              <div id="price`+i+`">prezzo</div>
             </div>
             <div class="col" id="divMail" >
-            <form id="formBottonMail" class="visible">
-            <button id="bottonMail" class="btn btn-primary">Contattaci</botton>
-            </form>
-              <form id="emailForm" class="hidden">
+              <form id="emailForm">
                  <h2 class="mt-4">Invia un messaggio</h2>
                   <form id="emailForm1">
                     <div class="mb-3">
                       <label for="to" class="form-label">Destinatario</label>
-                      <input type="email" class="form-control" id="to" name="to" required>
+                      <input type="email" class="form-control" id="to" >
                     </div>
                     <div class="mb-3">
                       <label for="subject" class="form-label">Oggetto</label>
-                      <input type="text" class="form-control" id="subject" name="subject" required>
+                      <input type="text" class="form-control" id="subject" name="subject" >
                     </div>
                     <div class="mb-3">
                       <label for="message" class="form-label">Messaggio</label>
-                      <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                      <textarea class="form-control" id="message" name="message" rows="5" ></textarea>
                     </div>
-                    <button type="submit" class="btn btn-success">Invia Email</button>
+                    <button type="button" id="submit" class="btn btn-success">Invia Email</button>
                   </form>
           <div id="result" class="mt-3"></div>
                 </form>
@@ -81,10 +78,17 @@ export const createPages=(parentElement)=>{
             </div>
             
                </div>
-               </div>
                </div>`;
                parentElement.innerHTML=html;
                console.log(html);
+
+               const submitButton = document.getElementById('submit');
+            if (submitButton) {
+                submitButton.onclick = () => {
+                    console.log("csdoèa");
+                    //formContainer.render();
+                };
+            }
 
         }
     }

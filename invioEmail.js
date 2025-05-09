@@ -1,26 +1,44 @@
-export const invioEmail = () => {
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'youremail@gmail.com',
-      pass: 'yourpassword'
+const fs = require('fs');
+const conf = JSON.parse(fs.readFileSync("./conf.json"));
+const nodemailer = require("nodemailer");
+const invioEmail = () => {
+  return {
+    sendEmail: function (to, subject, message) {
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: "baranisimone@itis-molinari.eu",
+          pass: conf.EMAIL_PASS,
+        }
+      });
+      let mail = to;
+      let mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: mail,
+        subject: subject,
+        text: message
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log("Errore:", error);
+        } else {
+          console.log('Email inviata: ' + info.response);
+        }
+      });
+
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log("Errore nella connessione SMTP:", error);
+        } else {
+          console.log("SMTP pronto per inviare");
+        }
+      });
     }
-  }); 
-  
-  let mailOptions = {
-    from: 'youremail@gmail.com',
-    to: 'myfriend@yahoo.com',
-    subject: 'Sending Email using Node.js',
-    text: 'That was easy!'
-  };
-  
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Email sent: ' + info.response);
-    }
-  });
+  }
+}
+module.exports = invioEmail;
+
   /*const express = require('express');
   const path = require('path');
   const mailer = require('./mailer');
@@ -93,4 +111,4 @@ export const invioEmail = () => {
         resultBox.innerHTML = `<div class="alert alert-danger">Errore di rete: ${err.message}</div>`;
       }
     });*/
-}
+
