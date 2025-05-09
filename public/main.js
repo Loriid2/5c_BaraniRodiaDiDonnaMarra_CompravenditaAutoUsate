@@ -7,17 +7,14 @@ import { autocomprate } from "./autoComprate.js";
 import{createform}from "./formIns.js";
 
 
-const Comprate=autocomprate(document.querySelector("#autocomprate"));
-Comprate.build({contatto:"rodiathomas@itis-molinari.eu"});
-Comprate.render();
-Comprate.setCallBack(CarOfInterest);
+
 import{generateMiddleware}from"./middleware.js";
 
 //import { login } from "../serverDB.js";
 
 
 const middleware=generateMiddleware();
-
+const Comprate=autocomprate(document.querySelector("#autocomprate"));
 const form=createform(document.querySelector("#formInserimento"));
 const navigator = createNavigator(document.querySelector("#container"));
 const home=homepage(document.getElementById("homePage"));
@@ -108,13 +105,20 @@ loginButton.onclick=()=>{
       .then(response => response.json())
       .then(json => {
         if (json.result) {
-          console.log("i bottoni sono questi: "+loginNavbar,registerNavbar,areaPersonaleNavbar);
+          let utente=json.result[0];
           //cambio di visibilità navbar
           loginNavbar.classList.add("hidden");
           registerNavbar.classList.add("hidden");
           areaPersonaleNavbar.classList.remove("hidden");
           areaPersonaleNavbar.classList.add("visible");
-          
+         
+if(utente==null){}else{
+    console.log(utente);
+
+Comprate.build({contatto:utente.email});
+Comprate.render();
+Comprate.setCallBack(CarOfInterest);
+}
 
           navigator.update(document.querySelector("#container"));
           home.render();

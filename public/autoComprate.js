@@ -12,6 +12,7 @@ export const autocomprate = (parentElement) => {
         callback = cb;
       },
       render:()=>{
+        console.log("sono dentro con l'utente: "+utente);
         fetch("/car/sel", {
             method: "POST",
             headers: {
@@ -21,12 +22,12 @@ export const autocomprate = (parentElement) => {
           })
           .then(response => response.json())
           .then(dati => {
-        //console.log(dati.dati);
+        console.log(dati.dati);
         dati=dati.dati;
         let  html=`<a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
-                    <table id="carList" class="table table-borderless">`;
+                    <table id="carListPagate" class="table table-borderless">`;
 
-//console.log(dati.length());
+console.log(dati.length);
       for (let i = 0; i < dati.length; i += 3) {
 
         html += `  <tr>
@@ -45,9 +46,10 @@ export const autocomprate = (parentElement) => {
       html += `</table>
 `;
     parentElement.innerHTML=html;
-   // console.log(html);
+    console.log(html);
+
 const renderCars = (cars) => {
-  const carList = document.getElementById("carList");
+  const carList = document.getElementById("carListPagate");
   if(!carList) {
     alert("Car list element not found!");
     return;

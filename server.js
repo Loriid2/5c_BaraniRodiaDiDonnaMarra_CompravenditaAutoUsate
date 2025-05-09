@@ -141,7 +141,7 @@ app.post("/car/login", (req, res) => {
       .then(results => {
         //  console.log("Risultati della query:", results);
           res.json({
-              result: results.length > 0
+              result: results
           });
           console.log("Login effettuato con successo:", results);
       })
