@@ -3,12 +3,12 @@ import { createCOI } from "./COI.js";
 import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
-//import{invioEmail}from"./invioEmail.js";
+import{generateMiddleware}from"./middleware.js";
 
 //import { login } from "../serverDB.js";
 import{createform}from "./formIns.js";
 
-
+const middleware=generateMiddleware();
 
 const form=createform(document.querySelector("#formInserimento"));
 
@@ -17,10 +17,9 @@ const navigator = createNavigator(document.querySelector("#container"));
 
 const home=homepage(document.getElementById("homePage"));
 const divMail=document.getElementById("divMail");
-const mail=createPages(document.querySelector("#bottonMail"));
+//const submit=createPages(document.querySelector("#submit"));
 const formContainer = createPages(document.getElementById('formMail'));
-const bottone=createPages(document.getElementById('formBottonMail'));
-
+const submitButton = document.getElementById('submit');
 const loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister");
 
@@ -154,7 +153,7 @@ setInterval(() => {
   }
 }, 200); // controlla ogni 200ms
 
-mail.onclick = () => {
-  
-  formContainer.render();
-}
+/*submitButton.onclick = () => {
+  console.log("csdoèa")
+  //formContainer.render();
+}*/
