@@ -29,7 +29,7 @@ const submitButton = document.getElementById('submit');
 
 
 const loginButton = document.querySelector("#loginButton");
-const invioRegisterButton = document.querySelector("#invioRegister");
+const invioRegisterButton = document.querySelector("#invioRegister"); 
 
 //da metterci il cambio di visibilità
 const loginNavbar= document.querySelector("#loginButtonHome");
@@ -68,10 +68,28 @@ function aggiorna(){
 
 
 invioRegisterButton.onclick=()=>{
-  const username = document.querySelector("#username");
-  const email = document.querySelector("#email");
-  const password = document.querySelector("#password");
-  console.log("Username:", username, "   Email:", email, "   Password:", password);
+  const username = document.querySelector("#usernameReg");
+  const email = document.querySelector("#emailReg");
+  const password = document.querySelector("#passwordReg");
+  console.log("Username:", username.value, "   Email:", email.value, "   Password:", password.value);
+  //da aggiungere la parte dove si caricano le credenziali nel db
+  fetch("/car/register", {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ username: username.value, email: email.value, password: password.value })
+  })
+    .then(response => response.json())
+    .then(json => {
+      if (json.result) {
+        alert("Registrazione avvenuta con successo. Effettua il login.");
+        //navigator.update(document.querySelector("#container"));
+        //home.render();
+      } else {
+        alert("Registrazione fallita. Controlla i dati inseriti.");
+      }
+    });
 }
 
 
