@@ -34,9 +34,7 @@ export const homepage = (parentElement) => {
     render: () => {
       let html = `
         <div class="row">
-        <div class="col">
-                <a href="doc/indexDocum.html"><button>DOCUMENTATION</button></a>
-        </div>
+        
          <div class="col">
                     <div class="input-group mb-3">
                         <button class="input-group-text" id="ricercaButton">Cerca</button>

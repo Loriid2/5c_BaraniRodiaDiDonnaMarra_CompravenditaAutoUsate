@@ -6,7 +6,7 @@
     display: none !important;
  }
  #bd{
-   background-color:#FFFFFF;
+   background-color:#ffffff;
  }
  .trasparente {
    background-color: transparent;
@@ -19,4 +19,27 @@
    border: 1px solid #ccc; /* opzionale: solo se vuoi bordi */
    color: black; /* cambia se serve */
  }
+
+ .pieDiPagina {
+  background-color: #000000;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+.testoBianco{
+  color:white;
+}
+
+#paginaLogin .row {
+  margin-bottom: 15px;
+}
+#paginaRegister .row {
+  margin-bottom: 15px;
+}
+
+#pagina1 .row {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
  

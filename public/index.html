@@ -16,9 +16,17 @@
 
 
       <div id="pagina1" class="page">
-         <a href="#paginaRegister"><button id="registerButtonHome" class="visible">Register</button></a>
-         <a href="#paginaLogin"><button id="loginButtonHome" class="visible">Log-In</button></a>
-         <a href="#areaPersonale"><button id="areaPersonaleButtonHome" class="hidden">Area Personale</button></a>
+         <div class="row">
+            <div class="col"> </div>
+            <div class="col"> </div>
+            <div class="col"> </div>
+            <div class="col"> <a href="#areaPersonale"><button id="areaPersonaleButtonHome" class="hidden">Area Personale</button></a> </div>
+            <div class="col"> <a href="#paginaLogin"><button id="loginButtonHome" class="visible btn btn-secondary">Log-In</button></a></div>
+            <div class="col"> <a href="#paginaRegister"><button id="registerButtonHome" class="visible btn btn-dark">Register</button></a></div>
+         </div>
+         
+         
+         
          <div id="homePage"></div>
                    
       </div>
@@ -44,79 +52,157 @@
 
       <!------PAGINA LOGIN --------->
       <div id="paginaLogin" class="page hidden">
-         <input type="text" id="username" placeholder="Username" required>
-         <input type="password" id="password" placeholder="Password" required>
-         <button id="loginButton"><a href="#pagina1">Login</a></button>
-         <button id="registerButton"><a href="#paginaRegister">Register</a></button>
+        
+         <div class="row">
+            <div class="col"> <a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a></div>
+            <div class="col"> </div>
+         </div>
+         <div class="row">
+            <div class="col">Username:</div>
+            <div class="col"> <input type="text" id="username" placeholder="Username" required></div>
+         </div>
+         <div class="row">
+            <div class="col">Password:</div>
+            <div class="col"> <input type="password" id="password" placeholder="Password" required></div>
+         </div>
+         <div class="row">
+            <div class="col"></div>
+            <div class="col"> <button id="loginButton"><a href="#pagina1">Login</a></button></div>
+         </div>
+        
+         
+        <!-- <button id="registerButton"><a href="#paginaRegister">Register</a></button>-->
       </div>
 
 
 
       <!------PAGINA REGISTRAZIONE --------->
       <div id="paginaRegister" class="page hidden">
-         <input type="text" id="usernameReg" placeholder="Username" required>
-         <input type="password" id="passwordReg" placeholder="Password" required>
-         <input type="email" id="emailReg" placeholder="Email" required>
-         <button id="invioRegister"><a href="#pagina1">invio</a></button>
+
+         <div class="row">
+            <div class="col"> <a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a></div>
+            <div class="col"> </div>
+         </div>
+         <div class="row">
+            <div class="col">Username:</div>
+            <div class="col"> <input type="text" id="usernameReg" placeholder="Username" required></div>
+         </div>
+         <div class="row">
+            <div class="col">Password:</div>
+            <div class="col">  <input type="password" id="passwordReg" placeholder="Password" required></div>
+         </div>
+         <div class="row">
+            <div class="col">Email:</div>
+            <div class="col"> <input type="email" id="emailReg" placeholder="Email" required></div>
+         </div>
+         <div class="row">
+            <div class="col"></div>
+            <div class="col"> <button id="invioRegister"><a href="#pagina1">invio</a></button></div>
+         </div>
+
+
+         
+        
+         
+         
       </div>
 
 
       <!------PAGINA DETTAGLI AUTO-------->
 
       <div id="pagina2" class="page hidden">
-        <div class="container text-center">
-            <!-----------header----------------->
-            <div class="row">
-              <div class="col">
-               <button><a href="#pagina1">HOME</a></button>
-              </div>
-              <div class="col">
-                <div id="titleCar">Titolo di prova</div>
-              </div>
-              <div class="col">
-                
-              </div>
-         </div>
-         <hr>
-         <!--------------------------------------------------->
-         <!-----------immagine e dettagli----------------->
-         <div class="row">
-            <div class="col">
-             <div id="imagesCar">qui ci sarà limmagine</div>
-            </div>
-            <div class="col">
-              <div id="detailsCar">qui i dettagli elencati </div>
-            </div>
-            
-         </div>
-       <hr>
-       <!--------------------------------------------------->
-        <!-----------descrizione macchina----------------->
-        <div class="row">
-            <div class="col">
-             <div id="description">qui ci la descrizione</div>
-            </div>
-            
-            
-          </div>
-        <hr>
-       <!--------------------------------------------------->
-        <!-----------dettagli finali ----------------->
-        <div class="row">
-            <div class="col">
-             <div id="price">prezzo</div>
-            </div>
-            <div class="col">
-               <div id="divMail">mail</div>
-                  </div>
-            </div>
-            
-            
-         </div>
+      
       </div>
       
    </div>
    </div>
+
+
+   
+  <div class="pieDiPagina">
+   <div class="container">
+     <div class="row">
+
+       <div class="col">
+         <div class="row">
+           <div class="col">
+             <p class="testoBianco"></p>
+           </div>
+           <div class="col">
+             <p class="testoBianco"></p>
+           </div>
+           <div class="col"></div>
+         </div>
+         <div class="row">
+           <div class="col">
+             <p class="testoBianco">Creato da:</p>
+           </div>
+           <div class="col">
+             <p class="testoBianco">Thomas Rodia - Gabriel Marra <br> Lorenzo Di Donna - Simone Barani</p>
+           </div>
+           
+         </div>
+         <div class="row">
+           <div class="col">
+             <p class="testoBianco">Iniziato il: </p>
+           </div>
+           <div class="col">
+             <p class="testoBianco">10/4/2025</p>
+           </div>
+           
+         </div>
+         <div class="row">
+           <div class="col">
+             <p class="testoBianco">Ultimo aggiornamento il: </p>
+           </div>
+           <div class="col">
+             <p class="testoBianco">9/5/2025</p>
+           </div>
+          
+         </div>
+         <div class="row">
+            <div class="col">
+              <p class="testoBianco">Documentazione </p>
+            </div>
+            <div class="col">
+              <p class="testoBianco"><a href="doc/indexDocum.html">Link alla documentazone</a></p>
+            </div>
+           
+          </div>
+         <div class="row">
+           <div class="col">
+             <p class="testoBianco">© 2025 Autocinetum </p>
+           </div>
+         </div>
+
+       </div>
+
+
+       <div class="col">
+         
+         <div class="card text-bg-dark mb-3" style="max-width: 540px;">
+           <div class="row g-0">
+             <div class="col-md-4">
+               <img src="./asset/immages/git.png" class="img-fluid rounded-start" alt="...">
+             </div>
+             <div class="col-md-8">
+               <div class="card-body">
+                 <h5 class="card-title">Repository GitHub</h5>
+                 <p class="card-text">Questo progetto è stato sviluppato utilizzando un repository Git Hub pullico a cui potrai accede</p>
+                 <a href="https://github.com/Loriid2/5c_BaraniRodiaDiDonnaMarra_CompravenditaAutoUsate" ><button class="btn btn-light" >Vai alla repository</button></a>
+               </div>
+             </div>
+           </div>
+         </div>
+
+       </div>
+
+
+
+
+
+       
+
 
    <script type="module" src="./main.js"></script>
    
