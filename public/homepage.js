@@ -38,9 +38,9 @@ export const homepage = (parentElement) => {
         <div class="row">
         <div class="col">
                 <a href="doc/indexDocum.html"><button>DOCUMENTATION</button></a>
-                <a href="#paginaRegister"><button>Register</button></a>
-                <a href="#paginaLogin"><button>Log-In</button></a>
-                <a href="#areaPersonale"><button>Area Personale</button></a>
+                <a href="#paginaRegister"><button id="registerButtonHome">Register</button></a>
+                <a href="#paginaLogin"><button id="loginButtonHome">Log-In</button></a>
+                <a href="#areaPersonale"><button id="areaPersonaleButtonHome" class="hidden">Area Personale</button></a>
         </div>
          <div class="col">
                     <div class="input-group mb-3">
