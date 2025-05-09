@@ -54,7 +54,11 @@ const serverDB = {
     getall:function(){
         return executeQuery("SELECT * from AutoDettagli");
 
+    },
+    getForUser:function(user){
+        return executeQuery("SELECT * FROM AutoDettagli WHERE contatto='"+user+"'");
     }
+
     
 };
 

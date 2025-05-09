@@ -9,6 +9,7 @@ const fs= require("fs");
 const multer = require("multer");
 const serverDB = require("./serverDB.js");
 const { resolve } = require('url');
+const mail=require("./invioEmail.js")();
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -89,7 +90,26 @@ app.post("/car/getone", (req, res) => {
     res.json({result: automobili[indice]});
  
 });
+app.post("/car/sel",(req, res) => {
+  //console.log(req);
+  let user=req.body.utente;
+  serverDB.getForUser(user).then(results=>{
 
+    for(let i=0;i<results.length;i++){
+      let auto=results[i]
+    
+      results[i].immagini=auto.immagini.split(",");
+  
+    };
+   
+    let auto=results;
+    automobili=results;
+  //console.log(auto);
+    res.json({dati:auto})
+
+  });
+
+})
 app.post("/car/register", (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
@@ -168,4 +188,21 @@ app.post("/car/insert", (req, res) => {
             });
         });
 });
+
+app.post('/send-email', async (req, res) => {
+    const { to, subject, message } = req.body;
+
+    if (!to || !subject || !message) {
+      return res.status(400).send({ error: 'Parametri mancanti' });
+    }
+
+    try {
+      const info = await mail.invioEmail.sendEmail(to, subject, message);
+      res.send({ success: true, messageId: info.messageId });
+    } catch (error) {
+      res.status(500).send({ error: 'Errore durante l\'invio', details: error.message });
+    }
+  });
+
+//mail.sendEmail("massivecm11@gmail.com","prova","prova di invio email");
 serverDB.createTable();
