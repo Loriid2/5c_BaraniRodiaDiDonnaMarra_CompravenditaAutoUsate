@@ -87,6 +87,7 @@ app.post("/car/getone", (req, res) => {
   const indice = req.body.index;
   
  console.info(req.body);
+ //console.log(automobili);
     res.json({result: automobili[indice]});
  
 });

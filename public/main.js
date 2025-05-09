@@ -92,19 +92,21 @@ loginButton.onclick=()=>{
       .then(json => {
         if (json.result) {
           let utente=json.result[0];
-          //cambio di visibilità navbar
+          console.log(json);
           loginNavbar.classList.add("hidden");
           registerNavbar.classList.add("hidden");
           areaPersonaleNavbar.classList.remove("hidden");
           areaPersonaleNavbar.classList.add("visible");
          
-if(utente==null){}else{
-    console.log(utente);
+            if(utente==null){
+                console.log("help");
+            }else{
+                console.log(utente);
 
-Comprate.build({contatto:utente.email});
-Comprate.render();
-Comprate.setCallBack(CarOfInterest);
-}
+            Comprate.build({contatto:utente.email});
+            Comprate.render();
+            Comprate.setCallBack(CarOfInterest);
+            }
 
           navigator.update(document.querySelector("#container"));
           home.render();
