@@ -8,7 +8,36 @@ const app = express();
 const fs= require("fs");
 const multer = require("multer");
 const serverDB = require("./serverDB.js");
+const { resolve } = require('url');
 const mail=require("./invioEmail.js")();
+
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+      callback(null, path.join(__dirname, "public/asset/immages"));
+  },
+  filename: function (req, file, callback) {
+      callback(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage }).array('file', 3); 
+
+app.post('/car/upload', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      console.error("Errore upload:", err);
+      return res.status(500).json({ result: false, error: "Errore upload" });
+    }
+
+    if (!req.files || req.files.length !== 3) {
+      return res.status(400).json({ result: false, error: "Devono essere caricati 3 file" });
+    }
+
+    const filenames = req.files.map(f => f.filename); // ["foto1.jpg", "foto2.png", "foto3.jpg"]
+    console.log("File caricati:", filenames);
+
+    res.json({ result: true, files: filenames });
+  });
+});
 
 let automobili;
 app.use(bodyParser.json());
@@ -26,7 +55,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
   app.get("/car/getall",(req,res) => {
 
     let auto=serverDB.getall().then(results => {
-      console.log("Risultati della query:", results);
+     // console.log("Risultati della query:", results);
       
       for(let i=0;i<results.length;i++){
         let auto=results[i]
@@ -38,6 +67,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
       //results.immagini=img;
       let auto=results;
       automobili=results;
+
       res.json({dati:auto})
       //console.log(" effettuato con successo:", results);
   })
@@ -69,7 +99,7 @@ app.post("/car/register", (req, res) => {
   console.log("Username:", username, "   Email:", email, "   Password:", password);
   serverDB.register(username, email, password)
       .then(results => {
-          console.log("Risultati della query:", results);
+       //   console.log("Risultati della query:", results);
           res.json({
               result: results.affectedRows > 0
           });
@@ -90,7 +120,7 @@ app.post("/car/login", (req, res) => {
   console.log("Username:", username, "   Password:", password);
   serverDB.login(username, password)
       .then(results => {
-          console.log("Risultati della query:", results);
+        //  console.log("Risultati della query:", results);
           res.json({
               result: results.length > 0
           });
@@ -125,7 +155,7 @@ app.post("/car/insert", (req, res) => {
    // prezzo=prezzo.replaceAll(" ","");
     serverDB.insert(titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto,abstract,immagini)
         .then(results => {
-            console.log("Risultati della query:", results);
+          //  console.log("Risultati della query:", results);
             res.json({
                 result: results.affectedRows > 0
             });
