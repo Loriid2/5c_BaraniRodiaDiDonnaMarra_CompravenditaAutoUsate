@@ -74,10 +74,8 @@ loginButton.onclick=()=>{
       .then(json => {
         if (json.result) {
           console.log(loginNavbar,registerNavbar);
-          loginNavbar.classList.add("hidden");
-          registerNavbar.classList.add("hidden");
           navigator.update(document.querySelector("#container"));
-          home.render(); 
+          home.render();
         } else {
           alert("Login errato. controllare le credenziali.");
         }
