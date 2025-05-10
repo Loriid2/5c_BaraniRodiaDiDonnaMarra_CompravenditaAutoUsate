@@ -10,6 +10,7 @@ export const createCOI=()=>{
     let prezzo;
     let nomef;
     let i;
+    let email;
 
     return{
         build:(diz,val)=>{
@@ -20,13 +21,14 @@ export const createCOI=()=>{
         render:()=>{
 
 
-         console.info(dizionario);
+         //console.info(dizionario);
             info=infos(document.getElementById("detailsCar"+i));
-            console.log(document.getElementById("imagesCar"+i));
+            //console.log(document.getElementById("imagesCar"+i));
             img=immages(document.getElementById("imagesCar"+i));
             description=document.getElementById("description"+i);
             title=document.getElementById("titleCar"+i);
             prezzo=document.getElementById("price"+i);
+            email=document.getElementById("to"+i);
             img.build(dizionario);
             img.render();
             
@@ -35,6 +37,7 @@ export const createCOI=()=>{
             title.innerHTML="<h1>"+dizionario.titolo+"</h1>"
             description.innerHTML="<p>"+dizionario.descrizione+"</p>"
             prezzo.innerHTML="<h1>"+dizionario.prezzo+"€"+"</h1>";
+            email.value=dizionario.contatto;
 
         }
     }

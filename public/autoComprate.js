@@ -22,12 +22,12 @@ export const autocomprate = (parentElement) => {
           })
           .then(response => response.json())
           .then(dati => {
-        console.log(dati.dati);
+       // console.log(dati.dati);
         dati=dati.dati;
         let  html=`<a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
                     <table id="carListPagate" class="table table-borderless">`;
 
-console.log(dati.length);
+//console.log(dati.length);
       for (let i = 0; i < dati.length; i += 3) {
 
         html += `  <tr>
@@ -46,7 +46,7 @@ console.log(dati.length);
       html += `</table>
 `;
     parentElement.innerHTML=html;
-    console.log(html);
+   // console.log(html);
 
 const renderCars = (cars) => {
   const carList = document.getElementById("carListPagate");

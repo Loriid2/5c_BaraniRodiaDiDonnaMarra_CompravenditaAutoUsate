@@ -14,7 +14,7 @@ export const createPages=(parentElement, middleware)=>{
             <!-----------header----------------->
             <div class="row">
               <div class="col">
-               <button><a href="#pagina1">HOME</a></button>
+               <a href="#pagina1"><button class="btn btn-dark">HOME</button></a>
               </div>
               <div class="col">
                 <div id="titleCar`+i+`">Titolo di prova</div>
@@ -58,7 +58,7 @@ export const createPages=(parentElement, middleware)=>{
                   
                     <div class="mb-3">
                       <label class="form-label">Destinatario</label>
-                      <input type="email" class="form-control" id="to" >
+                      <input type="email" class="form-control" id="to`+i+`" disabled >
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Oggetto</label>
@@ -75,13 +75,14 @@ export const createPages=(parentElement, middleware)=>{
                </div>
                </div>`;
                parentElement.innerHTML=html;
-               console.log(html);
+              // console.log(html);
 
                const submitButton = document.getElementById("submit");
                if (submitButton) {
                  submitButton.onclick = () => {
                   console.log("submitButton clicked");
-                   const to = document.getElementById("to").value;
+                  //dovra essere preso dall utente
+                   const to = document.getElementById("to"+i).value;
                    const subject = document.getElementById("subject").value;
                    const message = document.getElementById("message").value;
          
@@ -89,7 +90,10 @@ export const createPages=(parentElement, middleware)=>{
                      alert("Tutti i campi sono obbligatori!");
                      return;
                    }
-         
+                  if(!to){
+                    alert("Devi essere loggato!");
+                     return;
+                  }
                   middleware.sendEmail(to, subject, message);
                  };
                }

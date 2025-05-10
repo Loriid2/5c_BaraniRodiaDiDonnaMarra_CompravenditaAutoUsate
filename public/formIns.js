@@ -76,10 +76,10 @@ export const createform=(parentElement)=>{
                 
 
                 const invioFormButton = document.querySelector("#invioForm");
-                console.log(invioFormButton);
+              //  console.log(invioFormButton);
                 
                 invioFormButton.onclick=()=>{
-                  console.log("dentro");
+                //  console.log("dentro");
                   const nomeModello = document.querySelector("#nomeModello").value;
                   //console.log(nomeModello);
                   const nomeMarca = document.querySelector("#nomeMarca").value;

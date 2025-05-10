@@ -57,7 +57,7 @@ invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#usernameReg");
   const email = document.querySelector("#emailReg");
   const password = document.querySelector("#passwordReg");
-  console.log("Username:", username.value, "   Email:", email.value, "   Password:", password.value);
+ // console.log("Username:", username.value, "   Email:", email.value, "   Password:", password.value);
   //da aggiungere la parte dove si caricano le credenziali nel db
   fetch("/car/register", {
     method: 'POST',
@@ -92,7 +92,7 @@ loginButton.onclick=()=>{
       .then(json => {
         if (json.result) {
           let utente=json.result[0];
-          console.log(json);
+          //console.log(json);
           loginNavbar.classList.add("hidden");
           registerNavbar.classList.add("hidden");
           areaPersonaleNavbar.classList.remove("hidden");
@@ -181,25 +181,3 @@ setInterval(() => {
     }
   }
 }, 200); // controlla ogni 200ms
-
-//const submitButton = document.getElementById('submit');
-/*if (submitButton) {
-  submitButton.onclick = () => {
-    console.log("submitButton clicked");
-    const to = document.getElementById("to").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
-
-    if (!to || !subject || !message) {
-        alert("Tutti i campi sono obbligatori!");
-        return;
-    }
-
-    middleware.sendEmail(to, subject, message);
-  };
-}*/
-
-/*submitButton.onclick = () => {
-  console.log("csdoèa")
-  //formContainer.render();
-}*/

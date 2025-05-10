@@ -2,7 +2,7 @@ export const immages = (parentElement) => {
     let arrImag=[];
     return {
       build:(diz)=>{
-        console.log(diz);
+        //console.log(diz);
         arrImag=diz.immagini;
 
       },
@@ -32,7 +32,7 @@ export const immages = (parentElement) => {
             <span class="visually-hidden">Next</span>
             </button>
         </div>`;
-        console.log(document.querySelector("#container"));
+       // console.log(document.querySelector("#container"));
     parentElement.innerHTML=html;
 
     }
