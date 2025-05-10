@@ -9,13 +9,13 @@ const invioEmail = () => {
         let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: "baranisimone@itis-molinari.eu",
+            user: "autocunetum@gmail.com",
             pass: conf.EMAIL_PASS,
           }
         });
 
         let mailOptions = {
-          from: "baranisimone@itis-molinari.eu",
+          from: "autocunetum@gmail.com",
           to,
           subject,
           text: message
