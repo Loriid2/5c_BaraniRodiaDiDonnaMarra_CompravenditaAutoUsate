@@ -78,7 +78,7 @@ loginButton.onclick=()=>{
       .then(json => {
         if (json.result) {
           let utente=json.result[0];
-          //console.log(json);
+          console.log(json);
           emailutente=utente.email;
           loginNavbar.classList.add("hidden");
           registerNavbar.classList.add("hidden");
@@ -93,6 +93,7 @@ loginButton.onclick=()=>{
             Comprate.build({contatto:utente.email});
             Comprate.render();
             Comprate.setCallBack(CarOfInterest);
+            home.render()
             }
 
           navigator.update(document.querySelector("#container"));
@@ -108,7 +109,7 @@ function CarOfInterest(index, pagina) {
     if (pagina === "" || pagina === null) {
       return;
     }
-  
+   console.info("indice: "+index+"\n pagina: "+pagina);
     fetch("/car/getone", {
       method: 'POST',
       headers: {
@@ -119,9 +120,10 @@ function CarOfInterest(index, pagina) {
       .then(response => response.json())
       .then(json => {
         let dizionario = json.result;
-        const coi = createPages(document.querySelector("#container"), middleware,emailutente);
-        coi.build(index);
-        coi.render();
+        console.log(dizionario);
+        const coir = createPages(document.querySelector("#container"), middleware,emailutente);
+        coir.build(index);
+        coir.render();
         navigator.update(document.querySelector("#container"));
         COI.build(dizionario, index);
         COI.render();

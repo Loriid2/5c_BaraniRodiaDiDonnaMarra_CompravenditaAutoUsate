@@ -9,6 +9,9 @@ export const createPages=(parentElement, middleware,emailutente)=>{
         render:()=>{
 
         let html=parentElement.innerHTML;
+        console.info(document.getElementById("car="+i));
+        if(document.getElementById("car="+i)==null){
+          console.log("faccio questo");
         html+=`<div id="car=`+i+`" class="page hidden">
         <div class="container text-center">
             <!-----------header----------------->
@@ -53,7 +56,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
              <div id="price`+i+`">prezzo</div>
             </div>
             <div class="col" id="divMail" >
-              <form id="emailForm">
+              <form id="emailForm`+i+`">
                  <h2 class="mt-4">Invia un messaggio</h2>
                   
                     <div class="mb-3">
@@ -62,13 +65,13 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Oggetto</label>
-                      <input type="text" class="form-control" id="subject" >
+                      <input type="text" class="form-control" id="subject`+i+`" >
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Messaggio</label>
-                      <input type="text" class="form-control" id="message">
+                      <input type="text" class="form-control" id="message`+i+`">
                     </div>
-                    <button type="button" id="submit" class="btn btn-success">Invia Email</button>
+                    <button type="button" id="submit`+i+`" class="btn btn-success">Invia Email</button>
                 </form>
             </div>
             
@@ -76,8 +79,8 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                </div>`;
                parentElement.innerHTML=html;
               // console.log(html);
-
-               const submitButton = document.getElementById("submit");
+        }
+               const submitButton = document.getElementById("submit"+i);
                if (submitButton) {
                  submitButton.onclick = () => {
                   console.log("submitButton clicked");
@@ -87,8 +90,8 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                      return;
                   }
                    const to = document.getElementById("to"+i).value;
-                   const subject = document.getElementById("subject").value;
-                   let message = document.getElementById("message").value;
+                   const subject = document.getElementById("subject"+i).value;
+                   let message = document.getElementById("message"+i).value;
                    message += "\n Questa mail è stasta inviata da https://autocinetum.eu non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+emailutente ; 
                    if (!to || !subject || !message) {
                      alert("Tutti i campi sono obbligatori!");

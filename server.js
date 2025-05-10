@@ -40,6 +40,7 @@ app.post('/car/upload', (req, res) => {
 });
 
 let automobili;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -87,7 +88,7 @@ app.post("/car/getone", (req, res) => {
   const indice = req.body.index;
   
  console.info(req.body);
- //console.log(automobili);
+ console.log(automobili);
     res.json({result: automobili[indice]});
  
 });
@@ -104,7 +105,7 @@ app.post("/car/sel",(req, res) => {
     };
    
     let auto=results;
-    automobili=results;
+    //automobili=results;
   //console.log(auto);
     res.json({dati:auto})
 
