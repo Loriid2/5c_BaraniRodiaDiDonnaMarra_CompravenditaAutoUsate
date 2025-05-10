@@ -78,6 +78,7 @@ loginButton.onclick=()=>{
       .then(json => {
         if (json.result) {
           let utente=json.result[0];
+         
           console.log(json);
           emailutente=utente.email;
           loginNavbar.classList.add("hidden");
@@ -90,7 +91,7 @@ loginButton.onclick=()=>{
             }else{
                 console.log(utente);
 
-            Comprate.build({contatto:utente.email});
+            Comprate.build({contatto:utente.email,});
             Comprate.render();
             Comprate.setCallBack(CarOfInterest);
             home.render()

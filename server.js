@@ -107,6 +107,7 @@ app.post("/car/sel",(req, res) => {
     let auto=results;
     //automobili=results;
   //console.log(auto);
+  
     res.json({dati:auto})
 
   });
@@ -143,9 +144,11 @@ app.post("/car/login", (req, res) => {
       .then(results => {
         //  console.log("Risultati della query:", results);
           res.json({
-              result: results
+              result: results,
+              
           });
           console.log("Login effettuato con successo:", results);
+          
       })
       .catch(error => {
           console.error("Errore durante il login:", error);

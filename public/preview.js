@@ -26,7 +26,8 @@ export const prewiew = (parentElement) => {
             modello:diz.modello,
             titolo:diz.titolo,
             descrizione:diz.abstract,
-            prezzo:diz.prezzo
+            prezzo:diz.prezzo,
+            id:diz.id_auto
         }
         
       },
@@ -62,7 +63,7 @@ export const prewiew = (parentElement) => {
     <hr>
     <div class="row">
               <div class="col">
-               <a href="#car=${i}" class="btn btn-primary" id="dett${i}">Dettagli</a>
+               <a href="#car=${info.id}" class="btn btn-primary" id="dett${i}">Dettagli</a>
               </div>
               <div class="col">
                  <b>`+info.prezzo+`</b>
