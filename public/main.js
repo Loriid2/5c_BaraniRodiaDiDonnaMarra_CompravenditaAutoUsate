@@ -1,6 +1,5 @@
 import { createNavigator } from "./navigator.js";
 import { createCOI } from "./COI.js";
-import { prewiew } from "./preview.js";
 import{homepage}from"./homepage.js";
 import{createPages}from"./pages.js";
 import {autocomprate} from "./autoComprate.js";
@@ -13,26 +12,18 @@ const Comprate=autocomprate(document.querySelector("#autocomprate"));
 const form=createform(document.querySelector("#formInserimento"));
 const navigator = createNavigator(document.querySelector("#container"));
 const home=homepage(document.getElementById("homePage"));
-
-const submitButton = document.querySelector("#submit");
-
-
 const loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister"); 
-
-//da metterci il cambio di visibilità
 const loginNavbar= document.querySelector("#loginButtonHome");
 const registerNavbar= document.querySelector("#registerButtonHome");
 const areaPersonaleNavbar = document.querySelector("#areaPersonaleButtonHome");
-
-//bottone per l'aggiunta dell'auto tramite form
 const openFormButton = document.querySelector("#aggiungiMacchina");
 
 const COI=createCOI();
-//const pippo  = createPages(document.querySelector("#container"), middleware);
+
 
 let automobili;
-
+let emailutente;
 openFormButton.onclick=()=>{
     form.build();
     form.setCallBack(aggiorna);
@@ -41,7 +32,6 @@ openFormButton.onclick=()=>{
   }
 
 function aggiorna(){
-   // navigator.update(document.querySelector("#container"));
     
     fetch("/car/getall")
             .then(response => response.json())
@@ -57,8 +47,6 @@ invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#usernameReg");
   const email = document.querySelector("#emailReg");
   const password = document.querySelector("#passwordReg");
- // console.log("Username:", username.value, "   Email:", email.value, "   Password:", password.value);
-  //da aggiungere la parte dove si caricano le credenziali nel db
   fetch("/car/register", {
     method: 'POST',
     headers: {
@@ -70,8 +58,6 @@ invioRegisterButton.onclick=()=>{
     .then(json => {
       if (json.result) {
         alert("Registrazione avvenuta con successo. Effettua il login.");
-        //navigator.update(document.querySelector("#container"));
-        //home.render();
       } else {
         alert("Registrazione fallita. Controlla i dati inseriti.");
       }
@@ -93,6 +79,7 @@ loginButton.onclick=()=>{
         if (json.result) {
           let utente=json.result[0];
           //console.log(json);
+          emailutente=utente.email;
           loginNavbar.classList.add("hidden");
           registerNavbar.classList.add("hidden");
           areaPersonaleNavbar.classList.remove("hidden");
@@ -132,22 +119,18 @@ function CarOfInterest(index, pagina) {
       .then(response => response.json())
       .then(json => {
         let dizionario = json.result;
-        const coi = createPages(document.querySelector("#container"), middleware);
+        const coi = createPages(document.querySelector("#container"), middleware,emailutente);
         coi.build(index);
         coi.render();
         navigator.update(document.querySelector("#container"));
         COI.build(dizionario, index);
         COI.render();
-  
-        
-       // history.replaceState(null, "", window.location.pathname);
       });
   }
   
 fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
-               //console.log(json.dati);
                automobili=json.dati;
                home.build(automobili);
                home.setCallBack(CarOfInterest);

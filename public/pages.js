@@ -1,4 +1,4 @@
-export const createPages=(parentElement, middleware)=>{
+export const createPages=(parentElement, middleware,emailutente)=>{
   let i;
 
     return{
@@ -82,10 +82,14 @@ export const createPages=(parentElement, middleware)=>{
                  submitButton.onclick = () => {
                   console.log("submitButton clicked");
                   //dovra essere preso dall utente
+                  if(emailutente==null){
+                     alert("Per inviare la mail devi essere loggato!");
+                     return;
+                  }
                    const to = document.getElementById("to"+i).value;
                    const subject = document.getElementById("subject").value;
-                   const message = document.getElementById("message").value;
-         
+                   let message = document.getElementById("message").value;
+                   message += "\n Questa mail è stasta inviata da https://autocinetum.eu non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+emailutente ; 
                    if (!to || !subject || !message) {
                      alert("Tutti i campi sono obbligatori!");
                      return;
