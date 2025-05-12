@@ -27,7 +27,7 @@ export const autocomprate = (parentElement) => {
         console.log(dati.dati);
         dati=dati.dati;
         let  html=`<a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
-                    <table id="carListPagate" class="table table-borderless">`;
+                    <table id="carListPagate" class="">`;
 
 //console.log(dati.length);
       for (let i = 0; i < dati.length; i += 3) {

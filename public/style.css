@@ -55,11 +55,20 @@ td {
   padding: 10px;
 }
 
-.card {
+.c {
   background-color: #ebeadb;
   height: 100%;
   display: flex;
   min-height: 600px;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 12px;
+  overflow: hidden; /* importante per far sì che l'immagine segua il bordo arrotondato */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+label{
+    color:white;
+}
+.card-body {
+  padding: 16px;
 }

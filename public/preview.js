@@ -37,7 +37,7 @@ export const prewiew = (parentElement) => {
       render:()=>{
         
             let html=`
-            <div class="card" style="width: 18rem;">
+            <div class="c" style="width: 18rem;">
   <img src="asset/immages/`+info.images[0]+`" class="card-img-top" alt="immagine"> 
   <div class="card-body">
     <h5 class="card-title">`+info.titolo+`</h5>
