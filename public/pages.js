@@ -9,7 +9,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
         render:()=>{
 
         let html=parentElement.innerHTML;
-        console.info(document.getElementById("car="+i));
+        //console.info(document.getElementById("car="+i));
         if(document.getElementById("car="+i)==null){
           console.log("faccio questo");
         html+=`<div id="car=`+i+`" class="page hidden">
@@ -89,10 +89,18 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                      alert("Per inviare la mail devi essere loggato!");
                      return;
                   }
-                   const to = document.getElementById("to"+i).value;
-                   const subject = document.getElementById("subject"+i).value;
-                   let message = document.getElementById("message"+i).value;
-                   message += "\n Questa mail è stasta inviata da https://autocinetum.eu non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+emailutente ; 
+                  //console.log(document.getElementById("titleCar"+i).innerHTML);
+                   let titolo=document.getElementById("titleCar"+i).innerHTML;
+                   titolo=titolo.replace("<h1>","");
+                   titolo=titolo.replace("</h1>","");
+                   console.log(titolo);
+                   let message="Buongiorno, ha ricevuto un nuovo messaggio per il suo annuncio : "+ titolo+"\nIl messaggio è il seguente: \n";
+                   let to = document.getElementById("to"+i).value;
+                   let subject = document.getElementById("subject"+i).value;
+                    message += document.getElementById("message"+i).value;
+                   document.getElementById("subject"+i).value="";
+                   document.getElementById("message"+i).value="";
+                   message += "\n\n\n Questa mail è stasta inviata da autocinetum non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+emailutente ; 
                    if (!to || !subject || !message) {
                      alert("Tutti i campi sono obbligatori!");
                      return;
@@ -101,6 +109,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                     alert("Devi essere loggato!");
                      return;
                   }
+                  alert("EMAIL INVIATA CON SUCCESSO!");
                   middleware.sendEmail(to, subject, message);
                  };
                }
