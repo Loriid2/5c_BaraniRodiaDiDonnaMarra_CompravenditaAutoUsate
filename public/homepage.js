@@ -111,12 +111,12 @@ export const homepage = (parentElement) => {
     <option value="TVR">TVR</option>
     <option value="VAUXHALL">VAUXHALL</option>
     </select><br>
-   <p>Prezzo massimo</p>
-<input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" onchange="document.getElementById('value').textContent = this.value + ' €'">
-<p>Value: <span id="value">50000 €</span></p>
-        <p>Chilometraggio massimo</p>
+   <p class="testoBianco">Prezzo massimo</p>
+<input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" onchange="document.getElementById('value').textContent = this.value + ' €'"  class="testoBianco">
+<p class="testoBianco">Value: <span id="value">50000 €</span></p>
+        <p class="testoBianco">Chilometraggio massimo</p>
 <input type="range" id="chilometraggio" min="0" max="500000" value="100000" step="1000" onchange="document.getElementById('kmValue').textContent = this.value + ' km'">
-<p>Value: <span id="kmValue">100000 km</span></p>
+<p class="testoBianco">Value: <span id="kmValue">100000 km</span></p>
 
                   <br> <select id="provinciaFilter">
     <option selected>Seleziona una provincia</option>
@@ -233,7 +233,7 @@ export const homepage = (parentElement) => {
         </div>
         <div class="col">
                    
-        <table id="carList" class="table table-borderless">`;
+        <table id="carList" class="">`;
 
 
       for (let i = 0; i < dati.length; i += 3) {

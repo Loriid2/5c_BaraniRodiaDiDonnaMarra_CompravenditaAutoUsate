@@ -6,13 +6,13 @@
     display: none !important;
  }
  #bd{
-   background-color:#ffffff;
+   background-color:#222222;
  }
  .trasparente {
    background-color: transparent;
    border-collapse: collapse;
  }
- 
+ table { background-color: transparent;}
  .trasparente th,
  .trasparente td {
    background-color: transparent;
@@ -46,4 +46,20 @@
 #areaPersonale .row {
   margin-bottom: 15px;
   margin-top: 15px;
+}
+
+td {
+  width: 300px;
+  height: 550px;
+  vertical-align: top; /* evita che le card si allineino in basso */
+  padding: 10px;
+}
+
+.card {
+  background-color: #ebeadb;
+  height: 100%;
+  display: flex;
+  min-height: 600px;
+  flex-direction: column;
+  justify-content: space-between;
 }
