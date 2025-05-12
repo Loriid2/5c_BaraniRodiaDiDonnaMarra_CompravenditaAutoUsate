@@ -120,7 +120,7 @@ marcaSelect.addEventListener("change", () => {
   })
     .then(response => response.json())
     .then(json => {
-      const modelli = json.responce; // supponendo sia un array di oggetti { Modello: "..." }
+      const modelli = json.responce; 
       modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
       for (let i = 0; i < modelli.length; i++) {
         modelloSelect.innerHTML += `<option value="${modelli[i].Modello}">${modelli[i].Modello}</option>`;
