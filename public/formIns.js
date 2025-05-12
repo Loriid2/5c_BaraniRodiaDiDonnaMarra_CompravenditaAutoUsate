@@ -12,17 +12,36 @@ export const createform=(parentElement)=>{
             callback=f;
          },
          render:()=>{
- 
+         fetch("/car/getMarche")
+                      .then(response => response.json())
+                      .then(json => {
+                        console.log(json);
+                        const marche = json.responce; 
+         
          let html="";
          html+=`
           
           <div class="mb-3">
+
             <label for="nomeMarca" class="form-label">Marca</label>
-            <input type="text" class="form-control" id="nomeMarca" placeholder="Inserire Marca">
+            <select id="nomeMarca">
+            <option selected>Seleziona una marca</option>`
+            for(let i=0;i<marche.length;i++){
+
+              html+=`<option value="`+(marche[i].Marca)+`">`+(marche[i].Marca)+`</option>`;
+            }
+            
+            
+          html+=`
+          </select>
           </div>
           <div class="mb-3">
             <label for="nomeModello" class="form-label">Nome Macchina</label>
-            <input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">
+            <label for="nomeModello" class="form-label">Modello</label>
+            <select id="nomeModello">
+            <option selected>Seleziona un modello</option>
+            </select>
+            <!--<input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">-->
           </div>
           <div class="mb-3">
             <label for="numerokm" class="form-label">Numero Km</label>
@@ -74,6 +93,54 @@ export const createform=(parentElement)=>{
         `;
                 parentElement.innerHTML=html;
                 
+
+
+
+
+
+
+
+                const marcaSelect = document.querySelector("#nomeMarca");
+const modelloSelect = document.querySelector("#nomeModello");
+
+marcaSelect.addEventListener("change", () => {
+  const marcaSelezionata = marcaSelect.value;
+
+  if (marcaSelezionata === "Seleziona una marca") {
+    modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
+    return;
+  }
+
+  fetch("/car/getModello", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ marca: marcaSelezionata })
+  })
+    .then(response => response.json())
+    .then(json => {
+      const modelli = json.responce; // supponendo sia un array di oggetti { Modello: "..." }
+      modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
+      for (let i = 0; i < modelli.length; i++) {
+        modelloSelect.innerHTML += `<option value="${modelli[i].Modello}">${modelli[i].Modello}</option>`;
+      }
+    })
+    .catch(err => {
+      console.error("Errore nel recupero dei modelli:", err);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
 
                 const invioFormButton = document.querySelector("#invioForm");
               //  console.log(invioFormButton);
@@ -155,6 +222,11 @@ export const createform=(parentElement)=>{
                 }
                 
             }
+
+
+          })
+
+
          }
      }
  }

@@ -158,7 +158,15 @@ app.post("/car/login", (req, res) => {
           });
       });
 });
+app.get("/car/getMarche", (req, res) => {
+  serverDB.getMarca().then(results => {res.json({responce:results})})
+  
+})
 
+app.post("/car/getModello", (req, res) => {
+  let marca=req.body.marca;
+   serverDB.getModello(marca).then(results => {res.json({responce:results})})
+})
 app.post("/car/insert", (req, res) => {
     
     const titolo = String(req.body.titolo).trim();

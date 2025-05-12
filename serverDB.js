@@ -57,8 +57,13 @@ const serverDB = {
     },
     getForUser:function(user){
         return executeQuery("SELECT * FROM AutoDettagli WHERE contatto='"+user+"'");
+    },
+    getMarca:function(){
+     return executeQuery("SELECT DISTINCT Marca FROM ModelloMarche");
+    },
+    getModello:function(marca){
+     return executeQuery("SELECT Modello FROM ModelloMarche WHERE Marca='"+marca+"'");
     }
-
     
 };
 
