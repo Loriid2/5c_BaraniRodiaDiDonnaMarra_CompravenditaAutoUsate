@@ -20,7 +20,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                <a href="#pagina1"><button class="btn btn-dark">HOME</button></a>
               </div>
               <div class="col">
-                <div id="titleCar`+i+`">Titolo di prova</div>
+                <div id="titleCar`+i+`" class="testoBianco">Titolo di prova</div>
               </div>
               <div class="col">
                 
@@ -31,10 +31,10 @@ export const createPages=(parentElement, middleware,emailutente)=>{
          <!-----------immagine e dettagli----------------->
          <div class="row">
             <div class="col">
-             <div id="imagesCar`+i+`">qui ci sarà limmagine</div>
+             <div id="imagesCar`+i+`" class="testoBianco">qui ci sarà limmagine</div>
             </div>
             <div class="col">
-              <div id="detailsCar`+i+`">qui i dettagli elencati </div>
+              <div id="detailsCar`+i+`" class="testoBianco">qui i dettagli elencati </div>
             </div>
             
          </div>
@@ -43,7 +43,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
         <!-----------descrizione macchina----------------->
         <div class="row">
             <div class="col">
-             <div id="description`+i+`">qui ci la descrizione</div>
+             <div id="description`+i+`" class="testoBianco">qui ci la descrizione</div>
             </div>
             
             
@@ -53,11 +53,11 @@ export const createPages=(parentElement, middleware,emailutente)=>{
         <!-----------dettagli finali ----------------->
         <div class="row">
             <div class="col">
-             <div id="price`+i+`">prezzo</div>
+             <div id="price`+i+`" class="testoBianco">prezzo</div>
             </div>
             <div class="col" id="divMail" >
               <form id="emailForm`+i+`">
-                 <h2 class="mt-4">Invia un messaggio</h2>
+                 <h2 class="mt-4 testoBianco">Invia un messaggio</h2>
                   
                     <div class="mb-3">
                       <label class="form-label">Destinatario</label>

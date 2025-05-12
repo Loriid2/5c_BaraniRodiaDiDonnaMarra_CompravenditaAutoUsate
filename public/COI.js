@@ -34,9 +34,9 @@ export const createCOI=()=>{
             
             info.build(dizionario);
             info.render();
-            title.innerHTML="<h1>"+dizionario.titolo+"</h1>"
-            description.innerHTML="<p>"+dizionario.descrizione+"</p>"
-            prezzo.innerHTML="<h1>"+dizionario.prezzo+"€"+"</h1>";
+            title.innerHTML=`<h1 class=" testoBianco">`+dizionario.titolo+`</h1>`
+            description.innerHTML=`<p class=" testoBianco">`+dizionario.descrizione+`</p>`
+            prezzo.innerHTML=`<h1 class=" testoBianco">`+dizionario.prezzo+"€"+`</h1>`;
             email.value=dizionario.contatto;
 
         }
