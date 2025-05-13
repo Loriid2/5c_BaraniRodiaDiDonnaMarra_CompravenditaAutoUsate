@@ -228,6 +228,11 @@ app.post('/send-email', async (req, res) => {
       res.status(500).send({ error: 'Errore durante l\'invio', details: error.message });
     }
   });
-
+app.get("/getProvince", (req, res) => {
+  serverDB.getprovince().then(results => {
+    console.log(results);
+    res.json({responce:results});
+  })
+});
 //mail.sendEmail("massivecm11@gmail.com","prova","prova di invio email");
 serverDB.createTable();

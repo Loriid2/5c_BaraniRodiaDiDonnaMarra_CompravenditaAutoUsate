@@ -1,311 +1,197 @@
 import { prewiew } from "./preview.js";
 
-
 export const homepage = (parentElement) => {
   let callback;
   let dati = [];
+
   const filterSerach = (searchTerm) => {
     return dati.filter(car => {
       if (searchTerm !== null) {
         return car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm);
       }
-    })};
+    });
+  };
 
-    const filterCars = (prezzoMax, marca, provincia, kmMax) => {
-      return dati.filter(car => {
-          const carPrezzo =car.prezzo; // Converte il prezzo in numero
-          const carKm = car.km; // Converte il chilometraggio in numero
-          const matchesPrezzo = carPrezzo <= prezzoMax;
-          const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
-          const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
-          const matchesKm = carKm <= kmMax;
-          return matchesPrezzo && matchesMarca && matchesProvincia && matchesKm;
-      });
+  const filterCars = (prezzoMax, marca, provincia, kmMax) => {
+    return dati.filter(car => {
+      const carPrezzo = car.prezzo; // Converte il prezzo in numero
+      const carKm = car.km; // Converte il chilometraggio in numero
+      const matchesPrezzo = carPrezzo <= prezzoMax;
+      const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
+      const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
+      const matchesKm = carKm <= kmMax;
+      return matchesPrezzo && matchesMarca && matchesProvincia && matchesKm;
+    });
   };
 
   return {
     build: (diz) => {
-
       dati = diz;
     },
     setCallBack: (cb) => {
       callback = cb;
     },
-    render: () => {
+    render: async () => {
       let html = `
         <div class="row">
-        
-         <div class="col">
-                    <div class="input-group mb-3">
-                        <button class="input-group-text" id="ricercaButton">Cerca</button>
-                        <input type="text" id="searchInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <button class="input-group-text" id="ricercaButton">Cerca</button>
+              <input type="text" id="searchInput" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="col">
-                  <select id="marcaFilter">
-    <option selected>Scegli la marca</option>
-    <option value="FIAT">FIAT</option>
-    <option value="VOLKSWAGEN">VOLKSWAGEN</option>
-    <option value="ALFA ROMEO">ALFA ROMEO</option>
-    <option value="AUDI">AUDI</option>
-    <option value="BMW">BMW</option>
-    <option value="CITROËN">CITROËN</option>
-    <option value="DACIA">DACIA</option>
-    <option value="FORD">FORD</option>
-    <option value="HYUNDAI">HYUNDAI</option>
-    <option value="KIA">KIA</option>
-    <option value="LANCIA">LANCIA</option>
-    <option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
-    <option value="NISSAN">NISSAN</option>
-    <option value="OPEL">OPEL</option>
-    <option value="PEUGEOT">PEUGEOT</option>
-    <option value="RENAULT">RENAULT</option>
-    <option value="SEAT">SEAT</option>
-    <option value="SKODA">SKODA</option>
-    <option value="TOYOTA">TOYOTA</option>
-    <option value="VOLVO">VOLVO</option>
-    <option value="ABARTH">ABARTH</option>
-    <option value="ACURA">ACURA</option>
-    <option value="AIXAM">AIXAM</option>
-    <option value="ALPINE">ALPINE</option>
-    <option value="ASTON MARTIN">ASTON MARTIN</option>
-    <option value="AUSTIN">AUSTIN</option>
-    <option value="BENTLEY">BENTLEY</option>
-    <option value="BUICK">BUICK</option>
-    <option value="CADILLAC">CADILLAC</option>
-    <option value="CHEVROLET">CHEVROLET</option>
-    <option value="CHRYSLER">CHRYSLER</option>
-    <option value="CUPRA">CUPRA</option>
-    <option value="DAEWOO">DAEWOO</option>
-    <option value="DAIHATSU">DAIHATSU</option>
-    <option value="DODGE">DODGE</option>
-    <option value="DS">DS</option>
-    <option value="FERRARI">FERRARI</option>
-    <option value="FISKER">FISKER</option>
-    <option value="FORD USA">FORD USA</option>
-    <option value="GENESIS">GENESIS</option>
-    <option value="HONDA">HONDA</option>
-    <option value="HUMMER">HUMMER</option>
-    <option value="INFINITI">INFINITI</option>
-    <option value="ISUZU">ISUZU</option>
-    <option value="JAGUAR">JAGUAR</option>
-    <option value="JEEP">JEEP</option>
-    <option value="LAMBORGHINI">LAMBORGHINI</option>
-    <option value="LAND ROVER">LAND ROVER</option>
-    <option value="LEXUS">LEXUS</option>
-    <option value="MASERATI">MASERATI</option>
-    <option value="MAZDA">MAZDA</option>
-    <option value="MG">MG</option>
-    <option value="MINI">MINI</option>
-    <option value="MITSUBISHI">MITSUBISHI</option>
-    <option value="PORSCHE">PORSCHE</option>
-    <option value="ROLLS-ROYCE">ROLLS-ROYCE</option>
-    <option value="SAAB">SAAB</option>
-    <option value="SMART">SMART</option>
-    <option value="SSANGYONG">SSANGYONG</option>
-    <option value="SUBARU">SUBARU</option>
-    <option value="SUZUKI">SUZUKI</option>
-    <option value="TESLA">TESLA</option>
-    <option value="TVR">TVR</option>
-    <option value="VAUXHALL">VAUXHALL</option>
-    </select><br>
-   <p class="testoBianco">Prezzo massimo</p>
-<input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" onchange="document.getElementById('value').textContent = this.value + ' €'"  class="testoBianco">
-<p class="testoBianco">Value: <span id="value">50000 €</span></p>
-        <p class="testoBianco">Chilometraggio massimo</p>
-<input type="range" id="chilometraggio" min="0" max="500000" value="100000" step="1000" onchange="document.getElementById('kmValue').textContent = this.value + ' km'">
-<p class="testoBianco">Value: <span id="kmValue">100000 km</span></p>
-
-                  <br> <select id="provinciaFilter">
-    <option selected>Seleziona una provincia</option>
-    <option value="Agrigento">Agrigento</option>
-    <option value="Alessandria">Alessandria</option>
-    <option value="Ancona">Ancona</option>
-    <option value="Aosta">Aosta</option>
-    <option value="Arezzo">Arezzo</option>
-    <option value="Ascoli Piceno">Ascoli Piceno</option>
-    <option value="Asti">Asti</option>
-    <option value="Avellino">Avellino</option>
-    <option value="Bari">Bari</option>
-    <option value="Barletta-Andria-Trani">Barletta-Andria-Trani</option>
-    <option value="Belluno">Belluno</option>
-    <option value="Benevento">Benevento</option>
-    <option value="Bergamo">Bergamo</option>
-    <option value="Biella">Biella</option>
-    <option value="Bologna">Bologna</option>
-    <option value="Bolzano">Bolzano</option>
-    <option value="Brescia">Brescia</option>
-    <option value="Brindisi">Brindisi</option>
-    <option value="Cagliari">Cagliari</option>
-    <option value="Caltanissetta">Caltanissetta</option>
-    <option value="Campobasso">Campobasso</option>
-    <option value="Carbonia-Iglesias">Carbonia-Iglesias</option>
-    <option value="Caserta">Caserta</option>
-    <option value="Catania">Catania</option>
-    <option value="Catanzaro">Catanzaro</option>
-    <option value="Chieti">Chieti</option>
-    <option value="Como">Como</option>
-    <option value="Cosenza">Cosenza</option>
-    <option value="Cremona">Cremona</option>
-    <option value="Crotone">Crotone</option>
-    <option value="Cuneo">Cuneo</option>
-    <option value="Enna">Enna</option>
-    <option value="Fermo">Fermo</option>
-    <option value="Ferrara">Ferrara</option>
-    <option value="Firenze">Firenze</option>
-    <option value="Foggia">Foggia</option>
-    <option value="Forlì-Cesena">Forlì-Cesena</option>
-    <option value="Frosinone">Frosinone</option>
-    <option value="Genova">Genova</option>
-    <option value="Gorizia">Gorizia</option>
-    <option value="Grosseto">Grosseto</option>
-    <option value="Imperia">Imperia</option>
-    <option value="Isernia">Isernia</option>
-    <option value="L'Aquila">L'Aquila</option>
-    <option value="La Spezia">La Spezia</option>
-    <option value="Latina">Latina</option>
-    <option value="Lecce">Lecce</option>
-    <option value="Lecco">Lecco</option>
-    <option value="Livorno">Livorno</option>
-    <option value="Lodi">Lodi</option>
-    <option value="Lucca">Lucca</option>
-    <option value="Macerata">Macerata</option>
-    <option value="Mantova">Mantova</option>
-    <option value="Massa-Carrara">Massa-Carrara</option>
-    <option value="Matera">Matera</option>
-    <option value="Messina">Messina</option>
-    <option value="Milano">Milano</option>
-    <option value="Modena">Modena</option>
-    <option value="Monza e della Brianza">Monza e della Brianza</option>
-    <option value="Napoli">Napoli</option>
-    <option value="Novara">Novara</option>
-    <option value="Nuoro">Nuoro</option>
-    <option value="Oristano">Oristano</option>
-    <option value="Padova">Padova</option>
-    <option value="Palermo">Palermo</option>
-    <option value="Parma">Parma</option>
-    <option value="Pavia">Pavia</option>
-    <option value="Perugia">Perugia</option>
-    <option value="Pesaro e Urbino">Pesaro e Urbino</option>
-    <option value="Pescara">Pescara</option>
-    <option value="Piacenza">Piacenza</option>
-    <option value="Pisa">Pisa</option>
-    <option value="Pistoia">Pistoia</option>
-    <option value="Pordenone">Pordenone</option>
-    <option value="Potenza">Potenza</option>
-    <option value="Prato">Prato</option>
-    <option value="Ragusa">Ragusa</option>
-    <option value="Ravenna">Ravenna</option>
-    <option value="Reggio Calabria">Reggio Calabria</option>
-    <option value="Reggio Emilia">Reggio Emilia</option>
-    <option value="Rieti">Rieti</option>
-    <option value="Rimini">Rimini</option>
-    <option value="Roma">Roma</option>
-    <option value="Rovigo">Rovigo</option>
-    <option value="Salerno">Salerno</option>
-    <option value="Sassari">Sassari</option>
-    <option value="Savona">Savona</option>
-    <option value="Siena">Siena</option>
-    <option value="Siracusa">Siracusa</option>
-    <option value="Sondrio">Sondrio</option>
-    <option value="Sud Sardegna">Sud Sardegna</option>
-    <option value="Taranto">Taranto</option>
-    <option value="Teramo">Teramo</option>
-    <option value="Terni">Terni</option>
-    <option value="Torino">Torino</option>
-    <option value="Trapani">Trapani</option>
-    <option value="Trento">Trento</option>
-    <option value="Treviso">Treviso</option>
-    <option value="Trieste">Trieste</option>
-    <option value="Udine">Udine</option>
-    <option value="Varese">Varese</option>
-    <option value="Venezia">Venezia</option>
-    <option value="Verbano-Cusio-Ossola">Verbano-Cusio-Ossola</option>
-    <option value="Vercelli">Vercelli</option>
-    <option value="Verona">Verona</option>
-    <option value="Vibo Valentia">Vibo Valentia</option>
-    <option value="Vicenza">Vicenza</option>
-    <option value="Viterbo">Viterbo</option>
-    </select>
-    <br> <button id="filtraButton">vai</button> 
-        </div>
-        <div class="col">
-                   
-        <table id="carList" class="">`;
-
-
-      for (let i = 0; i < dati.length; i += 3) {
-
-        html += `  <tr>
-  <td >
-  <div id="n`+ i + `"></div>
- </td>
- <td >
-  <div id="n`+ (i + 1) + `"></div>
- </td>
- <td >
-  <div id="n`+ (i + 2) + `"></div>
- </td>
-  </tr>`;
-      }
-
-      html += `</table>
-
-        </div>
+            <select id="marcaFilter">
+              <option selected>Scegli la marca</option>
+            </select><br>
+            
+            <!-- La select per il modello è sempre visibile ma inizialmente ha solo l'opzione di default -->
+            <select id="modelloFilter" disabled>
+              <option selected>Scegli il modello</option>
+            </select><br>
+            
+            <p class="testoBianco">Prezzo massimo</p>
+            <input type="range" id="prezzo" min="0" max="100000" value="50000" step="1000" onchange="document.getElementById('value').textContent = this.value + ' €'" class="testoBianco">
+            <p class="testoBianco">Value: <span id="value">50000 €</span></p>
+            <p class="testoBianco">Chilometraggio massimo</p>
+            <input type="range" id="chilometraggio" min="0" max="500000" value="100000" step="1000" onchange="document.getElementById('kmValue').textContent = this.value + ' km'">
+            <p class="testoBianco">Value: <span id="kmValue">100000 km</span></p>
+            <br>
+            
+            <!-- La select per la provincia -->
+            <select id="provinciaFilter">
+              <option selected>Seleziona una provincia</option>
+            </select><br> 
+            
+            <button id="filtraButton">Vai</button>
+          </div>
+          <div class="col">
+            <table id="carList" class=""></table>
+          </div>
         </div>`;
 
-      // console.info(html);
       parentElement.innerHTML = html;
-     
-//-----------------------------------------------
-const renderCars = (cars) => {
-  const carList = document.getElementById("carList");
-  if(!carList) {
-    alert("Car list element not found!");
-    return;
-  }
 
-  let carHtml = `<table class="table table-borderless">`;
+      // Carica le marche tramite fetch
+      fetch("/car/getMarche")
+        .then(response => response.json())
+        .then(json => {
+          const marche = json.responce; // Supponiamo che le marche siano nella proprietà "responce"
+          const marcaSelect = document.getElementById("marcaFilter");
 
-  for (let i = 0; i < cars.length; i += 3) {
-    carHtml += `<tr>
+          // Crea l'HTML delle opzioni per le marche
+          let marcaOptions = '<option selected>Scegli la marca</option>';
+          marche.forEach(marca => {
+            marcaOptions += `<option value="${marca.Nome}">${marca.Nome}</option>`;
+          });
+          // Imposta l'HTML per la select delle marche
+          marcaSelect.innerHTML = marcaOptions;
+        })
+        .catch(error => {
+          console.error("Errore nel caricare le marche:", error);
+        });
+
+      // Carica le province tramite fetch
+      fetch("/getProvince")
+        .then(response => response.json())
+        .then(json => {
+          const province = json.responce; // Supponiamo che le province siano nella proprietà "responce"
+          const provinciaSelect = document.getElementById("provinciaFilter");
+
+          // Crea l'HTML delle opzioni per le province
+          let provinciaOptions = '<option selected>Seleziona una provincia</option>';
+          province.forEach(provincia => {
+            provinciaOptions += `<option value="${provincia.Provincia}">${provincia.Provincia}</option>`;
+          });
+          // Imposta l'HTML per la select delle province
+          provinciaSelect.innerHTML = provinciaOptions;
+        })
+        .catch(error => {
+          console.error("Errore nel caricare le province:", error);
+        });
+
+      // Aggiungi event listener per la selezione della marca
+      document.getElementById("marcaFilter").onchange = () => {
+        const marcaSelezionata = document.getElementById("marcaFilter").value;
+        const modelloSelect = document.getElementById("modelloFilter");
+
+        // Svuota i modelli precedenti e disabilita la select dei modelli se nessuna marca è selezionata
+        modelloSelect.innerHTML = '<option selected>Scegli il modello</option>';
+        modelloSelect.disabled = marcaSelezionata === "Scegli la marca";
+
+        // Non fare la richiesta se non è stata selezionata una marca
+        if (marcaSelezionata !== "Scegli la marca") {
+          fetch("/car/getModello", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ marca: marcaSelezionata })
+          })
+            .then(response => response.json())
+            .then(json => {
+              const modelli = json.responce; // Supponiamo che i modelli siano nella proprietà "responce"
+              
+              // Crea l'HTML delle opzioni per i modelli
+              let modelloOptions = '<option selected>Scegli il modello</option>';
+              modelli.forEach(modello => {
+                modelloOptions += `<option value="${modello.nome_Modello}">${modello.nome_Modello}</option>`;
+              });
+              // Imposta l'HTML per la select dei modelli
+              modelloSelect.innerHTML = modelloOptions;
+            })
+            .catch(error => {
+              console.error("Errore nel caricare i modelli:", error);
+            });
+        }
+      };
+
+      const renderCars = (cars) => {
+        const carList = document.getElementById("carList");
+        if (!carList) {
+          alert("Car list element not found!");
+          return;
+        }
+
+        let carHtml = `<table class="table table-borderless">`;
+
+        for (let i = 0; i < cars.length; i += 3) {
+          carHtml += `<tr>
               <td><div id="n${i}"></div></td>
               <td><div id="n${i + 1}"></div></td>
               <td><div id="n${i + 2}"></div></td>
           </tr>`;
-  }
+        }
 
-  carHtml += `</table>`;
-  //console.log(carHtml); - ok
-  carList.innerHTML = carHtml;
+        carHtml += `</table>`;
+        carList.innerHTML = carHtml;
 
-  for (let i = 0; i < cars.length; i++) {
-    const prewiewer = prewiew(document.getElementById("n" + i));
-    //console.log(cars[i]); - ok
-    prewiewer.build(cars[i], i);
-    prewiewer.setCallBack(callback);
-    prewiewer.render();
-  }
-};
+        for (let i = 0; i < cars.length; i++) {
+          const prewiewer = prewiew(document.getElementById("n" + i));
+          prewiewer.build(cars[i], i);
+          prewiewer.setCallBack(callback);
+          prewiewer.render();
+        }
+      };
 
-renderCars(dati);
+      renderCars(dati);
 
-document.getElementById("ricercaButton").onclick = () => {
-  const searchTerm = document.getElementById("searchInput").value;
-  const filteredCars = filterSerach(searchTerm);
-  renderCars(filteredCars);
-};
-document.getElementById("filtraButton").onclick = () => {
-  const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
-  const marca = document.getElementById("marcaFilter").value;
-  const provincia = document.getElementById("provinciaFilter").value;
-  const kmMax = parseInt(document.getElementById("chilometraggio").value, 10);
-  const filteredCars = filterCars(prezzoMax, marca, provincia, kmMax);
-  renderCars(filteredCars);
-};
-      }
+      document.getElementById("ricercaButton").onclick = () => {
+        const searchTerm = document.getElementById("searchInput").value;
+        const filteredCars = filterSerach(searchTerm);
+        renderCars(filteredCars);
+      };
+
+      document.getElementById("filtraButton").onclick = () => {
+        const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
+        const marca = document.getElementById("marcaFilter").value;
+        const provincia = document.getElementById("provinciaFilter").value;
+        const kmMax = parseInt(document.getElementById("chilometraggio").value, 10);
+        const filteredCars = filterCars(prezzoMax, marca, provincia, kmMax);
+        renderCars(filteredCars);
+      };
     }
-  }
-
+  };
+};

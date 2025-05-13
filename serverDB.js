@@ -66,6 +66,9 @@ const serverDB = {
     },
     delete(id){
         return executeQuery("DELETE FROM AutoDettagli WHERE id_auto="+id);
+    },
+    getprovince:function(){
+        return executeQuery("SELECT * provincia FROM province");
     }
     
 };
