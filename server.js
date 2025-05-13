@@ -238,7 +238,7 @@ app.post('/send-email', async (req, res) => {
   });
 app.get("/getProvince", (req, res) => {
   serverDB.getprovince().then(results => {
-    console.log(results);
+    
     res.json({responce:results});
   })
 });

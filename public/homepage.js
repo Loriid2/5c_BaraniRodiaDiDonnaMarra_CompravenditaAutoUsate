@@ -4,15 +4,17 @@ export const homepage = (parentElement) => {
   let callback;
   let dati = [];
 
-  const filterSerach = (searchTerm) => {
+  const filterSerach = (searchTerm, modello) => {
     return dati.filter(car => {
       if (searchTerm !== null) {
-        return car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm);
+        // Aggiungi il controllo per il filtro del modello
+        const matchesModello = modello === "Scegli il modello" || car.modello.toLowerCase().includes(modello.toLowerCase());
+        return (car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm)) && matchesModello;
       }
     });
   };
 
-  const filterCars = (prezzoMax, marca, provincia, kmMax) => {
+  const filterCars = (prezzoMax, marca, provincia, kmMax, modello) => {
     return dati.filter(car => {
       const carPrezzo = car.prezzo; // Converte il prezzo in numero
       const carKm = car.km; // Converte il chilometraggio in numero
@@ -20,7 +22,8 @@ export const homepage = (parentElement) => {
       const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
       const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
       const matchesKm = carKm <= kmMax;
-      return matchesPrezzo && matchesMarca && matchesProvincia && matchesKm;
+      const matchesModello = modello === "Scegli il modello" || car.modello === modello; // Aggiungi controllo per il modello
+      return matchesPrezzo && matchesMarca && matchesProvincia && matchesKm && matchesModello;
     });
   };
 
@@ -47,7 +50,7 @@ export const homepage = (parentElement) => {
               <option selected>Scegli la marca</option>
             </select><br>
             
-            <!-- La select per il modello è sempre visibile ma inizialmente ha solo l'opzione di default -->
+            <!-- Aggiungi la select per il modello che inizialmente è disabilitata -->
             <select id="modelloFilter" disabled>
               <option selected>Scegli il modello</option>
             </select><br>
@@ -94,7 +97,7 @@ export const homepage = (parentElement) => {
         });
 
       // Carica le province tramite fetch
-      fetch("/getProvince")
+      fetch("/car/getProvince")
         .then(response => response.json())
         .then(json => {
           const province = json.responce; // Supponiamo che le province siano nella proprietà "responce"
@@ -105,6 +108,7 @@ export const homepage = (parentElement) => {
           province.forEach(provincia => {
             provinciaOptions += `<option value="${provincia.Provincia}">${provincia.Provincia}</option>`;
           });
+
           // Imposta l'HTML per la select delle province
           provinciaSelect.innerHTML = provinciaOptions;
         })
@@ -141,6 +145,8 @@ export const homepage = (parentElement) => {
               });
               // Imposta l'HTML per la select dei modelli
               modelloSelect.innerHTML = modelloOptions;
+              // Abilita la select del modello
+              modelloSelect.disabled = false;
             })
             .catch(error => {
               console.error("Errore nel caricare i modelli:", error);
@@ -178,18 +184,22 @@ export const homepage = (parentElement) => {
 
       renderCars(dati);
 
+      // Filtro di ricerca
       document.getElementById("ricercaButton").onclick = () => {
         const searchTerm = document.getElementById("searchInput").value;
-        const filteredCars = filterSerach(searchTerm);
+        const modello = document.getElementById("modelloFilter").value;
+        const filteredCars = filterSerach(searchTerm, modello);
         renderCars(filteredCars);
       };
 
+      // Filtro per i parametri
       document.getElementById("filtraButton").onclick = () => {
         const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
         const marca = document.getElementById("marcaFilter").value;
         const provincia = document.getElementById("provinciaFilter").value;
         const kmMax = parseInt(document.getElementById("chilometraggio").value, 10);
-        const filteredCars = filterCars(prezzoMax, marca, provincia, kmMax);
+        const modello = document.getElementById("modelloFilter").value;
+        const filteredCars = filterCars(prezzoMax, marca, provincia, kmMax, modello);
         renderCars(filteredCars);
       };
     }
