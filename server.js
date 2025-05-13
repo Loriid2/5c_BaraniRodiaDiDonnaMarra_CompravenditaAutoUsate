@@ -168,7 +168,10 @@ app.post("/car/login", (req, res) => {
       });
 });
 app.get("/car/getMarche", (req, res) => {
-  serverDB.getMarca().then(results => {res.json({responce:results})})
+  serverDB.getMarca().then(results => {
+    console.log(results);
+    res.json({responce:results});
+  })
   
 })
 

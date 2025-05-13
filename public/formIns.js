@@ -28,7 +28,7 @@ export const createform=(parentElement)=>{
             <option selected>Seleziona una marca</option>`
             for(let i=0;i<marche.length;i++){
 
-              html+=`<option value="`+(marche[i].Marca)+`">`+(marche[i].Marca)+`</option>`;
+              html+=`<option value="`+(marche[i].Nome)+`">`+(marche[i].Nome)+`</option>`;
             }
             
             
@@ -95,46 +95,37 @@ export const createform=(parentElement)=>{
                 
 
 
-
-
-
-
-
+                const modelloSelect = document.querySelector("#nomeModello");
                 const marcaSelect = document.querySelector("#nomeMarca");
-const modelloSelect = document.querySelector("#nomeModello");
 
-marcaSelect.addEventListener("change", () => {
-  const marcaSelezionata = marcaSelect.value;
-
-  if (marcaSelezionata === "Seleziona una marca") {
-    modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
-    return;
-  }
-  //input.onselect
-
-  fetch("/car/getModello", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ marca: marcaSelezionata })
-  })
-    .then(response => response.json())
-    .then(json => {
-      const modelli = json.responce; 
-      modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
-      for (let i = 0; i < modelli.length; i++) {
-        modelloSelect.innerHTML += `<option value="${modelli[i].Modello}">${modelli[i].Modello}</option>`;
-      }
-    })
-    .catch(err => {
-      console.error("Errore nel recupero dei modelli:", err);
-    });
-});
-
-
-
-
+                marcaSelect.onchange = function () {
+                  const marcaSelezionata = marcaSelect.value;
+                
+                  if (marcaSelezionata === "Seleziona una marca") {
+                    modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
+                    return;
+                  }
+                
+                  fetch("/car/getModello", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ marca: marcaSelezionata })
+                  })
+                    .then(response => response.json())
+                    .then(json => {
+                      const modelli = json.responce; 
+                      modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
+                      console.log(modelli);
+                      for (let i = 0; i < modelli.length; i++) {
+                        modelloSelect.innerHTML += `<option value="${modelli[i].nome_Modello}">${modelli[i].nome_Modello}</option>`;
+                      }
+                    })
+                    .catch(err => {
+                      console.error("Errore nel recupero dei modelli:", err);
+                    });
+                };
 
 
 

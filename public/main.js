@@ -36,6 +36,7 @@ function aggiorna(){
     fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
+              console.log("aggiorno")
                //console.log(json.dati);
                automobili=json.dati;
                home.render();
@@ -126,6 +127,7 @@ function CarOfInterest(index, pagina) {
     })
       .then(response => response.json())
       .then(json => {
+       
         let dizionario = json.result;
         console.log(dizionario);
         const coir = createPages(document.querySelector("#container"), middleware,emailutente);

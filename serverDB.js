@@ -59,10 +59,10 @@ const serverDB = {
         return executeQuery("SELECT * FROM AutoDettagli WHERE contatto='"+user+"'");
     },
     getMarca:function(){
-     return executeQuery("SELECT DISTINCT Marca FROM ModelloMarche");
+     return executeQuery("SELECT Nome FROM Marche");
     },
     getModello:function(marca){
-     return executeQuery("SELECT Modello FROM ModelloMarche WHERE Marca='"+marca+"'");
+     return executeQuery("SELECT nome_Modello FROM Modelli JOIN Marche ON Marche.Id_marca=Modelli.nome_marca WHERE Nome='"+marca+"'");
     },
     delete(id){
         return executeQuery("DELETE FROM AutoDettagli WHERE id_auto="+id);
