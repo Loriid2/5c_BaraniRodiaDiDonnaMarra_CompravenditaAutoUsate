@@ -48,26 +48,27 @@ invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#usernameReg");
   const email = document.querySelector("#emailReg");
   const password = document.querySelector("#passwordReg");
-  fetch("/car/register", {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ username: username.value, email: email.value, password: password.value })
-  })
-    .then(response => response.json())
-    .then(json => {
+  if(username.value=="" || email.value=="" || password.value==""){
+    document.querySelector("#errreg").innerHTML="Compila tutti i campi.";
+  }else{
+    fetch("/car/register", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username: username.value, email: email.value, password: password.value })
+    })
+      .then(response => response.json())
+      .then(json => {
 
-      if (json.result) {
-        document.getElementById("errreg").innerHTML="";
-        document.getElementById("okreg").innerHTML="Registrazione avvenuta con successo. Effettua il login.";
-        //alert("Registrazione avvenuta con successo. Effettua il login.");
-      } else {
-        document.getElementById("errreg").innerHTML="Registrazione fallita. Controlla i dati inseriti.";
-        //alert("Registrazione fallita. Controlla i dati inseriti.");
-        document.getElementById("okreg").innerHTML="";
-      }
-    });
+        if (json.result) {
+          alert("Registrazione avvenuta con successo. Effettua il login.");
+          document.querySelector("#errreg").innerHTML="";
+          document.querySelector("#okreg").innerHTML="Registrazione avvenuta con successo. Effettua il login.";
+          //alert("Registrazione avvenuta con successo. Effettua il login.");
+        } 
+      });
+  }
 }
 
 loginButton.onclick=()=>{
