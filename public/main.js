@@ -56,10 +56,15 @@ invioRegisterButton.onclick=()=>{
   })
     .then(response => response.json())
     .then(json => {
+
       if (json.result) {
-        alert("Registrazione avvenuta con successo. Effettua il login.");
+        document.getElementById("errreg").innerHTML="";
+        document.getElementById("okreg").innerHTML="Registrazione avvenuta con successo. Effettua il login.";
+        //alert("Registrazione avvenuta con successo. Effettua il login.");
       } else {
-        alert("Registrazione fallita. Controlla i dati inseriti.");
+        document.getElementById("errreg").innerHTML="Registrazione fallita. Controlla i dati inseriti.";
+        //alert("Registrazione fallita. Controlla i dati inseriti.");
+        document.getElementById("okreg").innerHTML="";
       }
     });
 }
@@ -100,7 +105,8 @@ loginButton.onclick=()=>{
           navigator.update(document.querySelector("#container"));
           home.render();
         } else {
-          alert("Login errato. controllare le credenziali.");
+          document.getElementById("errlog").innerHTML="Login errato. controllare le credenziali."
+          //alert("Login errato. controllare le credenziali.");
         }
       
       });

@@ -1,4 +1,4 @@
-import { prewiew } from "./preview.js";
+import { prewiew } from "./previewComprate.js";
 export const autocomprate = (parentElement) => {
     let utente ;
     let callback;
@@ -80,10 +80,11 @@ const renderCars = (cars) => {
   for (let i = 0; i < cars.length; i++) {
     const prewiewer = prewiew(document.getElementById("r" + (cars[i].id_auto)));
     //console.log(cars[i]); - ok
-    prewiewer.build(cars[i], i);
+    prewiewer.build(cars[i], i,utente);
     prewiewer.setCallBack(callback);
     prewiewer.render();
   }
+
 };
 
 renderCars(dati);
@@ -93,3 +94,4 @@ renderCars(dati);
 }
     }
 }
+//1,golf7_1.png,golf7_2.png,golf7_3.png,Golf 7 Volkswagen,Volkswagen Golf 7, versione business, tenuta in modo maniacale.,13200.00,6,115,92000,Roma,Disel	11.7,Volkswagen,Golf 7,rodiathomas@itis-molinari.eu,Golf 7 business in ottimo stato, 92.000 km e potente motore diesel.

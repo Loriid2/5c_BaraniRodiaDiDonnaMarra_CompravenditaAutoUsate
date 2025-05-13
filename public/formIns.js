@@ -110,6 +110,7 @@ marcaSelect.addEventListener("change", () => {
     modelloSelect.innerHTML = `<option selected>Seleziona un modello</option>`;
     return;
   }
+  //input.onselect
 
   fetch("/car/getModello", {
     method: "POST",

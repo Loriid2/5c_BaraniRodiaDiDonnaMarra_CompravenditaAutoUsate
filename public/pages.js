@@ -10,6 +10,10 @@ export const createPages=(parentElement, middleware,emailutente)=>{
 
         let html=parentElement.innerHTML;
         //console.info(document.getElementById("car="+i));
+        if(document.getElementById("errore"+i)!==null&&document.getElementById("errore"+i)!==undefined&&document.getElementById("ok"+i)!==null&&document.getElementById("ok"+i)!==undefined){
+          document.getElementById("errore"+i).innerHTML="";
+          document.getElementById("ok"+i).innerHTML="";
+        }
         if(document.getElementById("car="+i)==null){
           console.log("faccio questo");
         html+=`<div id="car=`+i+`" class="page hidden">
@@ -72,6 +76,10 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                       <input type="text" class="form-control" id="message`+i+`">
                     </div>
                     <button type="button" id="submit`+i+`" class="btn btn-success">Invia Email</button>
+                     <div class="mb-3">
+                      <label class="form-label errore" id="errore`+i+`"></label>
+                      <label class="form-label ok" id="ok`+i+`"></label>
+                    </div>
                 </form>
             </div>
             
@@ -83,15 +91,19 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                const submitButton = document.getElementById("submit"+i);
                if (submitButton) {
                  submitButton.onclick = () => {
+                  let errore=document.getElementById("errore"+i);
+                  let ok=document.getElementById("ok"+i);
                   console.log("submitButton clicked");
                   //dovra essere preso dall utente
                   if(emailutente==null){
-                     alert("Per inviare la mail devi essere loggato!");
+                    ok.innerHTML="";
+                    errore.innerHTML="Per inviare la mail devi essere loggato!"
+                    // alert("Per inviare la mail devi essere loggato!");
                      return;
                   }
                   //console.log(document.getElementById("titleCar"+i).innerHTML);
                    let titolo=document.getElementById("titleCar"+i).innerHTML;
-                   titolo=titolo.replace("<h1>","");
+                   titolo=titolo.replace("<h1 class=\" testoBianco\">","");
                    titolo=titolo.replace("</h1>","");
                    console.log(titolo);
                    let message="Buongiorno, ha ricevuto un nuovo messaggio per il suo annuncio : "+ titolo+"\nIl messaggio è il seguente: \n";
@@ -102,14 +114,17 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                    document.getElementById("message"+i).value="";
                    message += "\n\n\n Questa mail è stasta inviata da autocinetum non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+emailutente ; 
                    if (!to || !subject || !message) {
-                     alert("Tutti i campi sono obbligatori!");
+                    ok.innerHTML="";
+                    errore.innerHTML="Tutti i campi sono obbligatori!"
+                     //alert("Tutti i campi sono obbligatori!");
                      return;
                    }
                   if(!to){
-                    alert("Devi essere loggato!");
+                    alert("ERRORE");
                      return;
                   }
-                  alert("EMAIL INVIATA CON SUCCESSO!");
+                    ok.innerHTML="Email inviata con successo";
+                    errore.innerHTML=""
                   middleware.sendEmail(to, subject, message);
                  };
                }

@@ -82,7 +82,16 @@ app.use("/", express.static(path.join(__dirname, "public")));
    // console.log(auto);
     //     res.json({dati:automobili})
  });
+ app.post("/car/delete", (req, res) => {
+  
+  const indice = req.body.id;
+  serverDB.delete(indice).then(results=>{
+res.json("OK")
+  });
  
+ 
+});
+
 app.post("/car/getone", (req, res) => {
   console.log("sono dentro la getone")
   const indice = req.body.index;

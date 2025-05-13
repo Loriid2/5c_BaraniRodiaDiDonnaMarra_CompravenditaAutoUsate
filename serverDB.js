@@ -63,6 +63,9 @@ const serverDB = {
     },
     getModello:function(marca){
      return executeQuery("SELECT Modello FROM ModelloMarche WHERE Marca='"+marca+"'");
+    },
+    delete(id){
+        return executeQuery("DELETE FROM AutoDettagli WHERE id_auto="+id);
     }
     
 };

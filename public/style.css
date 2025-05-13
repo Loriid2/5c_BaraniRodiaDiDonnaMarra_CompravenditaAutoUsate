@@ -48,6 +48,8 @@
   margin-top: 15px;
 }
 
+
+
 td {
   width: 300px;
   height: 550px;
@@ -71,4 +73,11 @@ label{
 }
 .card-body {
   padding: 16px;
+}
+
+.errore{
+  color:red;
+}
+.ok{
+  color:green;
 }
