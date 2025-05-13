@@ -18,6 +18,7 @@ const loginNavbar= document.querySelector("#loginButtonHome");
 const registerNavbar= document.querySelector("#registerButtonHome");
 const areaPersonaleNavbar = document.querySelector("#areaPersonaleButtonHome");
 const openFormButton = document.querySelector("#aggiungiMacchina");
+const logoutButton = document.querySelector("#logoutButton");
 
 const COI=createCOI();
 
@@ -32,7 +33,6 @@ openFormButton.onclick=()=>{
   }
 
 function aggiorna(){
-    
     fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
@@ -41,7 +41,6 @@ function aggiorna(){
                automobili=json.dati;
                home.render();
             });
-
 }
 
 invioRegisterButton.onclick=()=>{
@@ -69,6 +68,20 @@ invioRegisterButton.onclick=()=>{
         } 
       });
   }
+}
+
+logoutButton.onclick=()=>{
+  alert("Logout avvenuto con successo");
+  //viene mostrato il bottone di login
+  loginNavbar.classList.remove("hidden");
+  loginNavbar.classList.add("visible");
+  //viene mostrato il bottone di registrazione
+  registerNavbar.classList.remove("hidden");
+  registerNavbar.classList.add("visible");
+  //viene nascosto il bottone di area personale
+  areaPersonaleNavbar.classList.add("hidden");
+  areaPersonaleNavbar.classList.remove("visible");
+  home.render();
 }
 
 loginButton.onclick=()=>{
