@@ -56,7 +56,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
   app.get("/car/getall",(req,res) => {
 
     let auto=serverDB.getall().then(results => {
-     // console.log("Risultati della query:", results);
+     
       
       for(let i=0;i<results.length;i++){
         let auto=results[i]
@@ -70,7 +70,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
       automobili=results;
 
       res.json({dati:auto})
-      //console.log(" effettuato con successo:", results);
+      
   })
   .catch(error => {
       console.error("Errore durante il login:", error);
@@ -93,16 +93,20 @@ res.json("OK")
 });
 
 app.post("/car/getone", (req, res) => {
-  console.log("sono dentro la getone")
+ 
   const indice = req.body.index;
-  
- console.info(req.body);
- console.log(automobili);
-    res.json({result: automobili[indice]});
+  console.log("indice= "+indice);
+  console.log("automobili= ",automobili);
+  for(let i=0;i<automobili.length;i++){
+    if((automobili[i].id_auto)===indice){
+      res.json({result: automobili[i]});
+    }
+  }
+    //res.json({result: errore});
  
 });
 app.post("/car/sel",(req, res) => {
-  //console.log(req);
+  
   let user=req.body.utente;
   serverDB.getForUser(user).then(results=>{
 
@@ -114,8 +118,7 @@ app.post("/car/sel",(req, res) => {
     };
    
     let auto=results;
-    //automobili=results;
-  //console.log(auto);
+    
   
     res.json({dati:auto})
 
@@ -126,7 +129,7 @@ app.post("/car/register", (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  console.log(req.body);
+  //console.log(req.body);
   console.log("Username:", username, "   Email:", email, "   Password:", password);
   serverDB.register(username, email, password)
       .then(results => {
@@ -169,7 +172,7 @@ app.post("/car/login", (req, res) => {
 });
 app.get("/car/getMarche", (req, res) => {
   serverDB.getMarca().then(results => {
-    console.log(results);
+    //console.log(results);
     res.json({responce:results});
   })
   
@@ -177,7 +180,7 @@ app.get("/car/getMarche", (req, res) => {
 
 app.get("/car/getProvince", (req, res) => {
   serverDB.getProvince().then(results => {
-    console.log(results);
+    //console.log(results);
     res.json({responce:results});
   })
   
@@ -203,7 +206,7 @@ app.post("/car/insert", (req, res) => {
     const contatto= String(req.body.contatto).trim();
     const abstract = String(req.body.abstract).trim();
     const immagini=String(req.body.immagini).trim();
-    console.log("Dati dell'auto:", req.body);
+    //console.log("Dati dell'auto:", req.body);
    // prezzo=prezzo.replaceAll(" ","");
     serverDB.insert(titolo, descrizione, prezzo, marce, potenza, km, luogoVendita, carburante, Rapporto_Tara_Potenza, marca, modello,contatto,abstract,immagini)
         .then(results => {

@@ -1,4 +1,4 @@
-import { prewiew } from "./previewComprate.js";
+import { prewiew2 } from "./previewComprate.js";
 export const autocomprate = (parentElement) => {
     let utente ;
     let callback;
@@ -78,7 +78,7 @@ const renderCars = (cars) => {
   carList.innerHTML = carHtml;
 
   for (let i = 0; i < cars.length; i++) {
-    const prewiewer = prewiew(document.getElementById("r" + (cars[i].id_auto)));
+    const prewiewer = prewiew2(document.getElementById("r" + (cars[i].id_auto)));
     //console.log(cars[i]); - ok
     prewiewer.build(cars[i], i,utente);
     prewiewer.setCallBack(callback);

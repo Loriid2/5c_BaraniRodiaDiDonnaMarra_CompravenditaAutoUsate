@@ -1,6 +1,6 @@
 import { createCOI } from "./COI.js";
 import {autocomprate} from "./autoComprate.js";
-export const prewiew = (parentElement) => {
+export const prewiew2 = (parentElement) => {
     
 
     let info;

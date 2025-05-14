@@ -12,7 +12,7 @@ const Comprate=autocomprate(document.querySelector("#autocomprate"));
 const form=createform(document.querySelector("#formInserimento"));
 const navigator = createNavigator(document.querySelector("#container"));
 const home=homepage(document.getElementById("homePage"));
-const loginButton = document.querySelector("#loginButton");
+let loginButton = document.querySelector("#loginButton");
 const invioRegisterButton = document.querySelector("#invioRegister"); 
 const loginNavbar= document.querySelector("#loginButtonHome");
 const registerNavbar= document.querySelector("#registerButtonHome");
@@ -69,6 +69,9 @@ invioRegisterButton.onclick=()=>{
       });
   }
 }
+loginNavbar.onclick=()=>{
+  loginButton = document.querySelector("#loginButton");
+}
 
 logoutButton.onclick=()=>{
   alert("Logout avvenuto con successo");
@@ -85,6 +88,7 @@ logoutButton.onclick=()=>{
 }
 
 loginButton.onclick=()=>{
+  console.log("sono dentro login");
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
     fetch("/car/login", {
@@ -143,7 +147,7 @@ function CarOfInterest(index, pagina) {
       .then(json => {
        
         let dizionario = json.result;
-        console.log(dizionario);
+        console.log(json.result);
         const coir = createPages(document.querySelector("#container"), middleware,emailutente);
         coir.build(index);
         coir.render();
