@@ -37,8 +37,10 @@ function aggiorna(){
             .then(response => response.json())
             .then(json => {
               console.log("aggiorno")
-               //console.log(json.dati);
+               console.log(json.dati);
                automobili=json.dati;
+               home.build(automobili);
+               home.setCallBack(CarOfInterest);
                home.render();
             });
 }
@@ -156,7 +158,7 @@ function CarOfInterest(index, pagina) {
         COI.render();
       });
   }
-  
+
 fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
@@ -189,7 +191,8 @@ setInterval(() => {
         CarOfInterest(index, currentHash); // aggiorna pagina dettaglio
       }
     } else if (currentHash === "#pagina1" || currentHash === "#home") {
-      home.render(); // torna alla homepage
+      aggiorna();
+       // torna alla homepage
     }
   }
 }, 200); // controlla ogni 200ms

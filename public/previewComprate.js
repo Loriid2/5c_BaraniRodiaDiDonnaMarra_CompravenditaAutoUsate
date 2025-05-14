@@ -112,6 +112,13 @@ bottDelete.onclick=()=>{
             Comprate.build({contatto:utente});
             Comprate.render();
             Comprate.setCallBack(callback);
+            fetch("/car/getall")
+            .then(response => response.json())
+            .then(json => {
+             
+
+            });
+
      })
 
 
