@@ -1,17 +1,52 @@
-import { createNavigator } from "./navigator.js";
-import { createCOI } from "./COI.js";
-import{homepage}from"./homepage.js";
-import{createPages}from"./pages.js";
 import {autocomprate} from "./autoComprate.js";
-import{createform}from "./formIns.js";
-import{generateMiddleware}from"./middleware.js";
+export const login = (parentElement) => {
+    
 
-let loginButton = document.querySelector("#loginButton");
-const loginNavbar= document.querySelector("#loginButtonHome");
+    
+    return {
+      build:()=>{
+        
+        
+        
+      },
+      setCallBack:()=>{
+      
+      },
+      render:()=>{
+        
+            let html=`
+            
+         <div class="row">
+            <div class="col"> <a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a></div>
+            <div class="col"> </div>
+         </div>
+         <div class="row">
+            <div class="col testoBianco">Username:</div>
+            <div class="col"> <input type="text" id="username" class="form-control" placeholder="Username" required></div>
+         </div>
+         <div class="row">
+            <div class="col testoBianco">Password:</div>
+            <div class="col"> <input type="password" id="password" class="form-control" placeholder="Password" required></div>
+         </div>
+         <div class="row">
+            <div class="col"></div>
+            <div class="col"> <button id="loginButton" class="btn btn-light"><a href="#pagina1">Login</a></button></div>
+         </div>
+         <div class="row">
+          <div class="col ">
+            <div class="errore" id="errlog"></div>
+            <div class="ok" id="oklog"></div>
+            
+          </div>
+          <div class="col"> </div>
+       </div>`;
+           
+
+parentElement.innerHTML=html;
 
 
-
-loginButton.onclick=()=>{
+const bott= document.getElementById("loginButton");
+bott.onclick=()=>{
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
     fetch("/car/login", {
@@ -28,6 +63,10 @@ loginButton.onclick=()=>{
          
           console.log(json);
           let emailutente=utente.email;
+          let loginNavbar=document.querySelector("#loginButtonHome");
+          let areaPersonaleNavbar =document.querySelector("#areaPersonaleButtonHome");
+          let registerNavbar=document.querySelector("#registerButtonHome");
+          const Comprate=autocomprate(document.querySelector("#autocomprate"));
           loginNavbar.classList.add("hidden");
           registerNavbar.classList.add("hidden");
           areaPersonaleNavbar.classList.remove("hidden");
@@ -52,4 +91,7 @@ loginButton.onclick=()=>{
         }
       
       });
+
+}}
+}
 }

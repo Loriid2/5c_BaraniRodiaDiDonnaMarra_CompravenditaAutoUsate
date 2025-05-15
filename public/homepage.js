@@ -1,4 +1,5 @@
 import { prewiew } from "./preview.js";
+import { login } from "./login.js";
 
 export const homepage = (parentElement) => {
   let callback;
@@ -84,8 +85,14 @@ export const homepage = (parentElement) => {
          `;
 
       parentElement.innerHTML = html;
+      let elemento=document.getElementById("paginaLogin");
+      console.log(elemento);
+      const loginT=login(elemento);
+      loginT.render();
 
-      // Carica le marche tramite fetch
+
+
+      
       fetch("/car/getMarche")
         .then(response => response.json())
         .then(json => {
@@ -151,9 +158,8 @@ export const homepage = (parentElement) => {
               modelli.forEach(modello => {
                 modelloOptions += `<option value="${modello.nome_Modello}">${modello.nome_Modello}</option>`;
               });
-              // Imposta l'HTML per la select dei modelli
               modelloSelect.innerHTML = modelloOptions;
-              // Abilita la select del modello
+             
               modelloSelect.disabled = false;
             })
             .catch(error => {
@@ -161,6 +167,8 @@ export const homepage = (parentElement) => {
             });
         }
       };
+      
+     
 
       const renderCars = (cars) => {
         const carList = document.getElementById("carList");
@@ -210,6 +218,7 @@ export const homepage = (parentElement) => {
         const filteredCars = filterCars(prezzoMax, marca, provincia, kmMax, modello);
         renderCars(filteredCars);
       };
+
     }
   };
 };
