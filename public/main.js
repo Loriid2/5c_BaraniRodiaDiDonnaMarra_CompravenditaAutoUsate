@@ -12,9 +12,9 @@ const Comprate=autocomprate(document.querySelector("#autocomprate"));
 const form=createform(document.querySelector("#formInserimento"));
 const navigator = createNavigator(document.querySelector("#container"));
 const home=homepage(document.getElementById("homePage"));
-let loginButton = document.querySelector("#loginButton");
+
 const invioRegisterButton = document.querySelector("#invioRegister"); 
-const loginNavbar= document.querySelector("#loginButtonHome");
+
 const registerNavbar= document.querySelector("#registerButtonHome");
 const areaPersonaleNavbar = document.querySelector("#areaPersonaleButtonHome");
 const openFormButton = document.querySelector("#aggiungiMacchina");
@@ -30,7 +30,7 @@ openFormButton.onclick=()=>{
     form.setCallBack(aggiorna);
     form.render();
 
-  }
+}
 
 function aggiorna(){
     fetch("/car/getall")
@@ -42,7 +42,6 @@ function aggiorna(){
                home.build(automobili);
                home.setCallBack(CarOfInterest);
                home.render();
-               aggiornaLog()
             });
 }
 
@@ -72,10 +71,7 @@ invioRegisterButton.onclick=()=>{
       });
   }
 }
-loginNavbar.onclick=()=>{
-  loginButton = document.querySelector("#loginButton");
-}
-
+//va in areapersonale.js
 logoutButton.onclick=()=>{
   alert("Logout avvenuto con successo");
   //viene mostrato il bottone di login
@@ -88,50 +84,6 @@ logoutButton.onclick=()=>{
   areaPersonaleNavbar.classList.add("hidden");
   areaPersonaleNavbar.classList.remove("visible");
   home.render();
-}
-
-loginButton.onclick=()=>{
-  console.log("sono dentro login");
-  const username = document.querySelector("#username").value;
-  const password = document.querySelector("#password").value;
-    fetch("/car/login", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ username, password })
-    })
-      .then(response => response.json())
-      .then(json => {
-        if (json.result) {
-          let utente=json.result[0];
-         
-          console.log(json);
-          emailutente=utente.email;
-          loginNavbar.classList.add("hidden");
-          registerNavbar.classList.add("hidden");
-          areaPersonaleNavbar.classList.remove("hidden");
-          areaPersonaleNavbar.classList.add("visible");
-         
-            if(utente==null){
-                console.log("help");
-            }else{
-                console.log(utente);
-
-            Comprate.build({contatto:utente.email,});
-            Comprate.render();
-            Comprate.setCallBack(CarOfInterest);
-            home.render()
-            }
-
-          navigator.update(document.querySelector("#container"));
-          home.render();
-        } else {
-          document.getElementById("errlog").innerHTML="Login errato. controllare le credenziali."
-          //alert("Login errato. controllare le credenziali.");
-        }
-      
-      });
 }
 
 function CarOfInterest(index, pagina) {
@@ -148,7 +100,6 @@ function CarOfInterest(index, pagina) {
     })
       .then(response => response.json())
       .then(json => {
-       
         let dizionario = json.result;
         console.log(json.result);
         const coir = createPages(document.querySelector("#container"), middleware,emailutente);
@@ -198,7 +149,7 @@ setInterval(() => {
   }
 }, 200); // controlla ogni 200ms
 
-function aggiornaLog(){
+/*function aggiornaLog(){
 loginButton = document.querySelector("#loginButton");
 loginButton.onclick=()=>{
   console.log("sono dentro login");
@@ -243,4 +194,4 @@ loginButton.onclick=()=>{
       
       });
 }
-}
+}*/

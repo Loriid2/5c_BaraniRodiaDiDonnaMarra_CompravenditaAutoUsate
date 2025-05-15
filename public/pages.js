@@ -21,7 +21,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
             <!-----------header----------------->
             <div class="row">
               <div class="col">
-               <a href="#pagina1"><button class="btn btn-dark">HOME</button></a>
+               <a href="#pagina1"><button id="bottoneRitornoHome${i}" class="btn btn-dark">HOME</button></a>
               </div>
               <div class="col">
                 <div id="titleCar`+i+`" class="testoBianco">Titolo di prova</div>
