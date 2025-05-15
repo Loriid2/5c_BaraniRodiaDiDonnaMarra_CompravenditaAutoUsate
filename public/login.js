@@ -1,7 +1,7 @@
 import {autocomprate} from "./autoComprate.js";
 export const login = (parentElement) => {
     
-
+let cbv;
     
     return {
       build:()=>{
@@ -9,8 +9,8 @@ export const login = (parentElement) => {
         
         
       },
-      setCallBack:()=>{
-      
+      setCallBack:(cb)=>{
+      cbv=cb;
       },
       render:()=>{
         
@@ -79,12 +79,12 @@ bott.onclick=()=>{
 
             Comprate.build({contatto:utente.email,});
             Comprate.render();
-            Comprate.setCallBack(CarOfInterest);
-            home.render()
+            Comprate.setCallBack(cbv);
+           // home.render()
             }
           
-          navigator.update(document.querySelector("#container"));
-          home.render();
+          //navigator.update(document.querySelector("#container"));
+         // home.render();
         } else {
           document.getElementById("errlog").innerHTML="Login errato. controllare le credenziali."
           //alert("Login errato. controllare le credenziali.");

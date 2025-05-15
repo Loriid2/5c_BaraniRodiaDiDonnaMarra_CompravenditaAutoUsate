@@ -1,9 +1,12 @@
 import { prewiew } from "./preview.js";
 import { login } from "./login.js";
+import{createform}from "./formIns.js";
 
 export const homepage = (parentElement) => {
   let callback;
   let dati = [];
+  let CaB2;
+  let CaB3;
 
   const filterSerach = (searchTerm, modello) => {
     return dati.filter(car => {
@@ -31,6 +34,12 @@ export const homepage = (parentElement) => {
   return {
     build: (diz) => {
       dati = diz;
+    },
+    setSecondCallBack:(cb2)=>{
+      CaB2=cb2
+    },
+    setThirdCallBack:(cb3)=>{
+      CaB3=cb3
     },
     setCallBack: (cb) => {
       callback = cb;
@@ -88,9 +97,16 @@ export const homepage = (parentElement) => {
       let elemento=document.getElementById("paginaLogin");
       console.log(elemento);
       const loginT=login(elemento);
+      loginT.setCallBack(CaB3)
       loginT.render();
-
-
+      const openFormButton = document.querySelector("#aggiungiMacchina");
+      const form=createform(document.querySelector("#formInserimento"));
+      openFormButton.onclick=()=>{
+        form.build();
+        form.setCallBack(CaB2);
+        form.render();
+    
+    }
 
       
       fetch("/car/getMarche")

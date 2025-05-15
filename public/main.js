@@ -31,7 +31,8 @@ openFormButton.onclick=()=>{
     form.render();
 
 }
-
+home.setSecondCallBack(aggiorna);
+home.setThirdCallBack(CarOfInterest);
 function aggiorna(){
     fetch("/car/getall")
             .then(response => response.json())
@@ -44,6 +45,7 @@ function aggiorna(){
                home.render();
             });
 }
+
 
 invioRegisterButton.onclick=()=>{
   const username = document.querySelector("#usernameReg");
