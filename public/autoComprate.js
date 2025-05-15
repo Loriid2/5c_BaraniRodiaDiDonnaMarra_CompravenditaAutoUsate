@@ -24,6 +24,7 @@ export const autocomprate = (parentElement) => {
           })
           .then(response => response.json())
           .then(dati => {
+            console.log("dati");
         console.log(dati.dati);
         dati=dati.dati;
         let  html=`<a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
@@ -48,19 +49,20 @@ export const autocomprate = (parentElement) => {
   </tr>`;
       }
 
-      html += `</table>
+      html += `
+      </table>
 `;
     parentElement.innerHTML=html;
-   // console.log(html);
-
+    console.log(html);
+let carList = parentElement.querySelector("#carListPagate");
 const renderCars = (cars) => {
-  const carList = document.getElementById("carListPagate");
+  
   if(!carList) {
     alert("Car list element not found!");
     return;
   }
-
-  let carHtml = `<table class="table table-borderless">`;
+//<table class="table table-borderless">
+  let carHtml = ``;
 
   for (let i = 0; i < cars.length; i += 3) {
     if(cars[i]==undefined||cars[i]==null){continue;}
@@ -73,11 +75,27 @@ const renderCars = (cars) => {
           </tr>`;
   }
 
-  carHtml += `</table>`;
+  //carHtml += `</table>`;
   //console.log(carHtml);
   carList.innerHTML = carHtml;
+  console.log(carList.innerHTML);
+
 
   for (let i = 0; i < cars.length; i++) {
+    const container = document.getElementById("r" + cars[i].id_auto);
+    if (!container) {
+      console.warn("Container non trovato per:", cars[i].id_auto);
+      continue;
+    }
+    const prewiewer = prewiew2(container);
+    prewiewer.build(cars[i], i, utente);
+    prewiewer.setCallBack(callback);
+    prewiewer.render();
+  }
+};
+  /*
+  for (let i = 0; i < cars.length; i++) {
+    console.log(("r" + (cars[i].id_auto)));
     const prewiewer = prewiew2(document.getElementById("r" + (cars[i].id_auto)));
     //console.log(cars[i]); - ok
     prewiewer.build(cars[i], i,utente);
@@ -86,7 +104,7 @@ const renderCars = (cars) => {
   }
 
 };
-
+*/
 renderCars(dati);
 
     });

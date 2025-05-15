@@ -42,6 +42,7 @@ function aggiorna(){
                home.build(automobili);
                home.setCallBack(CarOfInterest);
                home.render();
+               aggiornaLog()
             });
 }
 
@@ -196,3 +197,50 @@ setInterval(() => {
     }
   }
 }, 200); // controlla ogni 200ms
+
+function aggiornaLog(){
+loginButton = document.querySelector("#loginButton");
+loginButton.onclick=()=>{
+  console.log("sono dentro login");
+  const username = document.querySelector("#username").value;
+  const password = document.querySelector("#password").value;
+    fetch("/car/login", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.result) {
+          let utente=json.result[0];
+         
+          console.log(json);
+          emailutente=utente.email;
+          loginNavbar.classList.add("hidden");
+          registerNavbar.classList.add("hidden");
+          areaPersonaleNavbar.classList.remove("hidden");
+          areaPersonaleNavbar.classList.add("visible");
+         
+            if(utente==null){
+                console.log("help");
+            }else{
+                console.log(utente);
+
+            Comprate.build({contatto:utente.email,});
+            Comprate.render();
+            Comprate.setCallBack(CarOfInterest);
+            home.render()
+            }
+
+          navigator.update(document.querySelector("#container"));
+          home.render();
+        } else {
+          document.getElementById("errlog").innerHTML="Login errato. controllare le credenziali."
+          //alert("Login errato. controllare le credenziali.");
+        }
+      
+      });
+}
+}
