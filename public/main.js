@@ -37,8 +37,8 @@ function aggiorna(){
     fetch("/car/getall")
             .then(response => response.json())
             .then(json => {
-              console.log("aggiorno")
-               console.log(json.dati);
+             // console.log("aggiorno")
+             //  console.log(json.dati);
                automobili=json.dati;
                home.build(automobili);
                home.setCallBack(CarOfInterest);
@@ -92,7 +92,7 @@ function CarOfInterest(index, pagina) {
     if (pagina === "" || pagina === null) {
       return;
     }
-   console.info("indice: "+index+"\n pagina: "+pagina);
+   //console.info("indice: "+index+"\n pagina: "+pagina);
     fetch("/car/getone", {
       method: 'POST',
       headers: {
@@ -103,7 +103,7 @@ function CarOfInterest(index, pagina) {
       .then(response => response.json())
       .then(json => {
         let dizionario = json.result;
-        console.log(json.result);
+       // console.log(json.result);
         const coir = createPages(document.querySelector("#container"), middleware,emailutente);
         coir.build(index);
         coir.render();

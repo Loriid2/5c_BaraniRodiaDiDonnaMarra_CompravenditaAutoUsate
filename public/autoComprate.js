@@ -14,7 +14,7 @@ export const autocomprate = (parentElement) => {
         callback = cb;
       },
       render:()=>{
-        console.log("sono dentro con l'utente: "+utente);
+        //console.log("sono dentro con l'utente: "+utente);
         fetch("/car/sel", {
             method: "POST",
             headers: {
@@ -24,8 +24,8 @@ export const autocomprate = (parentElement) => {
           })
           .then(response => response.json())
           .then(dati => {
-            console.log("dati");
-        console.log(dati.dati);
+         //   console.log("dati");
+       // console.log(dati.dati);
         dati=dati.dati;
         let  html=`<a href="#pagina1"><button type="button" class="btn btn-primary" id="tornaHome">HOME</button></a>
                     <table id="carListPagate" class="">`;
@@ -53,7 +53,7 @@ export const autocomprate = (parentElement) => {
       </table>
 `;
     parentElement.innerHTML=html;
-    console.log(html);
+    //console.log(html);
 let carList = parentElement.querySelector("#carListPagate");
 const renderCars = (cars) => {
   
@@ -78,7 +78,7 @@ const renderCars = (cars) => {
   //carHtml += `</table>`;
   //console.log(carHtml);
   carList.innerHTML = carHtml;
-  console.log(carList.innerHTML);
+  //console.log(carList.innerHTML);
 
 
   for (let i = 0; i < cars.length; i++) {

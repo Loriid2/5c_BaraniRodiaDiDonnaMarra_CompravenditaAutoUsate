@@ -41,8 +41,8 @@ const serverDB = {
         );
         `);
     },
-    login: function (username, password) {
-        return executeQuery(`SELECT * FROM credenziali WHERE nome = '${username}' AND password = '${password}'`);
+    login: function (username) {
+        return executeQuery(`SELECT * FROM credenziali WHERE nome = '${username}'`);
     },
     register: function (username, email ,password) {
         return executeQuery(`INSERT INTO credenziali (nome, email, password) VALUES ('${username}', '${email}', '${password}')`);

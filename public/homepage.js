@@ -95,7 +95,7 @@ export const homepage = (parentElement) => {
 
       parentElement.innerHTML = html;
       let elemento=document.getElementById("paginaLogin");
-      console.log(elemento);
+     // console.log(elemento);
       const loginT=login(elemento);
       loginT.setCallBack(CaB3)
       loginT.render();

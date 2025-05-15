@@ -15,7 +15,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
           document.getElementById("ok"+i).innerHTML="";
         }
         if(document.getElementById("car="+i)==null){
-          console.log("faccio questo");
+       //   console.log("faccio questo");
         html+=`<div id="car=`+i+`" class="page hidden">
         <div class="container text-center">
             <!-----------header----------------->
@@ -93,7 +93,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                  submitButton.onclick = () => {
                   let errore=document.getElementById("errore"+i);
                   let ok=document.getElementById("ok"+i);
-                  console.log("submitButton clicked");
+                 // console.log("submitButton clicked");
                   //dovra essere preso dall utente
                   if(emailutente==null){
                     ok.innerHTML="";

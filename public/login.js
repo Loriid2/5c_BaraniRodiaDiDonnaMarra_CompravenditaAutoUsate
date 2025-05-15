@@ -58,10 +58,11 @@ bott.onclick=()=>{
     })
       .then(response => response.json())
       .then(json => {
+        //console.log(json);
         if (json.result) {
-          let utente=json.result[0];
+          let utente=json.result;
          
-          console.log(json);
+          //console.log(utente);
           let emailutente=utente.email;
           let loginNavbar=document.querySelector("#loginButtonHome");
           let areaPersonaleNavbar =document.querySelector("#areaPersonaleButtonHome");
@@ -73,9 +74,9 @@ bott.onclick=()=>{
           areaPersonaleNavbar.classList.add("visible");
          
             if(utente==null){
-                console.log("help");
+               // console.log("help");
             }else{
-                console.log(utente);
+                //console.log(utente);
 
             Comprate.build({contatto:utente.email,});
             Comprate.render();

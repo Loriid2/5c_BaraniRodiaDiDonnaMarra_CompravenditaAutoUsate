@@ -10,6 +10,7 @@ const multer = require("multer");
 const serverDB = require("./serverDB.js");
 const { resolve } = require('url');
 const mail=require("./invioEmail.js")();
+const bcrypt = require('bcrypt');
 
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
@@ -128,8 +129,13 @@ app.post("/car/sel",(req, res) => {
 app.post("/car/register", (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
-  const password = req.body.password;
-  //console.log(req.body);
+  let password = req.body.password;
+  const saltRounds = 10;
+
+bcrypt.hash(password, saltRounds, function(err, hash) {
+  if (err){ throw err;}
+  password=hash
+  console.log('Password hashata:', hash);
   console.log("Username:", username, "   Email:", email, "   Password:", password);
   serverDB.register(username, email, password)
       .then(results => {
@@ -147,28 +153,45 @@ app.post("/car/register", (req, res) => {
           });
       });
 });
+  //console.log(req.body);
+ 
+});
 
 app.post("/car/login", (req, res) => {
   const username = req.body.username;
-  const password = req.body.password;
-  console.log("Username:", username, "   Password:", password);
-  serverDB.login(username, password)
-      .then(results => {
-        //  console.log("Risultati della query:", results);
-          res.json({
-              result: results,
-              
-          });
-          console.log("Login effettuato con successo:", results);
-          
-      })
-      .catch(error => {
-          console.error("Errore durante il login:", error);
-          res.status(500).json({
-              result: false,
-              error: "Errore durante il login"
-          });
+  let password = req.body.password;
+  
+  serverDB.login(username)
+    .then(results => {
+      if (results.length === 0) {
+        // utente non trovato
+        return res.json({ result: "errore" });
+      }
+
+      const user = results[0];
+      const hashedPassword = user.password; // supponendo che il campo si chiami così
+
+      bcrypt.compare(password, hashedPassword, (err, isMatch) => {
+        if (err) {
+          console.error("Errore bcrypt.compare:", err);
+          return res.status(500).json({ result: false, error: "Errore durante il login" });
+        }
+
+        if (isMatch) {
+          res.json({ result: user });
+          console.log("Login effettuato con successo:", user);
+        } else {
+          res.json({ result: "errore" });
+          console.log("Password errata per l'utente:", username);
+        }
       });
+    })
+    .catch(error => {
+      console.error("Errore durante il login:", error);
+      res.status(500).json({ result: false, error: "Errore durante il login" });
+    });
+
+  
 });
 app.get("/car/getMarche", (req, res) => {
   serverDB.getMarca().then(results => {

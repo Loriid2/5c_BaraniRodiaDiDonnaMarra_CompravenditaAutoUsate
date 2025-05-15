@@ -15,7 +15,7 @@ export const createform = (parentElement) => {
       fetch("/car/getMarche")
         .then(response => response.json())
         .then(json => {
-          console.log(json);
+          //console.log(json);
           const marche = json.responce;
 
           let html = "";
@@ -60,9 +60,9 @@ export const createform = (parentElement) => {
           fetch("/car/getProvince")
             .then(response => response.json())
             .then(json => {
-              console.log(json);
+              //console.log(json);
               const province = json.responce;
-              console.log(province);
+             // console.log(province);
               html += `
                      <div class="mb-3">
             <label for="luogoVendita" class="form-label">Luogo Vendita</label>
