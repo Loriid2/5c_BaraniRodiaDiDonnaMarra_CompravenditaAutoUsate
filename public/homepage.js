@@ -36,6 +36,7 @@ export const homepage = (parentElement) => {
     },
     render: async () => {
       let html = `
+      
         <div class="row">
           <div class="col">
             <div class="input-group mb-3">
@@ -45,13 +46,15 @@ export const homepage = (parentElement) => {
           </div>
         </div>
         <div class="row">
+        <div class="d" style="width: 18rem;">
+  <div class="card-body">
           <div class="col">
-            <select id="marcaFilter">
+            <select id="marcaFilter" class="form-select" aria-label="Default select example">
               <option selected>Scegli la marca</option>
             </select><br>
             
             <!-- Aggiungi la select per il modello che inizialmente è disabilitata -->
-            <select id="modelloFilter" disabled>
+            <select id="modelloFilter" class="form-select" aria-label="Default select example" disabled>
               <option selected>Scegli il modello</option>
             </select><br>
             
@@ -64,16 +67,21 @@ export const homepage = (parentElement) => {
             <br>
             
             <!-- La select per la provincia -->
-            <select id="provinciaFilter">
+            <select id="provinciaFilter" class="form-select" aria-label="Default select example">
               <option selected>Seleziona una provincia</option>
             </select><br> 
             
-            <button id="filtraButton">Vai</button>
+            <button id="filtraButton" class="btn btn-light">Vai</button>
           </div>
+          </div>
+         </div>
           <div class="col">
             <table id="carList" class=""></table>
           </div>
-        </div>`;
+        </div>
+         
+
+         `;
 
       parentElement.innerHTML = html;
 

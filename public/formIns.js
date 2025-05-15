@@ -24,7 +24,7 @@ export const createform = (parentElement) => {
           <div class="mb-3">
 
             <label for="nomeMarca" class="form-label">Marca</label>
-            <select id="nomeMarca">
+            <select id="nomeMarca" class="form-select" aria-label="Default select example">
             <option selected>Seleziona una marca</option>`
           for (let i = 0; i < marche.length; i++) {
 
@@ -38,7 +38,7 @@ export const createform = (parentElement) => {
           <div class="mb-3">
             <label for="nomeModello" class="form-label">Nome Macchina</label>
             <label for="nomeModello" class="form-label">Modello</label>
-            <select id="nomeModello">
+            <select id="nomeModello" class="form-select" aria-label="Default select example">
             <option selected>Seleziona un modello</option>
             </select>
             <!--<input type="text" class="form-control" id="nomeModello" placeholder="Inserire Nome Modello">-->
@@ -64,8 +64,10 @@ export const createform = (parentElement) => {
               const province = json.responce;
               console.log(province);
               html += `
-
-                <select id="luogoVendita">
+                     <div class="mb-3">
+            <label for="luogoVendita" class="form-label">Luogo Vendita</label>
+            
+                         <select id="luogoVendita" class="form-select" aria-label="Default select example">
             <option selected>Seleziona una provincia</option>`;
               for (let i = 0; i < province.length; i++) {
 
@@ -75,11 +77,9 @@ export const createform = (parentElement) => {
 
               html += `
           </select>
-
-          <div class="mb-3">
-            <label for="luogoVendita" class="form-label">Luogo Vendita</label>
-            <input type="text" class="form-control" id="luogoVendita" placeholder="Inserire Luogo di Vendita">
-          </div>
+</div>
+ 
+         
           <div class="mb-3">
             <label for="marce" class="form-label">Marce</label>
             <input type="text" class="form-control" id="marce" placeholder="Inserire Marce">
