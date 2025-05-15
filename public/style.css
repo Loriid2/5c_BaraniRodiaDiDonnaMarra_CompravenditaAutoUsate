@@ -25,8 +25,11 @@
   color: white;
   text-align: left;
   padding: 10px;
-}
 
+}
+.highPage{
+  min-height: 63vh;
+}
 .testoBianco{
   color:white;
 }
