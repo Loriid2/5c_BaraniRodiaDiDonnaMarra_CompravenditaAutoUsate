@@ -25,7 +25,7 @@ const hide = (elements) => {
    const update = (newParentElement) => {
        parentElement = newParentElement;
        pages = Array.from(parentElement.querySelectorAll(".page"));
-       render(); // opzionale: aggiorna subito la vista
+       render(); 
    };
 
    window.addEventListener('popstate', render);

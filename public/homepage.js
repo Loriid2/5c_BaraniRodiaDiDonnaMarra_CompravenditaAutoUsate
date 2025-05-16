@@ -11,7 +11,7 @@ export const homepage = (parentElement) => {
   const filterSerach = (searchTerm, modello) => {
     return dati.filter(car => {
       if (searchTerm !== null) {
-        // Aggiungi il controllo per il filtro del modello
+        
         const matchesModello = modello === "Scegli il modello" || car.modello.toLowerCase().includes(modello.toLowerCase());
         return (car.marca.toLowerCase().includes(searchTerm) || car.modello.toLowerCase().includes(searchTerm) || car.luogoVendita.toLowerCase().includes(searchTerm)) && matchesModello;
       }
@@ -20,13 +20,13 @@ export const homepage = (parentElement) => {
 
   const filterCars = (prezzoMax, marca, provincia, kmMax, modello) => {
     return dati.filter(car => {
-      const carPrezzo = car.prezzo; // Converte il prezzo in numero
-      const carKm = car.km; // Converte il chilometraggio in numero
+      const carPrezzo = car.prezzo; 
+      const carKm = car.km; 
       const matchesPrezzo = carPrezzo <= prezzoMax;
       const matchesMarca = marca === "Scegli la marca" || car.marca === marca;
       const matchesProvincia = provincia === "Seleziona una provincia" || car.luogoVendita === provincia;
       const matchesKm = carKm <= kmMax;
-      const matchesModello = modello === "Scegli il modello" || car.modello === modello; // Aggiungi controllo per il modello
+      const matchesModello = modello === "Scegli il modello" || car.modello === modello; 
       return matchesPrezzo && matchesMarca && matchesProvincia && matchesKm && matchesModello;
     });
   };
@@ -112,51 +112,50 @@ export const homepage = (parentElement) => {
       fetch("/car/getMarche")
         .then(response => response.json())
         .then(json => {
-          const marche = json.responce; // Supponiamo che le marche siano nella proprietà "responce"
+          const marche = json.responce; 
           const marcaSelect = document.getElementById("marcaFilter");
 
-          // Crea l'HTML delle opzioni per le marche
+       
           let marcaOptions = '<option selected>Scegli la marca</option>';
           marche.forEach(marca => {
             marcaOptions += `<option value="${marca.Nome}">${marca.Nome}</option>`;
           });
-          // Imposta l'HTML per la select delle marche
+         
           marcaSelect.innerHTML = marcaOptions;
         })
         .catch(error => {
           console.error("Errore nel caricare le marche:", error);
         });
 
-      // Carica le province tramite fetch
+
       fetch("/car/getProvince")
         .then(response => response.json())
         .then(json => {
-          const province = json.responce; // Supponiamo che le province siano nella proprietà "responce"
+          const province = json.responce;  
           const provinciaSelect = document.getElementById("provinciaFilter");
 
-          // Crea l'HTML delle opzioni per le province
+          
           let provinciaOptions = '<option selected>Seleziona una provincia</option>';
           province.forEach(provincia => {
             provinciaOptions += `<option value="${provincia.Provincia}">${provincia.Provincia}</option>`;
           });
 
-          // Imposta l'HTML per la select delle province
           provinciaSelect.innerHTML = provinciaOptions;
         })
         .catch(error => {
           console.error("Errore nel caricare le province:", error);
         });
 
-      // Aggiungi event listener per la selezione della marca
+     
       document.getElementById("marcaFilter").onchange = () => {
         const marcaSelezionata = document.getElementById("marcaFilter").value;
         const modelloSelect = document.getElementById("modelloFilter");
 
-        // Svuota i modelli precedenti e disabilita la select dei modelli se nessuna marca è selezionata
+       
         modelloSelect.innerHTML = '<option selected>Scegli il modello</option>';
         modelloSelect.disabled = marcaSelezionata === "Scegli la marca";
 
-        // Non fare la richiesta se non è stata selezionata una marca
+        
         if (marcaSelezionata !== "Scegli la marca") {
           fetch("/car/getModello", {
             method: "POST",
@@ -167,9 +166,9 @@ export const homepage = (parentElement) => {
           })
             .then(response => response.json())
             .then(json => {
-              const modelli = json.responce; // Supponiamo che i modelli siano nella proprietà "responce"
+              const modelli = json.responce; 
               
-              // Crea l'HTML delle opzioni per i modelli
+            
               let modelloOptions = '<option selected>Scegli il modello</option>';
               modelli.forEach(modello => {
                 modelloOptions += `<option value="${modello.nome_Modello}">${modello.nome_Modello}</option>`;
@@ -216,7 +215,7 @@ export const homepage = (parentElement) => {
 
       renderCars(dati);
 
-      // Filtro di ricerca
+     
       document.getElementById("ricercaButton").onclick = () => {
         const searchTerm = document.getElementById("searchInput").value;
         const modello = document.getElementById("modelloFilter").value;
@@ -224,7 +223,7 @@ export const homepage = (parentElement) => {
         renderCars(filteredCars);
       };
 
-      // Filtro per i parametri
+     
       document.getElementById("filtraButton").onclick = () => {
         const prezzoMax = parseInt(document.getElementById("prezzo").value, 10);
         const marca = document.getElementById("marcaFilter").value;

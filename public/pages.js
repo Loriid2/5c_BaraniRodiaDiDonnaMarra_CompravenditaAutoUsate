@@ -94,7 +94,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                   let errore=document.getElementById("errore"+i);
                   let ok=document.getElementById("ok"+i);
                  // console.log("submitButton clicked");
-                  //dovra essere preso dall utente
+                 
                   if(emailutente==null){
                     ok.innerHTML="";
                     errore.innerHTML="Per inviare la mail devi essere loggato!"

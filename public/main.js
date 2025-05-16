@@ -68,21 +68,21 @@ invioRegisterButton.onclick=()=>{
           alert("Registrazione avvenuta con successo. Effettua il login.");
           document.querySelector("#errreg").innerHTML="";
           document.querySelector("#okreg").innerHTML="Registrazione avvenuta con successo. Effettua il login.";
-          //alert("Registrazione avvenuta con successo. Effettua il login.");
+          
         } 
       });
   }
 }
-//va in areapersonale.js
+
 logoutButton.onclick=()=>{
   alert("Logout avvenuto con successo");
-  //viene mostrato il bottone di login
+
   loginNavbar.classList.remove("hidden");
   loginNavbar.classList.add("visible");
-  //viene mostrato il bottone di registrazione
+  
   registerNavbar.classList.remove("hidden");
   registerNavbar.classList.add("visible");
-  //viene nascosto il bottone di area personale
+
   areaPersonaleNavbar.classList.add("hidden");
   areaPersonaleNavbar.classList.remove("visible");
   home.render();
