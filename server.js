@@ -96,8 +96,8 @@ res.json("OK")
 app.post("/car/getone", (req, res) => {
  
   const indice = req.body.index;
-  console.log("indice= "+indice);
-  console.log("automobili= ",automobili);
+  //console.log("indice= "+indice);
+  //console.log("automobili= ",automobili);
   for(let i=0;i<automobili.length;i++){
     if((automobili[i].id_auto)===indice){
       res.json({result: automobili[i]});
@@ -256,6 +256,9 @@ app.post('/send-email', async (req, res) => {
     }
 
     try {
+      console.log(to);
+      console.log(subject);
+      console.log(message);
       const info = await mail.sendEmail(to, subject, message);
       res.send({ success: true, messageId: info.messageId });
     } catch (error) {

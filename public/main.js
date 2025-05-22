@@ -43,6 +43,7 @@ function aggiorna(){
                home.build(automobili);
                home.setCallBack(CarOfInterest);
                home.render();
+               emailutente=home.utente();
             });
 }
 
@@ -104,9 +105,11 @@ function CarOfInterest(index, pagina) {
       .then(json => {
         let dizionario = json.result;
        // console.log(json.result);
+       console.log(emailutente);
         const coir = createPages(document.querySelector("#container"), middleware,emailutente);
         coir.build(index);
         coir.render();
+        coir.setUtente(emailutente);
         navigator.update(document.querySelector("#container"));
         COI.build(dizionario, index);
         COI.render();

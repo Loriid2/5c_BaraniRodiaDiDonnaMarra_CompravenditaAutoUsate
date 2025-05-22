@@ -7,6 +7,7 @@ export const homepage = (parentElement) => {
   let dati = [];
   let CaB2;
   let CaB3;
+  let utente;
 
   const filterSerach = (searchTerm, modello) => {
     return dati.filter(car => {
@@ -34,6 +35,9 @@ export const homepage = (parentElement) => {
   return {
     build: (diz) => {
       dati = diz;
+    },
+    utente:()=>{
+      return utente;
     },
     setSecondCallBack:(cb2)=>{
       CaB2=cb2
@@ -96,9 +100,14 @@ export const homepage = (parentElement) => {
       parentElement.innerHTML = html;
       let elemento=document.getElementById("paginaLogin");
      // console.log(elemento);
-      const loginT=login(elemento);
+      let loginT=login(elemento);
       loginT.setCallBack(CaB3)
-      loginT.render();
+      loginT.render().then(dati => {
+  utente = dati;
+  console.log("Utente loggato:", utente);
+});
+      //utente=loginT.utente();
+      console.log(utente);
       const openFormButton = document.querySelector("#aggiungiMacchina");
       const form=createform(document.querySelector("#formInserimento"));
       openFormButton.onclick=()=>{

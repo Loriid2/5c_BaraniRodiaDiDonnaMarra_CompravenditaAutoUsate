@@ -2,6 +2,7 @@ import {autocomprate} from "./autoComprate.js";
 export const login = (parentElement) => {
     
 let cbv;
+let utentemail;
     
     return {
       build:()=>{
@@ -12,7 +13,15 @@ let cbv;
       setCallBack:(cb)=>{
       cbv=cb;
       },
-      render:()=>{
+      utente:()=>{
+        console.log("utente: "+ utentemail)
+        if(utentemail===null||utentemail===undefined){
+          return 0;
+        }else{
+          return utentemail;
+        }
+      },
+      render:async()=>{
         
             let html=`
             
@@ -44,7 +53,7 @@ let cbv;
 
 parentElement.innerHTML=html;
 
-
+/*
 const bott= document.getElementById("loginButton");
 bott.onclick=()=>{
   const username = document.querySelector("#username").value;
@@ -61,8 +70,9 @@ bott.onclick=()=>{
         //console.log(json);
         if (json.result) {
           let utente=json.result;
-         
+         utentemail=utente.email;
           //console.log(utente);
+         
           let emailutente=utente.email;
           let loginNavbar=document.querySelector("#loginButtonHome");
           let areaPersonaleNavbar =document.querySelector("#areaPersonaleButtonHome");
@@ -81,6 +91,9 @@ bott.onclick=()=>{
             Comprate.build({contatto:utente.email,});
             Comprate.render();
             Comprate.setCallBack(cbv);
+            console.log(utentemail);
+            //return emailutente;
+            resolve(utente);
            // home.render()
             }
           
@@ -93,6 +106,58 @@ bott.onclick=()=>{
       
       });
 
-}}
+}
+      */
+
+ return new Promise((resolve, reject) => {
+    const bott = document.getElementById("loginButton");
+
+    bott.onclick = () => {
+      const username = document.querySelector("#username").value;
+      const password = document.querySelector("#password").value;
+
+      fetch("/car/login", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      })
+        .then(response => response.json())
+        .then(json => {
+          if (json.result) {
+            let utente = json.result;
+            let emailutente = utente.email;
+
+            
+            let loginNavbar = document.querySelector("#loginButtonHome");
+            let areaPersonaleNavbar = document.querySelector("#areaPersonaleButtonHome");
+            let registerNavbar = document.querySelector("#registerButtonHome");
+
+            loginNavbar.classList.add("hidden");
+            registerNavbar.classList.add("hidden");
+            areaPersonaleNavbar.classList.remove("hidden");
+            areaPersonaleNavbar.classList.add("visible");
+
+            // costruisci interfaccia
+            const Comprate = autocomprate(document.querySelector("#autocomprate"));
+            Comprate.build({ contatto: utente.email });
+            Comprate.render();
+            Comprate.setCallBack(cbv);
+
+            resolve(utente.email);  
+          } else {
+            document.getElementById("errlog").innerHTML = "Login errato. controllare le credenziali.";
+            resolve(null);  // login fallito ma gestito
+          }
+        })
+        .catch(err => {
+          console.error("Errore durante il login:", err);
+          reject(err);  
+        });
+    };
+  });
+
+     }
 }
 }

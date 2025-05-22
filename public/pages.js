@@ -1,10 +1,14 @@
 export const createPages=(parentElement, middleware,emailutente)=>{
   let i;
+  let utente;
 
     return{
         build:(val)=>{
             
             i=val;
+        },
+        setUtente:(val)=>{
+          utente=val;
         },
         render:()=>{
 
@@ -90,12 +94,13 @@ export const createPages=(parentElement, middleware,emailutente)=>{
         }
                const submitButton = document.getElementById("submit"+i);
                if (submitButton) {
+
                  submitButton.onclick = () => {
                   let errore=document.getElementById("errore"+i);
                   let ok=document.getElementById("ok"+i);
                  // console.log("submitButton clicked");
                  
-                  if(emailutente==null){
+                  if(utente==null||utente===0){
                     ok.innerHTML="";
                     errore.innerHTML="Per inviare la mail devi essere loggato!"
                     // alert("Per inviare la mail devi essere loggato!");
@@ -112,7 +117,7 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                     message += document.getElementById("message"+i).value;
                    document.getElementById("subject"+i).value="";
                    document.getElementById("message"+i).value="";
-                   message += "\n\n\n Questa mail è stasta inviata da autocinetum non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+emailutente ; 
+                   message += "\n\n\n Questa mail è stasta inviata da autocinetum non risponerere a questa mail ma a quella del cliente.\n Sei stato contatattato da: "+utente ; 
                    if (!to || !subject || !message) {
                     ok.innerHTML="";
                     errore.innerHTML="Tutti i campi sono obbligatori!"
@@ -124,7 +129,8 @@ export const createPages=(parentElement, middleware,emailutente)=>{
                      return;
                   }
                     ok.innerHTML="Email inviata con successo";
-                    errore.innerHTML=""
+                    errore.innerHTML="";
+                    
                   middleware.sendEmail(to, subject, message);
                  };
                }
